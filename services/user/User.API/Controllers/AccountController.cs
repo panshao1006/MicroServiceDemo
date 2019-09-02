@@ -39,7 +39,7 @@ namespace User.API.Controllers
             if (userModel == null)
             {
                 result.Success = false;
-                result.Code = "1000";
+                result.Code = "1000"; 
 
                 return result;
             }
