@@ -1,5 +1,18 @@
 {
-  "ReRoutes": [],
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/v1/account/{postId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/post/{postId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ],
   "GlobalConfiguration": {
     "BaseUrl": "https://127.0.0.1:5000"
   }

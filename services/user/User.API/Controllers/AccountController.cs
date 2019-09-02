@@ -30,7 +30,7 @@ namespace User.API.Controllers
 
         [Route("login")]
         [HttpPost]
-        public ResultModel Login(UserLoginViewModel user)
+        public ResultModel Get(UserLoginViewModel user)
         {
             ResultModel result = new ResultModel();
 
