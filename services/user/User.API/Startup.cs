@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using User.BLL.User;
 using User.Common.DI;
-using User.Common.ServiceRegister;
-using User.Interface.BLL;
 
 namespace User.API
 {

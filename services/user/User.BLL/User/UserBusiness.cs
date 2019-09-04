@@ -24,9 +24,32 @@ namespace User.BLL.User
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public ResultModel Insert(UserRegisterViewModel user)
+        public OperationResult InsertUser(UserModel user)
         {
-            throw new NotImplementedException();
+            OperationResult result = new OperationResult();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            if (string.IsNullOrWhiteSpace(user.MFirstName) || string.IsNullOrWhiteSpace(user.MLastName))
+            {
+                result.Message = "姓和名是必填项";
+                result.Success = false;
+
+                return result;
+            }
+
+            user.MItemID = Guid.NewGuid().ToString();
+            
+            int effRow = _userRepository.InsertUser(user);
+
+            result.Success = effRow > 0;
+
+            result.Id = result.Success ? user.MItemID : null;
+
+            return result;
         }
 
 

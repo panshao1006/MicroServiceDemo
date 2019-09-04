@@ -11,6 +11,6 @@ namespace User.Interface.BLL
     {
         UserModel GetUser(string email, string password);
 
-        ResultModel Insert(UserRegisterViewModel user);
+        OperationResult InsertUser(UserModel user);
     }
 }
