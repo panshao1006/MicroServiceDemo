@@ -17,7 +17,7 @@ namespace User.API.Controllers
     /// 账号相关api控制器
     /// </summary>
     [Route("api/v1/account")]
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         private IUserBusiness _userBusiness = null;
 

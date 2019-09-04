@@ -26,7 +26,7 @@ namespace User.API
 
             return WebHost.CreateDefaultBuilder(args)
                  .UseStartup<Startup>()
-                 .UseUrls($"http://{ip}:{port}")
+                 .UseUrls("http://127.0.0.1:6000")
                  .Build();
         }
     }

@@ -22,7 +22,7 @@ namespace User.Model.ViewModel
         /// <summary>
         /// 邮箱
         /// </summary>
-        public string Eamil { set; get; }
+        public string Email { set; get; }
 
         /// <summary>
         /// 手机号

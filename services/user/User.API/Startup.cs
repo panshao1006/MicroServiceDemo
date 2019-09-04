@@ -35,7 +35,7 @@ namespace User.API
 
             app.UseMvc();
 
-            app.UserConsul(lifetime , Configuration);
+            //app.UserConsul(lifetime , Configuration);
 
         }
     }

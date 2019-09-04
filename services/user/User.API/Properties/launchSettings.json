@@ -18,12 +18,12 @@
     },
     "User.API": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
+        "ASPNETCORE_URLS": "http://*:6000/",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000/"
+      "applicationUrl": "http://localhost:6000/"
     }
   }
 }

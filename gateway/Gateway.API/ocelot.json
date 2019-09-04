@@ -1,16 +1,16 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/v1/account/{postId}",
+      "DownstreamPathTemplate": "/api/v1/sessions",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 80
+          "Port": 6000
         }
       ],
-      "UpstreamPathTemplate": "/post/{postId}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamPathTemplate": "/api/v1/sessions",
+      "UpstreamHttpMethod": [ "Post" ]
     }
   ],
   "GlobalConfiguration": {

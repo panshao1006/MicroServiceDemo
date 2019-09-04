@@ -14,4 +14,12 @@
     <PackageReference Include="Ocelot" Version="10.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="ocelot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties ocelot_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
