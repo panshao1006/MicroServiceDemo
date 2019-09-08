@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Cache;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using User.Common;
@@ -21,6 +22,32 @@ namespace User.API.Controllers
             _userBusiness = userBusiness;
         }
 
+        /// <summary>
+        /// 获取一个会话
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ResultModel Get(string token)
+        {
+            ResultModel result = new ResultModel();
+
+            OperationResult checkResult = _userBusiness.CheckToken(token);
+
+            if (!checkResult.Success)
+            {
+                result.Code = "100001";
+                result.Success = false;
+
+                return result;
+            }
+
+            result.Success = true;
+
+            result.Data = checkResult.Data;
+
+            return result;
+        }
 
         /// <summary>
         /// 创建一个会话
@@ -33,36 +60,19 @@ namespace User.API.Controllers
         {
             ResultModel result = new ResultModel();
 
-            var userModel = _userBusiness.GetUser(user.Email, user.Password);
+            OperationResult loginResult = _userBusiness.Login(user.Email, user.Password);
 
-            if (userModel == null)
+            if (!loginResult.Success || loginResult.Data == null)
             {
                 result.Success = false;
-                result.Code = "1000";
+                result.Code = "100000";
 
                 return result;
             }
 
-            TokenModel tokenModel = new TokenModel()
-            {
-                UserId = userModel.MItemID,
-                UserName = userModel.MName,
-                Token = Guid.NewGuid().ToString()
-            };
+            result.Success = true;
 
-            //调用缓存，把token保存起来
-
-            //Dictionary<string, string> postData = new Dictionary<string, string>();
-
-            //postData.Add("key", tokenModel.UserId);
-
-            //postData.Add("value", tokenModel.Token);
-
-            //ResultModel cacheResult = UriHelper.Post<ResultModel>(1, "CacheServiceName", "CacheServicePath", postData);
-
-            //result.Success = cacheResult.Success;
-            //result.Message = cacheResult.Message;
-            result.Data = tokenModel;
+            result.Data = loginResult.Data;
 
             return result;
         }

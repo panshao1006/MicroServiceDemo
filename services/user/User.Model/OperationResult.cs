@@ -13,5 +13,7 @@ namespace User.Model
         public string Message { set; get; }
 
         public string Id { set; get; }
+
+        public object Data { set; get; }
     }
 }

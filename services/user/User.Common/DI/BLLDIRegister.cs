@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Core.Cache;
+using Core.Cache.Redis;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +15,7 @@ namespace User.Common.DI
         {
             //配置一个依赖注入映射关系
             services.AddTransient(typeof(IUserBusiness), typeof(UserBusiness));
+            services.AddTransient(typeof(ICache), typeof(RedisClientCache));
 
             //注册DAL层的依赖注入
             DALDIRegister sdr = new DALDIRegister();
