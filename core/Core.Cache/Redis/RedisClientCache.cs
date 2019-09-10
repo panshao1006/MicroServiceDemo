@@ -109,6 +109,16 @@ namespace Core.Cache.Redis
 
             return false;
         }
+
+        void ICache.Delete(CacheFilter filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICache.Update(CacheModel cache)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region 私有方法

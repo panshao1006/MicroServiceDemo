@@ -59,7 +59,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "my", "my", "{119AC2E9-6082-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "My.UI", "website\my\My.UI\My.UI.csproj", "{1C1AF09E-6E59-41A6-A295-98A29756BBBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Cache", "core\Core.Cache\Core.Cache.csproj", "{852BB005-0E2E-44FD-A1FA-914C6BE10A8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Cache", "core\Core.Cache\Core.Cache.csproj", "{852BB005-0E2E-44FD-A1FA-914C6BE10A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Common", "gateway\Gateway.Common\Gateway.Common.csproj", "{5EDE69E9-CDC6-4622-992E-D4EA1DE02B10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +137,10 @@ Global
 		{852BB005-0E2E-44FD-A1FA-914C6BE10A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{852BB005-0E2E-44FD-A1FA-914C6BE10A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{852BB005-0E2E-44FD-A1FA-914C6BE10A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDE69E9-CDC6-4622-992E-D4EA1DE02B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDE69E9-CDC6-4622-992E-D4EA1DE02B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDE69E9-CDC6-4622-992E-D4EA1DE02B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDE69E9-CDC6-4622-992E-D4EA1DE02B10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +171,7 @@ Global
 		{119AC2E9-6082-406E-91F9-3D9176988442} = {CA956CB7-D2B0-4EA7-8F00-33D93FCF76B5}
 		{1C1AF09E-6E59-41A6-A295-98A29756BBBD} = {119AC2E9-6082-406E-91F9-3D9176988442}
 		{852BB005-0E2E-44FD-A1FA-914C6BE10A8B} = {34AD2C52-DF19-482D-AFA0-B6A5C3042325}
+		{5EDE69E9-CDC6-4622-992E-D4EA1DE02B10} = {8A254272-3431-4FCA-B47C-E0EE492B20C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25CB7005-47B1-4CBF-B0A5-CFFEE10A7F57}
