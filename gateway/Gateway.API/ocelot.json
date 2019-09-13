@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/sessions",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": ["Post"]
     }
   ],
   "GlobalConfiguration": {
