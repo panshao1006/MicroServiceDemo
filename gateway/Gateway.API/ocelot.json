@@ -10,6 +10,19 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/sessions",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 6000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/users",
+      "UpstreamHttpMethod": [ "Post" ]
       "UpstreamHttpMethod": ["Post"]
     }
   ],
