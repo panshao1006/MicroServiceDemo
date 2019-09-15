@@ -156,5 +156,25 @@ namespace User.BLL.User
 
             return result;
         }
+
+        /// <summary>
+        /// 获取用户的菜单
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="orgId"></param>
+        /// <returns></returns>
+        public MenuModel GetUserMenu(string userId, string orgId)
+        {
+            //判断用户是否存在
+
+            //判断组织是否存在
+
+            //根据用户和组织查找可以使用的模块
+
+            MenuModel menu = new MenuModel();
+
+
+            return menu;
+        }
     }
 }

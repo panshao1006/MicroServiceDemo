@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using User.Interface.BLL;
 using User.Model;
 using User.Model.Filter;
-using User.Model.Model;
 using User.Model.Model.User;
-using User.Model.ViewModel;
 
 namespace User.API.Controllers
 {

@@ -1,18 +1,14 @@
-﻿
-//import _global from "~/js/globalvariable.vue"  
-//Vue.prototype.global = _global;  
-
-var loginButton = new Vue({
-    el: '#aLogin',
+﻿var loginButton = new Vue({
+    el: '#btnLogin',
     methods: {
         login: function () {
             var self = this;
             this.isViewReady = false;
 
-            var requestUri = "http://localhost:5000/api/v1/user/login";
+            var requestUri = "http://localhost:5000/api/v1/sessions";
+            let data = {"Email":"591387160@qq.com","Password":"megi#123"};
 
-            //UPDATED TO GET DATA FROM WEB API
-            axios.get(requestUri)
+            axios.post(requestUri , data)
                 .then(function (response) {
                     self.subscribers = response.data;
                     self.isViewReady = true;

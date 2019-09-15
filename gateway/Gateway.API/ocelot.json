@@ -1,29 +1,28 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/v1/sessions",
+      "DownstreamPathTemplate": "/api/v1/sessions/",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "127.0.0.1",
           "Port": 6000
         }
       ],
       "UpstreamPathTemplate": "/api/v1/sessions",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "POST", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/v1/users",
+      "DownstreamPathTemplate": "/api/v1/users/",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "127.0.0.1",
           "Port": 6000
         }
       ],
       "UpstreamPathTemplate": "/api/v1/users",
       "UpstreamHttpMethod": [ "Post" ]
-      "UpstreamHttpMethod": ["Post"]
     }
   ],
   "GlobalConfiguration": {

@@ -56,7 +56,7 @@ namespace User.API.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResultModel Post([FromBody]UserLoginViewModel user)
+        public ResultModel Post(UserLoginViewModel user)
         {
             ResultModel result = new ResultModel();
 

@@ -18,11 +18,11 @@ namespace Gateway.API
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, builder) =>
-            {
-                builder
-                .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-                .AddJsonFile("ocelot.json");
-            }).UseStartup<Startup>();
+             WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, builder) =>
+             {
+                 builder
+                 .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                 .AddJsonFile("ocelot.json");
+             }).UseStartup<Startup>();
     }
 }

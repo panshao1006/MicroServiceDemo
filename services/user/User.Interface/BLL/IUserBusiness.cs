@@ -28,5 +28,8 @@ namespace User.Interface.BLL
         /// <param name="token"></param>
         /// <returns></returns>
         OperationResult CheckToken(string token);
+
+
+        MenuModel GetUserMenu(string userId, string orgId);
     }
 }

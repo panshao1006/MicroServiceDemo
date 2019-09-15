@@ -1,58 +1,64 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<html>
+<head>
 
-<div class="m-reg-box">
-    <div id="loginBox" class="m-login-box">
-        <div class="container form-login-content">
-            <div class="migi_Logo">
+    <link href="http://127.0.0.1:7005/css/css.css" rel="stylesheet" />
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/lib/axios/axios.js"></script>
+    
+</head>
+<body>
+    <div class="m-reg-box">
+        <div id="loginBox" class="m-login-box">
+            <div class="container form-login-content">
+                <div class="migi_Logo">
 
-            </div>
-            <div class="lang-bar">
-                切换语言 中文简体
-            </div>
-            @*@if (!string.IsNullOrEmpty(orgName))
-                {
-                    <div class="m-login-box-title-tip">@HtmlLang.WriteFormat(LangModule.Login, "LoginJoinMegi", "Login and join {0}", MText.Encode(orgName))</div>
-                }*@
-            <div class="main login">
-                <p class="item-wrap">
-                    <input list="userEmailList" type="text" id="txtEmail" class="easyui-validatebox textbox email" value="" hint="邮箱"
-                           data-options="required:true, validType:['email','length[0,256]']" tabindex="1" onblur="document.getElementById('userNameHidden').value=this.value" />
-                    <datalist id="userEmailList"></datalist>
-                </p>
-                <p class="item1-wrap">
-                    <input type="text" class="easyui-validatebox textbox password password-text " tabindex="2" value="" hint="密码" data-options="required:true, validType:['length[0,28]']" />
-                    <input type="text" style="display:none" id="userNameHidden" />
-                    <input type="text" onfocus="this.type='password'" autocomplete="off" id="txtPwd" class="easyui-validatebox textbox password password-password" value="" style="display: none;" data-options="required:true, validType:['length[0,28]']" />
-                </p>
-                <div><a href="/Password/ForgetPwd">忘记密码</a></div>
-                <p id="divCode" style="width:260px;display:none">
-                    <input type="text" id="tbxCode" class="easyui-validatebox textbox" hint="验证码"
-                           data-options="required:true" style="width: 60px; height: 26px; line-height:26px; padding-left: 2px;background-image:none;" />
-                    <span id="divCodeImage" style="display:none">
-                        <label id="isCorrent" href="javascript:void(0);" code="false" style="width: 16px; height: 16px; padding: 1px 5px;margin:0 auto;">&nbsp;&nbsp;</label>
+                </div>
+                <div class="lang-bar">
+                    切换语言 中文简体
+                </div>
 
-                        <a href="javascript:void(0);" id="btnChangeImage">看不清</a>
-                    </span>
-                </p>
-                <div id="lblError" class="error-msg">
-                </div>
-                <div class="m-action">
-                    <a href="javascript:void(0)" class="m-btn-blue" id="aLogin" v-on:click="login" tabindex="3">登陆</a>
-                </div>
-                <div class="m-reg-wrap">
-                    <span style="color:red"></span>
-                    <br />
-                    <span>没有账号</span>
-                </div>
-                <div class="m-trial-wrap">
-                    <a href="javascript:void(0);">免费试用</a>
+                <div class="main login">
+                    <p class="item-wrap">
+                        <input list="userEmailList" type="text" id="txtEmail" class="textbox email" value="" style="width:342px" />
+                        @*<label for="freename" class="placeholder" style="">输入邮箱</label>*@
+                        <datalist id="userEmailList"></datalist>
+                    </p>
+                    <p class="item1-wrap">
+                        <input type="text" onfocus="this.type='password'" autocomplete="off" id="txtPwd" class="textbox password password-password" value="" style="width:342px" />
+                        @*<label class="placeholder" style="">输入密码</label>*@
+                    </p>
+                    <div><a href="/Password/ForgetPwd">忘记密码</a></div>
+                    <p id="divCode" style="width:260px;display:none">
+                        <input type="text" id="tbxCode" class="easyui-validatebox textbox" hint="验证码"
+                               data-options="required:true" style="width: 60px; height: 26px; line-height:26px; padding-left: 2px;background-image:none;" />
+                        <span id="divCodeImage" style="display:none">
+                            <label id="isCorrent" href="javascript:void(0);" code="false" style="width: 16px; height: 16px; padding: 1px 5px;margin:0 auto;">&nbsp;&nbsp;</label>
+
+                            <a href="javascript:void(0);" id="btnChangeImage">看不清</a>
+                        </span>
+                    </p>
+                    <div id="lblError" class="error-msg">
+                    </div>
+                    <div class="m-action">
+                        <a href="javascript:void(0)" class="m-btn-blue" id="btnLogin" v-on:click="login" tabindex="3">登陆</a>
+                    </div>
+                    <div class="m-reg-wrap">
+                        <span style="color:red"></span>
+                        <br />
+                        <span>没有账号</span>
+                    </div>
+                    <div class="m-trial-wrap">
+                        <a href="javascript:void(0);">免费试用</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="~/lib/vue/vue.js"></script>
-<script src="~/lib/axios/axios.js"></script>
-<script src="~/js/login.js"></script>
+    <script src="~/js/login.js"></script>
+</body>
+</html>
+
+
