@@ -1,0 +1,218 @@
+{
+	"id": "63e15f89-7b40-5d41-7d29-6323cdcfcec6",
+	"name": "MicroserviceDemo",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "a1dfb920-cdcc-f1e4-c070-d8f3be8228c0",
+			"name": "Gataway.API",
+			"description": "",
+			"order": [
+				"dd09ca78-1542-8f04-9711-743c3b70f579",
+				"d84334ef-501c-4246-ac76-1d891ee9299e",
+				"a37cbc93-3436-895a-f470-5204d8da4193"
+			],
+			"owner": 0
+		},
+		{
+			"id": "e00944aa-804a-eeb3-6900-ca797476b2b6",
+			"name": "User.API",
+			"description": "",
+			"order": [
+				"77c0ba4c-8f67-196a-32be-c9df6bd27570",
+				"e39d9c8b-dcb5-3726-2ae3-e212f8dfbd06",
+				"fa004d0c-9b65-d8ef-6d3d-cb0b432e4eee"
+			],
+			"owner": 0
+		}
+	],
+	"timestamp": 1567606433011,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "77c0ba4c-8f67-196a-32be-c9df6bd27570",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:6000/api/v1/sessions/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1567610565664,
+			"name": "http://localhost:6000/api/sessions/",
+			"description": "",
+			"collectionId": "63e15f89-7b40-5d41-7d29-6323cdcfcec6",
+			"responses": [],
+			"rawModeData": "{\"Email\":\"591387160@qq.com\",\"Password\":\"megi#123\"}"
+		},
+		{
+			"id": "a37cbc93-3436-895a-f470-5204d8da4193",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/v1/sessions?token=07dd2b1d-f6c5-4632-86ce-166d5a3a8576",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "07dd2b1d-f6c5-4632-86ce-166d5a3a8576",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "63e15f89-7b40-5d41-7d29-6323cdcfcec6",
+			"data": null,
+			"dataMode": "params",
+			"name": "http://localhost:5000/api/v1/sessions?token=07dd2b1d-f6c5-4632-86ce-166d5a3a8576",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1568534835802,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "a1dfb920-cdcc-f1e4-c070-d8f3be8228c0"
+		},
+		{
+			"id": "d84334ef-501c-4246-ac76-1d891ee9299e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/users/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1568534385092,
+			"name": "http://localhost:5000/api/users/",
+			"description": "",
+			"collectionId": "63e15f89-7b40-5d41-7d29-6323cdcfcec6",
+			"responses": [],
+			"rawModeData": "{\"MEmail\":\"591387161@sina.com\" , \"MFirstName\":\"pan\",\"MLastName\":\"chen\" , \"MPassword\":\"123456\"}"
+		},
+		{
+			"id": "dd09ca78-1542-8f04-9711-743c3b70f579",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": ""
+				}
+			],
+			"url": "http://localhost:5000/api/v1/sessions/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1568122657658,
+			"name": "http://localhost:5000/api/v1/sessions/",
+			"description": "",
+			"collectionId": "63e15f89-7b40-5d41-7d29-6323cdcfcec6",
+			"responses": [],
+			"rawModeData": "{\"Email\":\"591387160@qq.com\",\"Password\":\"megi#123\"}"
+		},
+		{
+			"id": "e39d9c8b-dcb5-3726-2ae3-e212f8dfbd06",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:6000/api/v1/users/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1567610668632,
+			"name": "http://localhost:6000/api/users/",
+			"description": "",
+			"collectionId": "63e15f89-7b40-5d41-7d29-6323cdcfcec6",
+			"responses": [],
+			"rawModeData": "{\"MEmail\":\"591387161@sina.com\" , \"MFirstName\":\"pan\",\"MLastName\":\"chen\" , \"MPassword\":\"123456\"}"
+		},
+		{
+			"id": "fa004d0c-9b65-d8ef-6d3d-cb0b432e4eee",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:6000/api/v1/sessions?token=07dd2b1d-f6c5-4632-86ce-166d5a3a8576",
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "07dd2b1d-f6c5-4632-86ce-166d5a3a8576",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1567950401931,
+			"name": "http://localhost:6000/api/v1/sessions?token=07dd2b1d-f6c5-4632-86ce-166d5a3a8576",
+			"description": "",
+			"collectionId": "63e15f89-7b40-5d41-7d29-6323cdcfcec6",
+			"responses": []
+		}
+	]
+}
