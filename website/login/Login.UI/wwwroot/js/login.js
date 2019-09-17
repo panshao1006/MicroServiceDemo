@@ -10,7 +10,13 @@
 
             axios.post(requestUri , data)
                 .then(function (response) {
-                    self.subscribers = response.data;
+                    if (response.data.success) {
+                        var token = response.data.data.token;
+                        window.location.href = "http://localhost:7001";
+                        //this.$router.push({
+                        //    path: "http://localhost:7001"
+                        //});
+                    }
                     self.isViewReady = true;
                 })
                 .catch(function (error) {
