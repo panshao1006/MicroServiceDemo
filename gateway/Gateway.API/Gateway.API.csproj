@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gateway.Common\Gateway.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Ocelot">
       <HintPath>..\Lib\ocelot\Ocelot.dll</HintPath>
     </Reference>

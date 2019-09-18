@@ -10,6 +10,9 @@ namespace User.Interface.DAL
     {
         UserModel GetUser(string eamil, string password);
 
+        UserModel GetUser(string id);
+
+
         int InsertUser(UserModel user);
     }
 }

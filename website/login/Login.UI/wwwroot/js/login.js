@@ -2,9 +2,6 @@
     el: '#btnLogin',
     methods: {
         login: function () {
-            var self = this;
-            this.isViewReady = false;
-
             var requestUri = "http://localhost:5000/api/v1/sessions";
             let data = {"Email":"591387160@qq.com","Password":"megi#123"};
 
@@ -12,15 +9,13 @@
                 .then(function (response) {
                     if (response.data.success) {
                         var token = response.data.data.token;
-                        window.location.href = "http://localhost:7001";
-                        //this.$router.push({
-                        //    path: "http://localhost:7001"
-                        //});
+                        window.location.href = "http://localhost:7001?token=" + token;
+                    } else {
+                        alert("登录失败");
                     }
-                    self.isViewReady = true;
                 })
                 .catch(function (error) {
-                    alert("ERROR: " + (error.message | error));
+                    alert("登录失败");
                 });
         }
     },

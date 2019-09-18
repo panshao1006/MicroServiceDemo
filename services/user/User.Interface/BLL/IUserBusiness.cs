@@ -31,5 +31,12 @@ namespace User.Interface.BLL
 
 
         MenuModel GetUserMenu(string userId, string orgId);
+
+        /// <summary>
+        /// 获取一个token
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        UserViewModel GetUser(string token);
     }
 }

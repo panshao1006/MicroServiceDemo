@@ -75,6 +75,14 @@ namespace User.BLL.User
         }
 
 
+        public UserModel GetUserById(string id)
+        {
+            UserModel result = _userRepository.GetUser(id);
+
+            return result;
+        }
+
+
         /// <summary>
         /// 用户登录
         /// </summary>
@@ -175,6 +183,36 @@ namespace User.BLL.User
 
 
             return menu;
+        }
+
+        /// <summary>
+        /// 获取一个token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public UserViewModel GetUser(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return null;
+            }
+
+            CacheFilter filter = new CacheFilter() { Key = token };
+
+            var tokenResult = _cache.Query<TokenModel>(filter);
+
+            if (tokenResult == null)
+            {
+                return null;
+            }
+
+            string userId = tokenResult.UserId;
+
+            var user = _userRepository.GetUser(userId);
+
+            UserViewModel result = new UserViewModel().ConvertViewModel(user);
+
+            return result;
         }
     }
 }

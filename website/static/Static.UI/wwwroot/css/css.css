@@ -1,4 +1,8 @@
-﻿html, body, div, span, a, ul, li, p {
+﻿html, body{
+    width:100%;
+    height:100%;
+}
+html, body, div, span, a, ul, li, p {
     margin: 0;
     padding: 0;
     border: 0;
@@ -380,13 +384,13 @@ textarea {
     background-size: 100%;
 }
 
-    .m-reg-bg a {
-        color: #489de0;
-    }
+.m-reg-bg a {
+    color: #489de0;
+}
 
-        .m-reg-bg a:hover {
-            color: #378bce;
-        }
+.m-reg-bg a:hover {
+    color: #378bce;
+}
 
 .m-reg-box {
     margin: 80px auto 0px auto;

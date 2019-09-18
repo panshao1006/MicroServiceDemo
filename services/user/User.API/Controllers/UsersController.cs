@@ -22,9 +22,9 @@ namespace User.API.Controllers
 
 
         [HttpGet]
-        public ResultModel Get(UserFilter filter)
+        public ResponseResult Get(UserFilter filter)
         {
-            ResultModel result = new ResultModel();
+            ResponseResult result = new ResponseResult();
 
             var userModel = _userBusiness.GetUser(filter.Email, filter.Password);
 
@@ -42,12 +42,33 @@ namespace User.API.Controllers
             return result;
         }
 
+        [HttpGet("token")]
+        public ResponseResult Get(string token)
+        {
+            ResponseResult result = new ResponseResult();
+
+            var userModel = _userBusiness.GetUser(token);
+
+            if (userModel == null)
+            {
+                result.Success = false;
+                result.Code = "1000";
+
+                return result;
+            }
+
+
+            result.Data = userModel;
+
+            return result;
+        }
+
         [HttpPost]
-        public ResultModel Post([FromBody]UserModel user)
+        public ResponseResult Post([FromBody]UserModel user)
         {
             var operationResult = _userBusiness.InsertUser(user);
 
-            var result = new ResultModel();
+            var result = new ResponseResult();
 
             if (!operationResult.Success)
             {

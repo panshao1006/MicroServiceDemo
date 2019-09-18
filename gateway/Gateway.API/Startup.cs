@@ -49,7 +49,17 @@ namespace Gateway.API
 
             app.UseMvc();
             app.UseCors("DefaultCORS");
-            app.UseOcelot().Wait();
+
+            var configuration = new OcelotPipelineConfiguration
+            {
+                PreAuthenticationMiddleware = async (ctx, next) =>
+                {
+
+                   await OcelotMiddlewareExtension.AuthenticationMiddlewareAsync(ctx, next);
+                }
+            };
+
+            app.UseOcelot(configuration).Wait();
 
         }
     }

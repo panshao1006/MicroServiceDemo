@@ -5,7 +5,7 @@ namespace User.Model
     /// <summary>
     /// 返回结果信息
     /// </summary>
-    public class ResultModel
+    public class ResponseResult
     {
         /// <summary>
         /// 是否成功

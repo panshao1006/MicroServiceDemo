@@ -28,9 +28,9 @@ namespace User.API.Controllers
         /// <param name="token"></param>
         /// <returns></returns>
         [HttpGet]
-        public ResultModel Get(string token)
+        public ResponseResult Get(string token)
         {
-            ResultModel result = new ResultModel();
+            ResponseResult result = new ResponseResult();
 
             OperationResult checkResult = _userBusiness.CheckToken(token);
 
@@ -56,9 +56,9 @@ namespace User.API.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResultModel Post(UserLoginViewModel user)
+        public ResponseResult Post(UserLoginViewModel user)
         {
-            ResultModel result = new ResultModel();
+            ResponseResult result = new ResponseResult();
 
             OperationResult loginResult = _userBusiness.Login(user.Email, user.Password);
 
@@ -83,9 +83,9 @@ namespace User.API.Controllers
         /// <param name="token"></param>
         /// <returns></returns>
         [HttpDelete]
-        public ResultModel Delete(string token)
+        public ResponseResult Delete(string token)
         {
-            ResultModel result = new ResultModel();
+            ResponseResult result = new ResponseResult();
 
             return result;
         }

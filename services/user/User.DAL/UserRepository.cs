@@ -20,7 +20,18 @@ namespace User.DAL
         {
             CommandInfo cmd = new CommandInfo();
 
-            cmd.CommandText = string.Format("select * from t_sec_user where MEmailAddress='{0}' and MPassword='{1}'", eamil, password);
+            cmd.CommandText = string.Format("select * from t_sec_user where MEmailAddress='{0}' and MPassword='{1}' and MIsDelete=0", eamil, password);
+
+            var result = _orm.GetDataModel<UserModel>(cmd);
+
+            return result;
+        }
+
+        public UserModel GetUser(string id)
+        {
+            CommandInfo cmd = new CommandInfo();
+
+            cmd.CommandText = string.Format("select * from t_sec_user where id='{0}' and MIsDelete=0", id);
 
             var result = _orm.GetDataModel<UserModel>(cmd);
 
