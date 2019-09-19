@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.Cache\Core.Cache.csproj" />
+    <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
     <ProjectReference Include="..\User.BLL\User.BLL.csproj" />
     <ProjectReference Include="..\User.Common\User.Common.csproj" />
     <ProjectReference Include="..\User.Interface\User.Interface.csproj" />

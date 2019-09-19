@@ -142,7 +142,7 @@ namespace User.BLL.User
             var tokenCache = _cache.Query<TokenModel>(filter);
 
             //没有找到token或者token的过期日期小于当前日期加一个小时
-            if (tokenCache == null || tokenCache.ExpireDateTime < DateTime.Now.AddHours(1))
+            if (tokenCache == null || tokenCache.ExpireDateTime < DateTime.Now)
             {
                 return result;
             }

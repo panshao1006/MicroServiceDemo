@@ -42,7 +42,7 @@ namespace User.API.Controllers
             return result;
         }
 
-        [HttpGet("token")]
+        [HttpGet("{token}")]
         public ResponseResult Get(string token)
         {
             ResponseResult result = new ResponseResult();
@@ -57,7 +57,7 @@ namespace User.API.Controllers
                 return result;
             }
 
-
+            result.Success = true;
             result.Data = userModel;
 
             return result;

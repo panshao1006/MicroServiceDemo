@@ -31,7 +31,7 @@ namespace User.DAL
         {
             CommandInfo cmd = new CommandInfo();
 
-            cmd.CommandText = string.Format("select * from t_sec_user where id='{0}' and MIsDelete=0", id);
+            cmd.CommandText = string.Format("select * from t_sec_user where MItemID='{0}' and MIsDelete=0", id);
 
             var result = _orm.GetDataModel<UserModel>(cmd);
 

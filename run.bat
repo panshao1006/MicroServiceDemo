@@ -16,6 +16,9 @@ start "My.API" dotnet My.UI.dll
 cd %currentDirecotry%\website\static\Static.UI\bin\Debug\netcoreapp2.1\publish
 start "Static.API" dotnet Static.UI.dll
 
+cd %currentDirecotry%\services\organization\Organization.API\bin\Debug\netcoreapp2.2
+start "Organizaiton.API" dotnet Organization.API.dll
+
 ::start "Go.API" dotnet F:\work\github\MicroServiceDemo\services\user\User.API\bin\Debug\netcoreapp2.2\User.API.dll
 pause
 exit

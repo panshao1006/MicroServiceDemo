@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "POST", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/v1/users/",
+      "DownstreamPathTemplate": "/api/v1/users",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -22,7 +22,31 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/users",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post", "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/users/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "127.0.0.1",
+          "Port": 6000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/users/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/organizations",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "127.0.0.1",
+          "Port": 6001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/organizations",
+      "UpstreamHttpMethod": [ "Get","Post" ]
     }
   ],
   "GlobalConfiguration": {

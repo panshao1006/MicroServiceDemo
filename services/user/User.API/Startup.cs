@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Core.EventBus;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using User.Common.DI;
+using User.Common.Event;
 
 namespace User.API
 {
@@ -20,6 +22,9 @@ namespace User.API
         {
             services.DIRegisterBLL();
             services.AddMvc();
+            services.AddSingleton<IEventBus, RabbitMQEventBus>();
+
+            services.AddTransient<IEventHandler, OrganizationCreatedEventHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,9 +35,10 @@ namespace User.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe();
 
-            //app.UserConsul(lifetime , Configuration);
+            app.UseMvc();
 
         }
     }

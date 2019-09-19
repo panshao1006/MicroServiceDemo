@@ -15,8 +15,7 @@
                 <div class="content" style="padding-left:20px">
                     <div class="title" style="width:500px;">
                         <span class="title-text" style="font-size: 30px;">我的美记</span>
-                        <a href="javascript:void(0)" style="width:150px;" id="aAddOrganisationTop" class="easyui-splitbutton easyui-linkbutton-gray easyui-splitbutton-base m-btn-m"
-                           data-options="menu:'#divAddOrganisation'" onclick="$('.m-btn-line:visible').trigger('mouseenter.menubutton');">新增组织</a>
+                        <a href="javascript:void(0)" style="width:150px;" id="btnAddOrganization" v-on:click="click" class="easyui-splitbutton-base m-btn-m">新增组织</a>
 
                         <div id="divAddOrganisation" style="width:150px; display:none;">
                             <div><a href="javascript:void(0)" id="aAddBasicOrganisation" onclick="top.MyIndex.addOrganisation(0)">标准版</a></div>
@@ -26,7 +25,7 @@
                     </div>
                     <div class="clear"></div>
                     <div class="info" id="div-welcom" style="padding:1px 3px;margin-top:10px" lastorgid="">
-                        <span id="span-welcom-tips" class='mg-bold' v.on:load="init">{{welcomInfo}}</span>
+                        <span id="span-welcom-tips" class='mg-bold'>{{welcomInfo}}</span>
                     </div>
                 </div>
                 <div class="action" style="margin-right:20px;">

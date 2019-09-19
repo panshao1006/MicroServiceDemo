@@ -1,2 +1,0 @@
-Remove-ServiceFabricApplication fabric:/OcelotServiceApplication 
-Unregister-ServiceFabricApplicationType OcelotServiceApplicationType 1.0.0

@@ -16,7 +16,7 @@ namespace Gateway.API
         {
             var request = ctx.HttpContext.Request;
 
-            var token = request.Headers["token"];
+            var token = request.Headers.Keys.Contains("token") ? request.Headers["token"].ToString() : null;
 
             var requestPath = request.Path.ToString();
 
@@ -34,7 +34,7 @@ namespace Gateway.API
                 }
 
                 HttpClientUtility httpClient = new HttpClientUtility();
-                string url = "http://localhost:6000/api/v1/sessions?token" + token;
+                string url = "http://localhost:6000/api/v1/sessions?token=" + token;
 
                 ResponseResult checkTokenResult = httpClient.Get<ResponseResult>(url);
 

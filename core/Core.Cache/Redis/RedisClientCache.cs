@@ -117,7 +117,15 @@ namespace Core.Cache.Redis
 
         void ICache.Update(CacheModel cache)
         {
-            throw new NotImplementedException();
+            if (!RedisHelper.Exists(cache.Key))
+            {
+                return;
+            }
+
+            if(Delete( new CacheFilter() { Key = cache.Key }))
+            {
+                Add(cache);
+            }
         }
         #endregion
 
