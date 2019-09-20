@@ -38,5 +38,21 @@ namespace Organization.DAL
 
             return result;
         }
+
+        /// <summary>
+        /// 删除组织
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int Delete(string id)
+        {
+            string sql = string.Format(@"delete from t_bas_organization where MItemID='{0}'",id);
+            CommandInfo cmd = new CommandInfo();
+            cmd.CommandText = sql;
+
+            var result = _orm.Execute(cmd);
+
+            return result;
+        }
     }
 }

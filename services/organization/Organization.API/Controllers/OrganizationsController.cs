@@ -45,6 +45,10 @@ namespace Organization.API.Controllers
         {
             ReponseResult result = new ReponseResult();
 
+            OperationResult operationResult = _business.CreateOrganization(org);
+
+            result.Success = operationResult.Success;
+
             return result;
         }
     }

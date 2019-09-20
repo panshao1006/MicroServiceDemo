@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.Cache\Core.Cache.csproj" />
+    <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
     <ProjectReference Include="..\User.Interface\User.Interface.csproj" />
     <ProjectReference Include="..\User.Model\User.Model.csproj" />
   </ItemGroup>

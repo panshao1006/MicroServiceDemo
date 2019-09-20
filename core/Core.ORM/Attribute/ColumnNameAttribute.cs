@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.ORM
+namespace Core.ORM.Attribute
 {
-    public class DBFieldNameAttribute : Attribute
+    public class ColumnNameAttribute : System.Attribute
     {
         private string _fieldName;
 
@@ -13,13 +13,13 @@ namespace Core.ORM
         /// </summary>
         private bool _isMapField;
 
-        public DBFieldNameAttribute(string fieldName)
+        public ColumnNameAttribute(string fieldName)
         {
             _fieldName = fieldName;
         }
 
 
-        public DBFieldNameAttribute(bool isMapField)
+        public ColumnNameAttribute(bool isMapField)
         {
             _isMapField = isMapField;
         }

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.EventBus;
+using Core.EventBus.Model.Organization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Organization.BLL.EventHandler;
 
 namespace Organization.API
 {
@@ -24,6 +27,9 @@ namespace Organization.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSingleton<IEventBus, RabbitMQEventBus>();
+            services.AddSingleton<IEventHandler, OrganizationRollbackHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +39,9 @@ namespace Organization.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe<OrganizationRollbackEvent>();
 
             app.UseMvc();
         }

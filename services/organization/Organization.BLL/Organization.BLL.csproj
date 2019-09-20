@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
     <ProjectReference Include="..\Organization.DAL\Organization.DAL.csproj" />
     <ProjectReference Include="..\Organization.Model\Organization.Model.csproj" />
   </ItemGroup>

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Core.EventBus.Model;
 
 namespace Core.EventBus
 {
@@ -16,6 +15,6 @@ namespace Core.EventBus
         /// <summary>
         /// 收到事件时处理方式
         /// </summary>
-        void Receive();
+        void Receive<TEvent>(string queueName) where TEvent : IEvent;
     }
 }

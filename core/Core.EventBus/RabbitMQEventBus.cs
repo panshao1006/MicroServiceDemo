@@ -16,12 +16,12 @@ namespace Core.EventBus
 
         public RabbitMQEventBus(IEnumerable<IEventHandler> eventHandlers)
         {
-            _eventQueue = new RabbitQueue();
+            _eventQueue = new RabbitQueue("127.0.0.1","admin","admin");
 
             _eventHandlers = eventHandlers;
         }
 
-        private void EventQueue_EventPushed(object sender, EventProcessedEventArgs e)
+        private void EventQueue_EventReceive(object sender, EventProcessedEventArgs e)
         {
             var mathcHanderList = (from eh in this._eventHandlers
                                    where eh.CanHandle(e.Event)
@@ -45,9 +45,13 @@ namespace Core.EventBus
         /// <summary>
         /// 订阅
         /// </summary>
-        public void Subscribe()
+        public void Subscribe<TEvent>() where TEvent : IEvent
         {
-            _eventQueue.ReceivedEvent += EventQueue_EventPushed;
+            _eventQueue.ReceivedEvent += EventQueue_EventReceive;
+
+            string queueName = typeof(TEvent).FullName;
+
+            _eventQueue.Receive<TEvent>(queueName);
         }
 
 
@@ -58,7 +62,7 @@ namespace Core.EventBus
             {
                 if (disposing)
                 {
-                    this._eventQueue.ReceivedEvent -= EventQueue_EventPushed;
+                    this._eventQueue.ReceivedEvent -= EventQueue_EventReceive;
                 }
 
                 disposedValue = true;

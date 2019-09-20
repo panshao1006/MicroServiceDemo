@@ -23,6 +23,7 @@ namespace Core.ORM.Dapper
             _connection = new MySqlConnection(_connectionString);
         }
 
+        #region 自定义sql
 
         /// <summary>
         /// 
@@ -71,5 +72,30 @@ namespace Core.ORM.Dapper
             var command = new CommandDefinition(commandInfo.CommandText);
             return _connection.Execute(command);
         }
+
+        #endregion
+
+
+        #region
+        public T GetDataModel<T>() where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> GetDataModelList<T>() where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> UpdateModels<T>() where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public T UpdateModel<T>()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

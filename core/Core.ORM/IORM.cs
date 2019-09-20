@@ -11,5 +11,14 @@ namespace Core.ORM
         List<T> GetDataModelList<T>(CommandInfo commandInfo);
 
         int Execute(CommandInfo commandInfo);
+
+
+        T GetDataModel<T>() where T : class;
+
+        List<T> GetDataModelList<T>() where T : class;
+
+        List<T> UpdateModels<T>() where T : class;
+
+        T UpdateModel<T>();
     }
 }

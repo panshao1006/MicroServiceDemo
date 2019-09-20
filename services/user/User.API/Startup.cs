@@ -1,10 +1,12 @@
 ﻿using Core.EventBus;
+using Core.EventBus.Model.Organization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using User.BLL.EventHandler;
+using User.BLL.User;
 using User.Common.DI;
-using User.Common.Event;
 
 namespace User.API
 {
@@ -36,7 +38,7 @@ namespace User.API
             }
 
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-            eventBus.Subscribe();
+            eventBus.Subscribe<OrganizationCreatedEvent>();
 
             app.UseMvc();
 
