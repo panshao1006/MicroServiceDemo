@@ -6,16 +6,16 @@ namespace Core.ORM.Attribute
 {
     public class ColumnNameAttribute : System.Attribute
     {
-        private string _fieldName;
+        private string _columnName;
 
         /// <summary>
         /// 是否映射数据库字段
         /// </summary>
         private bool _isMapField;
 
-        public ColumnNameAttribute(string fieldName)
+        public ColumnNameAttribute(string columnName)
         {
-            _fieldName = fieldName;
+            _columnName = columnName;
         }
 
 
@@ -27,7 +27,12 @@ namespace Core.ORM.Attribute
 
         public string GetFieldName()
         {
-            return _fieldName.Trim();
+            return _columnName.Trim();
+        }
+
+        public bool IsMapFiled()
+        {
+            return _isMapField || !string.IsNullOrWhiteSpace(_columnName);
         }
     }
 }

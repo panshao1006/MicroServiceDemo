@@ -14,13 +14,16 @@ namespace Core.ORM.Dapper
 
         private IDbConnection _connection;
 
-        
+        private BaseORMUtility _ormUtility;
+
 
         public DapperORM(string connectionString)
         {
             _connectionString = connectionString;
 
             _connection = new MySqlConnection(_connectionString);
+
+            _ormUtility = new BaseORMUtility();
         }
 
         #region 自定义sql
@@ -76,7 +79,7 @@ namespace Core.ORM.Dapper
         #endregion
 
 
-        #region
+        #region ORM
         public T GetDataModel<T>() where T : class
         {
             throw new NotImplementedException();
@@ -87,6 +90,8 @@ namespace Core.ORM.Dapper
             throw new NotImplementedException();
         }
 
+
+
         public List<T> UpdateModels<T>() where T : class
         {
             throw new NotImplementedException();
@@ -95,6 +100,25 @@ namespace Core.ORM.Dapper
         public T UpdateModel<T>()
         {
             throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public int Insert<T>(T t) where T : class
+        {
+            if(t == null)
+            {
+                throw new ArgumentNullException("T is null");
+            }
+
+            CommandInfo commandInfo = _ormUtility.GetInsertSqlCommandInfo<T>(t);
+
+            return Execute(commandInfo);
         }
         #endregion
     }

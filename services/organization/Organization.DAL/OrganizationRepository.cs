@@ -11,7 +11,9 @@ namespace Organization.DAL
     {
         public int CreateOrganization(OrganizationModel org)
         {
-            return 1;
+            int effRow = _orm.Insert<OrganizationModel>(org);
+
+            return effRow;
         }
 
         public OrganizationModel GetOrganization(OrganizationFilter filter)

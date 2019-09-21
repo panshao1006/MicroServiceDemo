@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Core.ORM.Attribute;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Organization.Model.Model
 {
+    [TableName("t_bas_organisation")]
     public class OrganizationModel: BaseModel
     {
         /// <summary>

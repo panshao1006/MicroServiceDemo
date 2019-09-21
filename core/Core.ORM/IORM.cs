@@ -20,5 +20,7 @@ namespace Core.ORM
         List<T> UpdateModels<T>() where T : class;
 
         T UpdateModel<T>();
+
+        int Insert<T>(T t) where T : class;
     }
 }
