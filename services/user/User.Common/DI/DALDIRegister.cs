@@ -12,6 +12,7 @@ namespace User.Common.DI
         public void DIRegisterDAL(IServiceCollection services)
         {
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
+            services.AddTransient(typeof(IAuthorRepository), typeof(AuthorRepository));
         }
     }
 }

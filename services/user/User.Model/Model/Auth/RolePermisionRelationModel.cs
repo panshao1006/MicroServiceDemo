@@ -4,7 +4,7 @@ using System.Text;
 
 namespace User.Model.Model.Auth
 {
-    public class RolePermisionRealtionModel
+    public class RolePermisionRelationModel
     {
         public string MItemID { set; get; }
 

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -72,7 +73,7 @@ namespace Core.ORM.Dapper
                 throw new ArgumentNullException("commandInfo");
             }
 
-            var command = new CommandDefinition(commandInfo.CommandText);
+            var command = new CommandDefinition(commandInfo.CommandText, commandInfo.Parameters);
             return _connection.Execute(command);
         }
 
@@ -109,16 +110,21 @@ namespace Core.ORM.Dapper
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public int Insert<T>(T t) where T : class
+        public T Insert<T>(T t) where T : class, new()
         {
-            if(t == null)
+            if (t == null)
             {
                 throw new ArgumentNullException("T is null");
             }
 
             CommandInfo commandInfo = _ormUtility.GetInsertSqlCommandInfo<T>(t);
+            Execute(commandInfo);
+            return default(T);
+        }
 
-            return Execute(commandInfo);
+        public IDbConnection GetSqlClient<IDbConnection>() where IDbConnection : class
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

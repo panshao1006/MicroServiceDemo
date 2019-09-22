@@ -15,4 +15,10 @@
     <ProjectReference Include="..\User.Model\User.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SqlSugar">
+      <HintPath>..\..\..\core\Core.ORM\Lib\SqlSugar.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

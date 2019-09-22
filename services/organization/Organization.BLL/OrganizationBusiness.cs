@@ -34,9 +34,9 @@ namespace Organization.BLL
         {
             OperationResult result = new OperationResult();
 
-            int effRow = _dal.CreateOrganization(org);
+            OrganizationModel organization = _dal.CreateOrganization(org);
 
-            if (effRow > 0)
+            if (organization != null)
             {
                 OrganizationCreatedEvent @event = new OrganizationCreatedEvent()
                 {

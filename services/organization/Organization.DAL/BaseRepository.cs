@@ -1,5 +1,6 @@
 ﻿using Core.ORM;
 using Core.ORM.Dapper;
+using Core.ORM.Sugar;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,7 @@ namespace Organization.DAL
         {
             SetConnectionString();
 
-            _orm = new DapperORM(_connectionString);
+            _orm = new SugarORM(_connectionString);
         }
 
         protected virtual void SetConnectionString()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -21,6 +22,9 @@ namespace Core.ORM
 
         T UpdateModel<T>();
 
-        int Insert<T>(T t) where T : class;
+        T Insert<T>(T t) where T : class , new();
+
+
+        T GetSqlClient<T>() where T : class;
     }
 }

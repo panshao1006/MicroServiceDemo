@@ -142,6 +142,8 @@ namespace Core.ORM
             if (sqlInfo != null)
             {
                 result = sqlInfo.SqlString;
+
+                parameters = sqlInfo.Parameters;
             }
 
 
@@ -192,6 +194,8 @@ namespace Core.ORM
             SqlInfo insertSqlInfo = new SqlInfo();
             insertSqlInfo.SqlString = string.Format("insert into {0}({1}) values({2})", tableName, columnContactString, columnParamterNameString);
             insertSqlInfo.Parameters = GetMySqlParameters(paramtersDic);
+            insertSqlInfo.Type = 1;
+            result.Add(insertSqlInfo);
 
             SqlInfo updateSqlInfo = new SqlInfo();
             result.Add(updateSqlInfo);

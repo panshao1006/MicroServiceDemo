@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,13 @@
     <ProjectReference Include="..\Organization.BLL\Organization.BLL.csproj" />
     <ProjectReference Include="..\Organization.Common\Organization.Common.csproj" />
     <ProjectReference Include="..\Organization.Model\Organization.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SqlSugar">
+      <HintPath>..\..\..\core\Core.ORM\Lib\SqlSugar.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>

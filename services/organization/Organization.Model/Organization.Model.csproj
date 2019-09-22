@@ -8,4 +8,10 @@
     <ProjectReference Include="..\..\..\core\Core.ORM\Core.ORM.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SqlSugar">
+      <HintPath>..\..\..\core\Core.ORM\Lib\SqlSugar.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

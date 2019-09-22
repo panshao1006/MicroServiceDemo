@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,6 +10,7 @@ namespace Organization.Model.Model
         /// <summary>
         /// 主键id
         /// </summary>
+        [SugarColumn(IsPrimaryKey =true)]
         public string MItemID { set; get; }
 
         /// <summary>
@@ -19,11 +21,11 @@ namespace Organization.Model.Model
         /// <summary>
         /// 是否删除
         /// </summary>
-        public string MIsDelete { set; get; }
+        public bool MIsDelete { set; get; }
 
         /// <summary>
         /// 是否激活
         /// </summary>
-        public string MIsActive { set; get; }
+        public bool MIsActive { set; get; }
     }
 }

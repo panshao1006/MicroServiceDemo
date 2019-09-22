@@ -7,12 +7,20 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using User.BLL.Author;
+using User.Interface.BLL;
 using User.Model;
 
 namespace User.BLL.EventHandler
 {
     public class OrganizationCreatedEventHandler : IEventHandler<OrganizationCreatedEvent>
     {
+        IAuthorBusiness _authorBusiness;
+
+        public OrganizationCreatedEventHandler(IAuthorBusiness authorBusiness)
+        {
+            _authorBusiness = authorBusiness;
+        }
+
         public bool CanHandle(IEvent @event)
         {
             return @event.GetType().Equals(typeof(OrganizationCreatedEvent));
@@ -21,7 +29,7 @@ namespace User.BLL.EventHandler
         public Task<bool> HandleAsync(OrganizationCreatedEvent @event, CancellationToken cancellationToken = default(CancellationToken))
         {
             //处理逻辑
-            OperationResult operationResult = new AuthorBusiness().AddAuthor(@event.UserId, @event.OrgId);
+            OperationResult operationResult = _authorBusiness.AddAuthor(@event.UserId, @event.OrgId);
 
             return new Task<bool>(() => operationResult.Success);
         }

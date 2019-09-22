@@ -9,11 +9,12 @@ namespace Organization.DAL
 {
     public class OrganizationRepository : BaseRepository
     {
-        public int CreateOrganization(OrganizationModel org)
+        public OrganizationModel CreateOrganization(OrganizationModel org)
         {
-            int effRow = _orm.Insert<OrganizationModel>(org);
+            org.MItemID = Guid.NewGuid().ToString();
+            OrganizationModel organization = _orm.Insert<OrganizationModel>(org);
 
-            return effRow;
+            return organization;
         }
 
         public OrganizationModel GetOrganization(OrganizationFilter filter)
