@@ -7,6 +7,6 @@ namespace User.Interface.DAL
 {
     public interface IAuthorRepository
     {
-        bool AddAuthor(UserGroupRelationModel userGroupRelation, UserRoleRelationModel userRoleRelation);
+        bool AddAuthor(UserGroupRelationModel userGroupRelation, UserRoleRelationModel userRoleRelation , List<RolePermisionRelationModel> rolePermisionRelations, GroupRoleRealtionModel groupRoleRealtion);
     }
 }

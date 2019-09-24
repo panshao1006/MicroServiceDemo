@@ -12,28 +12,25 @@ namespace User.DAL
     /// </summary>
     public class AuthorRepository : BaseRepository, IAuthorRepository
     {
-        public bool AddAuthor(UserGroupRelationModel userGroupRelation, UserRoleRelationModel userRoleRelation)
+        public bool AddAuthor(UserGroupRelationModel userGroupRelation, UserRoleRelationModel userRoleRelation , List<RolePermisionRelationModel> rolePermisionRelations, GroupRoleRealtionModel groupRoleRealtion)
         {
             var dbContext = _orm.GetSqlClient<SqlSugarClient>();
             try
             {
                 dbContext.BeginTran();
-                dbContext.Insertable<UserGroupRelationModel>(userGroupRelation);
-                dbContext.Insertable<UserRoleRelationModel>(userRoleRelation);
-
+                dbContext.Insertable<UserGroupRelationModel>(userGroupRelation).ExecuteCommand();
+                dbContext.Insertable<UserRoleRelationModel>(userRoleRelation).ExecuteCommand();
+                dbContext.Insertable<List<RolePermisionRelationModel>>(rolePermisionRelations).ExecuteCommand();
+                dbContext.Insertable<GroupRoleRealtionModel>(groupRoleRealtion).ExecuteCommand();
                 dbContext.CommitTran();
 
                 return true;
             }
             catch (Exception ex)
             {
+                dbContext.RollbackTran();
                 throw ex;
             }
-            finally
-            {
-                dbContext.RollbackTran();
-            }
-
         }
     }
 }

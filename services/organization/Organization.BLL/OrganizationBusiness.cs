@@ -30,23 +30,26 @@ namespace Organization.BLL
         /// </summary>
         /// <param name="org"></param>
         /// <returns></returns>
-        public OperationResult CreateOrganization(OrganizationModel org)
+        public OperationResult CreateOrganization(OrganizationModel organization)
         {
             OperationResult result = new OperationResult();
 
-            OrganizationModel organization = _dal.CreateOrganization(org);
+            OrganizationModel tempOrganization = _dal.CreateOrganization(organization);
 
-            if (organization != null)
+            if (tempOrganization != null)
             {
                 OrganizationCreatedEvent @event = new OrganizationCreatedEvent()
                 {
-                    OrgId = org.MItemID,
-                    UserId = org.MStateID
+                    OrgId = organization.MItemID,
+                    UserId = organization.MStateID
                 };
 
 
                 _eventBus.PublishAsync<OrganizationCreatedEvent>(@event);
             }
+
+            result.Success = organization != null;
+            result.ObjectId = organization.MItemID;
 
             return result;
         }
@@ -65,6 +68,32 @@ namespace Organization.BLL
             return result;
         }
 
+        /// <summary>
+        /// 获取组织viewmodel
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public OrganizationViewModel Get(OrganizationFilter filter)
+        {
+            OrganizationModel organization = GetOrganization(filter);
+
+            OrganizationViewModel result = new OrganizationViewModel().ConvertViewModel(organization);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 获取组织信息
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public OrganizationModel GetOrganization(OrganizationFilter filter)
+        {
+            OrganizationModel organization = _dal.Get(filter);
+
+            return organization;
+        }
+
 
         /// <summary>
         /// 删除组织
@@ -76,6 +105,33 @@ namespace Organization.BLL
             OperationResult result = new OperationResult();
 
             result.Success = _dal.Delete(id) > 0;
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 更新组织状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public OperationResult UpdateOrganizationStatus(string id)
+        {
+            OperationResult result = new OperationResult();
+
+            OrganizationModel organization = GetOrganization(new OrganizationFilter() { Id = id });
+
+            if (organization == null)
+            {
+                result.Success = false;
+                result.Messages.Add($"Organization is not exist:{id}");
+
+                return result;
+            }
+
+            organization.MIsActive = true;
+
+            result.Success = _dal.Update(organization);
 
             return result;
         }

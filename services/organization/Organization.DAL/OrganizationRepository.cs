@@ -1,7 +1,9 @@
-﻿using Core.ORM;
+﻿using Core.Common;
+using Core.ORM;
 using Organization.Model.Filter;
 using Organization.Model.Model;
 using Organization.Model.ViewModel;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +13,7 @@ namespace Organization.DAL
     {
         public OrganizationModel CreateOrganization(OrganizationModel org)
         {
-            org.MItemID = Guid.NewGuid().ToString();
+            org.MItemID = GuidUtility.GetGuid();
             OrganizationModel organization = _orm.Insert<OrganizationModel>(org);
 
             return organization;
@@ -42,6 +44,13 @@ namespace Organization.DAL
             return result;
         }
 
+        public OrganizationModel Get(OrganizationFilter filter)
+        {
+            var sugarClient = _orm.GetSqlClient<SqlSugarClient>();
+
+            return sugarClient.GetSimpleClient<OrganizationModel>().GetById(filter.Id);
+        }
+
         /// <summary>
         /// 删除组织
         /// </summary>
@@ -54,6 +63,18 @@ namespace Organization.DAL
             cmd.CommandText = sql;
 
             var result = _orm.Execute(cmd);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 更新组织
+        /// </summary>
+        /// <param name="organization"></param>
+        /// <returns></returns>
+        public bool Update(OrganizationModel organization)
+        {
+            var result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<OrganizationModel>().Update(organization);
 
             return result;
         }

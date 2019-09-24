@@ -48,7 +48,7 @@ namespace Organization.API.Controllers
             OperationResult operationResult = _business.CreateOrganization(org);
 
             result.Success = operationResult.Success;
-
+            result.Data = new { Id = operationResult.ObjectId };
             return result;
         }
     }

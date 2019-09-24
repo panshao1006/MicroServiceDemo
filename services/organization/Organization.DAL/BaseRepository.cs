@@ -24,5 +24,10 @@ namespace Organization.DAL
         {
             _connectionString = "server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100";
         }
+
+        protected virtual T ORMClient<T>() where T : class
+        {
+            return _orm.GetSqlClient<T>();
+        }
     }
 }
