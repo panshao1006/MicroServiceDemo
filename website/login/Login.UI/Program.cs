@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Core.
 
 namespace Login.UI
 {
@@ -18,8 +19,10 @@ namespace Login.UI
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseUrls("http://127.0.0.1:7000")
+            WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((context, configBuiler) =>
+            {
+                configBuiler.UserConfigurationCenter();
+            }).UseStartup<Startup>().UseUrls("http://127.0.0.1:7000")
                 .Build();
     }
 }

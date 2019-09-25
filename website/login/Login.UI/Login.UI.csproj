@@ -9,6 +9,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Core.ConfiguartionCenter\Core.ConfigurationCenter.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Update="Views\Home\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
