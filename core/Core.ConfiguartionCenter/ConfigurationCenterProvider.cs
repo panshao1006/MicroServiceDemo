@@ -4,6 +4,7 @@ using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 
@@ -15,20 +16,20 @@ namespace Core.ConfigurationCenter
 
         public ConfigurationCenterProvider()
         {
-            var jsonConfig = new JsonConfigurationSource();
-            jsonConfig.FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
-            jsonConfig.Path = "appsettings.json";
-            var jsonProvider = new JsonConfigurationProvider(jsonConfig);
-            jsonProvider.Load();
+            //var jsonConfig = new JsonConfigurationSource();
+            //jsonConfig.FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
+            //jsonConfig.Path = "appsettings.json";
+            //var jsonProvider = new JsonConfigurationProvider(jsonConfig);
+            //jsonProvider.Load();
 
-            jsonProvider.TryGet("configurationcenter", out string serverAddress);
+            //jsonProvider.TryGet("configurationcenter", out string serverAddress);
 
-            if (string.IsNullOrEmpty(serverAddress))
-            {
-                throw new Exception("Can not find myconfigServer's address from appsettings.json");
-            }
-
-            _remoteAddress = serverAddress;
+            //if (string.IsNullOrEmpty(serverAddress))
+            //{
+            //    throw new Exception("Can not find myconfigServer's address from appsettings.json");
+            //}
+           
+            _remoteAddress = "http://localhost:5000/api/v1/configurations";
         }
 
         /// <summary>
