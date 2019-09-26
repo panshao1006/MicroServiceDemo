@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-09-24 16:04:34
+Date: 2019-09-26 14:32:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -299,3 +299,25 @@ CREATE TABLE `t_sec_userrole` (
 -- ----------------------------
 INSERT INTO `t_sec_userrole` VALUES ('27c42c8d4fc34937aa13ae31f3e63b2d', '460fbcec3c1f41b5b4492e8f2ecc2b7c', null, '5');
 INSERT INTO `t_sec_userrole` VALUES ('aa43d7166e314e998e27fe596f9fc94e', 'c4e0ddbf-5dca-40d6-a719-ca30484e6d1b', null, '5');
+
+-- ----------------------------
+-- Table structure for `t_sys_config`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sys_config`;
+CREATE TABLE `t_sys_config` (
+  `MItemID` varchar(36) NOT NULL,
+  `MEnvironment` varchar(50) DEFAULT NULL,
+  `MAppID` varchar(50) DEFAULT NULL,
+  `MKey` varchar(100) DEFAULT NULL,
+  `MValue` varchar(500) DEFAULT NULL,
+  `MVersion` varchar(11) DEFAULT NULL,
+  `MIsActive` bit(1) DEFAULT NULL,
+  `MIsDelete` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`MItemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_sys_config
+-- ----------------------------
+INSERT INTO `t_sys_config` VALUES ('10001', 'DEV', 'Login.UI', 'GatewayHost', 'http://127.0.0.1:5000', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('20001', 'DEV', 'User.API', 'ConnectionString', 'server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100', '1.0.0.0', '', '');

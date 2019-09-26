@@ -12,7 +12,7 @@ namespace ConfigCenter.API.Model
         /// <summary>
         /// 键
         /// </summary>
-        [SugarColumn(ColumnName ="MKey")]
+        [SugarColumn(ColumnName = "MKey")]
         public string Key { set; get; }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace ConfigCenter.API.Model
         /// 环境类型
         /// </summary>
         [SugarColumn(ColumnName = "MEnvironment")]
-        public string Environment{ set; get; }
+        public string Environment { set; get; }
 
 
         /// <summary>
@@ -39,5 +39,11 @@ namespace ConfigCenter.API.Model
         /// </summary>
         [SugarColumn(ColumnName = "MAppID")]
         public string AppId { set; get; }
+
+        [SugarColumn(ColumnName = "MIsActive")]
+        public bool IsActive { set; get; }
+
+        [SugarColumn(ColumnName = "MIsDelete")]
+        public bool IsDelete { set; get; }
     }
 }

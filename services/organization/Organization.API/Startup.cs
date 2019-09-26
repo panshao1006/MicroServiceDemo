@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Common;
 using Core.EventBus;
 using Core.EventBus.Model.Author;
 using Core.EventBus.Model.Organization;
@@ -41,6 +42,8 @@ namespace Organization.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.InstanceConfigurationManager(Configuration);
 
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
             eventBus.Subscribe<OrganizationRollbackEvent>();

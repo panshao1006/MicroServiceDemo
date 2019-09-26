@@ -29,7 +29,7 @@ namespace ConfigCenter.API.Controllers
         {
             var result = new List<KeyValuePair<string, string>>();
 
-            List<ConfigurationModel> configurations = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<ConfigurationModel>().GetList(x => x.Environment == filter.Environment && x.AppId == filter.AppId);
+            List<ConfigurationModel> configurations = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<ConfigurationModel>().GetList(x => x.Environment == filter.Environment && x.AppId == filter.AppId && !x.IsDelete);
 
             if(configurations == null)
             {
