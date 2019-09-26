@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-09-26 14:32:54
+Date: 2019-09-26 17:23:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -321,3 +321,10 @@ CREATE TABLE `t_sys_config` (
 -- ----------------------------
 INSERT INTO `t_sys_config` VALUES ('10001', 'DEV', 'Login.UI', 'GatewayHost', 'http://127.0.0.1:5000', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('20001', 'DEV', 'User.API', 'ConnectionString', 'server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('20002', 'DEV', 'User.API', 'RabbitMQHost', '127.0.0.1', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('20003', 'DEV', 'User.API', 'RabbitMQUser', 'admin', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('20004', 'DEV', 'User.API', 'RabbitMQPassword', 'admin', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('30001', 'DEV', 'Organization.API', 'ConnectionString', 'server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('30002', 'DEV', 'Organization.API', 'RabbitMQHost', '127.0.0.1', '1.0.0.1', '', '');
+INSERT INTO `t_sys_config` VALUES ('30003', 'DEV', 'Organization.API', 'RabbitMQUser', 'admin', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('30004', 'DEV', 'Organization.API', 'RabbitMQPassword', 'admin', '1.0.0.0', '', '');
