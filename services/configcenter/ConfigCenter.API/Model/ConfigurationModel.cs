@@ -30,8 +30,8 @@ namespace ConfigCenter.API.Model
         /// <summary>
         /// 环境类型
         /// </summary>
-        [SugarColumn(ColumnName = "MEnvirmentType")]
-        public string EnvirmentType { set; get; }
+        [SugarColumn(ColumnName = "MEnvironment")]
+        public string Environment{ set; get; }
 
 
         /// <summary>

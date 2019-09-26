@@ -1,4 +1,5 @@
-﻿using Core.EventBus;
+﻿using Core.Common;
+using Core.EventBus;
 using Core.EventBus.Model.Organization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,8 +38,12 @@ namespace User.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.InstanceConfigurationManager(Configuration);
+
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
             eventBus.Subscribe<OrganizationCreatedEvent>();
+
+            
 
             app.UseMvc();
 

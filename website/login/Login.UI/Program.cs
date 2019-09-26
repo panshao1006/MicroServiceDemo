@@ -22,6 +22,7 @@ namespace Login.UI
             WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((context, configBuiler) =>
             {
                 configBuiler.UserConfigurationCenter();
+
             }).UseStartup<Startup>().UseUrls("http://127.0.0.1:7000")
                 .Build();
     }

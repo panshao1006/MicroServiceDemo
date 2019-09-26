@@ -37,7 +37,7 @@ namespace Gateway.API
                 options.AddPolicy("DefaultCORS",
                 builder =>
                 {
-                    builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().AllowAnyOrigin();
+                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
         }
@@ -50,9 +50,9 @@ namespace Gateway.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
             app.UseCors("DefaultCORS");
-
+            app.UseMvc();
+            
             var configuration = new OcelotPipelineConfiguration
             {
                 PreAuthenticationMiddleware = async (ctx, next) =>

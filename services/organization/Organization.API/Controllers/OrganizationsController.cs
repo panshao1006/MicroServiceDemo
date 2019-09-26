@@ -40,12 +40,34 @@ namespace Organization.API.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 创建组织
+        /// </summary>
+        /// <param name="org"></param>
+        /// <returns></returns>
         [HttpPost]
         public ReponseResult Post([FromBody]OrganizationModel org)
         {
             ReponseResult result = new ReponseResult();
 
             OperationResult operationResult = _business.CreateOrganization(org);
+
+            result.Success = operationResult.Success;
+            result.Data = new { Id = operationResult.ObjectId };
+            return result;
+        }
+
+        /// <summary>
+        /// 更新组织信息
+        /// </summary>
+        /// <param name="organization"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public ReponseResult Put([FromBody]OrganizationModel organization)
+        {
+            ReponseResult result = new ReponseResult();
+
+            OperationResult operationResult = new OperationResult();
 
             result.Success = operationResult.Success;
             result.Data = new { Id = operationResult.ObjectId };

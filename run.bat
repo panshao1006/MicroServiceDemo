@@ -20,5 +20,5 @@ cd %currentDirecotry%\services\organization\Organization.API\bin\Debug\netcoreap
 start "Organizaiton.API" dotnet Organization.API.dll
 
 ::start "Go.API" dotnet F:\work\github\MicroServiceDemo\services\user\User.API\bin\Debug\netcoreapp2.2\User.API.dll
-pause
+
 exit

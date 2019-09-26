@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.ConfigurationCenter;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -17,17 +18,12 @@ namespace User.API
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            var config = new ConfigurationBuilder().AddCommandLine(args)
-                .Build();
-            string ip = config["ip"] ?? "127.0.0.1";
-            string port = config["port"] ?? "5000";
+        public static IWebHost BuildWebHost(string[] args) =>
+             WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((context, configBuiler) =>
+             {
+                 configBuiler.UserConfigurationCenter();
 
-            return WebHost.CreateDefaultBuilder(args)
-                 .UseStartup<Startup>()
-                 .UseUrls("http://127.0.0.1:6000")
+             }).UseStartup<Startup>().UseUrls("http://127.0.0.1:6000")
                  .Build();
-        }
     }
 }

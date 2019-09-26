@@ -1,4 +1,5 @@
 ﻿using Core.ORM;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,22 +19,14 @@ namespace User.DAL
         /// <returns></returns>
         public UserModel GetUser(string eamil , string password)
         {
-            CommandInfo cmd = new CommandInfo();
-
-            cmd.CommandText = string.Format("select * from t_sec_user where MEmailAddress='{0}' and MPassword='{1}' and MIsDelete=0", eamil, password);
-
-            var result = _orm.GetDataModel<UserModel>(cmd);
+            var result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<UserModel>().GetSingle(x => x.MEmail == eamil && x.MPassword == password);
 
             return result;
         }
 
         public UserModel GetUser(string id)
         {
-            CommandInfo cmd = new CommandInfo();
-
-            cmd.CommandText = string.Format("select * from t_sec_user where MItemID='{0}' and MIsDelete=0", id);
-
-            var result = _orm.GetDataModel<UserModel>(cmd);
+            var result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<UserModel>().GetById(id);
 
             return result;
         }

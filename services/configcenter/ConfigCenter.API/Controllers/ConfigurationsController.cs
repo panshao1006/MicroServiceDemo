@@ -6,6 +6,7 @@ using ConfigCenter.API.Model;
 using Core.ORM;
 using Core.ORM.Sugar;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SqlSugar;
 
 namespace ConfigCenter.API.Controllers
@@ -16,16 +17,30 @@ namespace ConfigCenter.API.Controllers
     {
         private IORM _orm;
 
-        public ConfigurationsController()
+        public ConfigurationsController(IConfiguration configuration)
         {
-            _orm = new SugarORM("server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100");
+            string connectionString = configuration["ConnectionString"];
+
+            _orm = new SugarORM(connectionString);
         }
 
         [HttpGet]
-        public List<ConfigurationModel> Get(ConfigurationFilter filter)
+        public List<KeyValuePair<string, string>> Get([FromQuery]ConfigurationFilter filter)
         {
-            List<ConfigurationModel> result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<ConfigurationModel>().GetList(x => x.EnvirmentType == filter.EnvirmentType && x.AppId == filter.AppId);
+            var result = new List<KeyValuePair<string, string>>();
 
+            List<ConfigurationModel> configurations = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<ConfigurationModel>().GetList(x => x.Environment == filter.Environment && x.AppId == filter.AppId);
+
+            if(configurations == null)
+            {
+                return result;
+            }
+
+            foreach(ConfigurationModel configuration in configurations)
+            {
+                result.Add(KeyValuePair.Create<string, string>(configuration.Key, configuration.Value));
+            }
+            
             return result;
         }
     }

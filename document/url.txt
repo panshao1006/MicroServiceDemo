@@ -1,3 +1,6 @@
+官方文档
+https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/configuration/index?view=aspnetcore-2.2
+
 https://blog.csdn.net/xeseo/article/details/69941827
 
 //配置中心

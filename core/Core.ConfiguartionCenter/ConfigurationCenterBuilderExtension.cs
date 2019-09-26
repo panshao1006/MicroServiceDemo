@@ -11,7 +11,7 @@ namespace Core.ConfigurationCenter
            this IConfigurationBuilder builder
            )
         {
-            return builder.Add(new ChainedConfigurationSource());
+            return builder.Add(new ConfigurationCenterSource());
         }
     }
 }

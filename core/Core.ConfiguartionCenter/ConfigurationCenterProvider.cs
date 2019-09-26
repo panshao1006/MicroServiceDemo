@@ -14,22 +14,37 @@ namespace Core.ConfigurationCenter
     {
         private string _remoteAddress;
 
+        private string _environment;
+
+        private string _appId;
+
         public ConfigurationCenterProvider()
         {
-            //var jsonConfig = new JsonConfigurationSource();
-            //jsonConfig.FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
-            //jsonConfig.Path = "appsettings.json";
-            //var jsonProvider = new JsonConfigurationProvider(jsonConfig);
-            //jsonProvider.Load();
+            var jsonConfigurationSource = new JsonConfigurationSource();
 
-            //jsonProvider.TryGet("configurationcenter", out string serverAddress);
+            jsonConfigurationSource.FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
+            jsonConfigurationSource.Path = "appsettings.json";
+            var jsonConfigurationProvider = new JsonConfigurationProvider(jsonConfigurationSource);
+            jsonConfigurationProvider.Load();
 
-            //if (string.IsNullOrEmpty(serverAddress))
-            //{
-            //    throw new Exception("Can not find myconfigServer's address from appsettings.json");
-            //}
-           
-            _remoteAddress = "http://localhost:5000/api/v1/configurations";
+            jsonConfigurationProvider.TryGet("ConfigurationCenter:Host", out _remoteAddress);
+            jsonConfigurationProvider.TryGet("ConfigurationCenter:Environment", out _environment);
+            jsonConfigurationProvider.TryGet("ConfigurationCenter:AppId", out _appId);
+
+            if (string.IsNullOrEmpty(_remoteAddress))
+            {
+                throw new Exception("Can not find configurationCenter remote address from appsettings.json");
+            }
+
+            if (string.IsNullOrEmpty(_environment))
+            {
+                throw new Exception("Can not find configurationCenter environment address from appsettings.json");
+            }
+
+            if (string.IsNullOrEmpty(_appId))
+            {
+                throw new Exception("Can not find configurationCenter appid address from appsettings.json");
+            }
         }
 
         /// <summary>
@@ -42,7 +57,7 @@ namespace Core.ConfigurationCenter
             {
                 var client = new HttpClient();
 
-                response = await client.GetStringAsync(_remoteAddress);
+                response = await client.GetStringAsync(_remoteAddress + $"?environment={_environment}&appid={_appId}");
 
                 WriteToLocal(response);
             }
@@ -68,13 +83,13 @@ namespace Core.ConfigurationCenter
 
         private void WriteToLocal(string resp)
         {
-            var file = Directory.GetCurrentDirectory() + "/myconfig.json";
+            var file = Directory.GetCurrentDirectory() + "/configurationcenter.json";
             File.WriteAllText(file, resp);
         }
 
         private string ReadFromLocal()
         {
-            var file = Directory.GetCurrentDirectory() + "/myconfig.json";
+            var file = Directory.GetCurrentDirectory() + "/configurationcenter.json";
             return File.ReadAllText(file);
         }
     }

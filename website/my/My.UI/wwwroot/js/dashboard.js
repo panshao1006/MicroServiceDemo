@@ -34,7 +34,11 @@ var btnAddOrganization = new Vue({
     el: '#btnAddOrganization',
     methods: {
         click: function () {
+            var topContentDiv = top.$(".m-tab-content[data-index='1']");
 
+            topContentDiv.css("display", "block");
+
+            topContentDiv.find("iframe").src = "/initialization/index";
         }
     }
 });

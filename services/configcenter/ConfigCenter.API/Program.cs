@@ -18,7 +18,11 @@ namespace ConfigCenter.API
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseUrls("http://127.0.0.1:8000")
-                .UseStartup<Startup>();
+            WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, builder) =>
+            {
+                builder
+                .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json");
+            }).UseUrls("http://127.0.0.1:8000").UseStartup<Startup>();
     }
 }

@@ -7,7 +7,7 @@ namespace ConfigCenter.API.Model
 {
     public class ConfigurationFilter
     {
-        public string EnvirmentType { set; get; }
+        public string Environment { set; get; }
 
         public string AppId { set; get; }
     }

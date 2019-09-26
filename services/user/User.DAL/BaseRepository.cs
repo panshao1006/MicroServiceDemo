@@ -1,4 +1,5 @@
-﻿using Core.ORM;
+﻿using Core.Common;
+using Core.ORM;
 using Core.ORM.Dapper;
 using Core.ORM.Sugar;
 using System;
@@ -22,7 +23,7 @@ namespace User.DAL
 
         protected virtual void SetConnectionString()
         {
-            _connectionString = "server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100";
+            _connectionString = ConfigurationManager.AppSetting("ConnectionString");
         }
     }
 }
