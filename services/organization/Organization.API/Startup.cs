@@ -29,7 +29,7 @@ namespace Organization.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            services.InstanceConfigurationManager(Configuration);
             services.AddSingleton<IEventBus, RabbitMQEventBus>();
             services.AddSingleton<IEventHandler, OrganizationRollbackHandler>();
             services.AddSingleton<IEventHandler, AuthorCreatedHandler>();

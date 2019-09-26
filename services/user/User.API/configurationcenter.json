@@ -1,1 +1,1 @@
-[{"key":"ConnectionString","value":"server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100"}]
+[{"key":"ConnectionString","value":"server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100"},{"key":"RabbitMQHost","value":"127.0.0.1"},{"key":"RabbitMQUser","value":"admin"},{"key":"RabbitMQPassword","value":"admin"}]

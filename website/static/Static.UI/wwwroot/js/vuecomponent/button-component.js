@@ -1,11 +1,11 @@
 ﻿Vue.component('button-yellow', {
     props:{
-        button-title:String,
-        button-color:String,
-        button-id:String,
-        romote-url:String,
-        http-method:String,
-        post-data:Object,
+        buttonTitle:String,
+        buttonColor:String,
+        buttonId:String,
+        romoteUrl:String,
+        httpMethod:String,
+        postData:Object,
         successed:Function,
         failed:Function,
     }, 
@@ -25,12 +25,12 @@
 
 Vue.component('button-normal', {
     props:{
-        button-title:String,
-        button-class:String,
-        button-id:String,
-        romote-url:String,
-        http-method:String,
-        post-data:Object,
+        buttonTitle: String,
+        buttonColor: String,
+        buttonId: String,
+        romoteUrl: String,
+        httpMethod: String,
+        postData: Object,
         successed:Function,
         failed:Function,
     }, 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Common;
 using Core.EventBus.Model;
 
 namespace Core.EventBus
@@ -14,9 +15,19 @@ namespace Core.EventBus
 
         private readonly IEnumerable<IEventHandler> _eventHandlers;
 
+        private string _mqHost;
+
+        private string _mqUser;
+
+        private string _mqPassword;
+
         public RabbitMQEventBus(IEnumerable<IEventHandler> eventHandlers)
         {
-            _eventQueue = new RabbitQueue("127.0.0.1","admin","admin");
+            _mqHost = ConfigurationManager.AppSetting("RabbitMQHost");
+            _mqUser = ConfigurationManager.AppSetting("RabbitMQUser");
+            _mqPassword = ConfigurationManager.AppSetting("RabbitMQPassword");
+
+            _eventQueue = new RabbitQueue(_mqHost, _mqUser, _mqPassword);
 
             _eventHandlers = eventHandlers;
         }

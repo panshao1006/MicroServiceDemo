@@ -24,6 +24,7 @@ namespace User.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.DIRegisterBLL();
+
             services.AddMvc();
             services.AddSingleton<IEventBus, RabbitMQEventBus>();
 
@@ -42,8 +43,6 @@ namespace User.API
 
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
             eventBus.Subscribe<OrganizationCreatedEvent>();
-
-            
 
             app.UseMvc();
 
