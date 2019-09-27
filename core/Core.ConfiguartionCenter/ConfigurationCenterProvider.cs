@@ -71,14 +71,21 @@ namespace Core.ConfigurationCenter
                 throw new Exception("Can not request configs from remote config center .");
             }
 
-            var configs = JsonConvert.DeserializeObject<List<System.Collections.Generic.KeyValuePair<string, string>>>(response);
+            var responseResult = JsonConvert.DeserializeObject<RespenseResult>(response);
 
-            Data = new ConcurrentDictionary<string, string>();
-
-            configs.ForEach(c =>
+            if (responseResult.Success && responseResult.Data != null)
             {
-                Data.Add(c);
-            });
+                var configs = JsonConvert.DeserializeObject<List<KeyValuePair<string , string>>>(responseResult.Data.ToString());
+
+                Data = new ConcurrentDictionary<string, string>();
+
+                configs.ForEach(c =>
+                {
+                    Data.Add(c);
+                });
+            }
+
+           
         }
 
         private void WriteToLocal(string resp)

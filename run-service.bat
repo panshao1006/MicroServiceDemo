@@ -4,7 +4,7 @@ cd %currentDirecotry%\services\configcenter\ConfigCenter.API\bin\Debug\netcoreap
 start "ConfigCenter.API" dotnet ConfigCenter.API.dll
 
 ::这个地方等待一下，防止配置中心还没起来，就有应用开始读配置信息
-TIMEOUT /T 30 /NOBREAK
+::TIMEOUT /T 30 /NOBREAK
 
 echo ASPNETCORE_ENVIRONMENT=Development
 cd %currentDirecotry%\gateway\Gateway.API\bin\Debug\netcoreapp2.2

@@ -1,1 +1,1 @@
-[{"key":"GatewayHost","value":"http://127.0.0.1:5000"}]
+{"success":true,"data":[{"key":"GatewayHost","value":"http://127.0.0.1:5000/api/v1"},{"key":"MySiteHost","value":"http://127.0.0.1:7001"}],"message":null,"code":null}

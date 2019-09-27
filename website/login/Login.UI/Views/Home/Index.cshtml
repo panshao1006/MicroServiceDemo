@@ -1,12 +1,14 @@
-﻿
-<html>
+﻿<html>
 <head>
     <link href="http://127.0.0.1:7005/css/css.css" rel="stylesheet" />
     <script src="http://127.0.0.1:7005/lib/vue/vue.js"></script>
-
+    <script src="http://127.0.0.1:7005/lib/vue-cookies/vue-cookies.js"></script>
     <script src="http://127.0.0.1:7005/lib/axios/axios.js"></script>
     <script src="http://127.0.0.1:7005/js/request-componet.js"></script>
     <script src="http://127.0.0.1:7005/js/vuecomponent/button-component.js"></script>
+
+    <script src="~/js//configuration.js"></script>
+
 </head>
 <body class="m-reg-bg">
     <div class="m-reg-box">
@@ -21,18 +23,16 @@
 
                 <div class="main login">
                     <p class="item-wrap">
-                        <input list="userEmailList" type="text" id="txtEmail" class="textbox email" value="" style="width:342px" />
-                        @*<label for="freename" class="placeholder" style="">输入邮箱</label>*@
+                        <input list="userEmailList" type="text" id="txtEmail" class="textbox email" v-model="email" style="width:342px" />
+
                         <datalist id="userEmailList"></datalist>
                     </p>
-                    <p class="item1-wrap">
-                        <input type="text" onfocus="this.type='password'" autocomplete="off" id="txtPwd" class="textbox password password-password" value="" style="width:342px" />
-                        @*<label class="placeholder" style="">输入密码</label>*@
+                    <p class="item-wrap">
+                        <input type="password" id="txtPwd" class="textbox password password-password" v-model="password" style="width:342px" />
                     </p>
                     <div><a href="/Password/ForgetPwd">忘记密码</a></div>
                     <p id="divCode" style="width:260px;display:none">
-                        <input type="text" id="tbxCode" class="easyui-validatebox textbox" hint="验证码"
-                               data-options="required:true" style="width: 60px; height: 26px; line-height:26px; padding-left: 2px;background-image:none;" />
+                        <input type="text" id="tbxCode" class="easyui-validatebox textbox" hint="验证码" style="width: 60px; height: 26px; line-height:26px; padding-left: 2px;background-image:none;" />
                         <span id="divCodeImage" style="display:none">
                             <label id="isCorrent" href="javascript:void(0);" code="false" style="width: 16px; height: 16px; padding: 1px 5px;margin:0 auto;">&nbsp;&nbsp;</label>
 
@@ -42,8 +42,8 @@
                     <div id="lblError" class="error-msg">
                     </div>
                     <div class="m-action">
-                          <button-normal buttonTitle="登录" buttonUrl="{{loginButtonUrl}}"></button-normal>
-                        @*<a href="javascript:void(0)" class="m-btn-blue" id="btnLogin" v-on:click="login" tabindex="3">登陆</a>*@
+                          <button-normal :button-id="loginButtonId" :button-class="loginButtonClass" :button-title="loginButtonTitle" :remote-url="loginButtonUrl" http-method="post" :init-post-data="getLoginPostData"
+                                         :success-callback="loginSuccessd" :fail-callback="loginFailed"></button-normal>
                     </div>
                     <div class="m-reg-wrap">
                         <span style="color:red"></span>

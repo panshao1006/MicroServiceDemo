@@ -25,22 +25,30 @@ namespace ConfigCenter.API.Controllers
         }
 
         [HttpGet]
-        public List<KeyValuePair<string, string>> Get([FromQuery]ConfigurationFilter filter)
+        public ResponseResult Get([FromQuery]ConfigurationFilter filter)
         {
-            var result = new List<KeyValuePair<string, string>>();
+            ResponseResult result = new ResponseResult();
+
+            var keyValues = new List<KeyValuePair<string, string>>();
 
             List<ConfigurationModel> configurations = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<ConfigurationModel>().GetList(x => x.Environment == filter.Environment && x.AppId == filter.AppId && x.IsDelete==false);
 
             if(configurations == null)
             {
+                result.Success = false;
+                
                 return result;
             }
 
             foreach(ConfigurationModel configuration in configurations)
             {
-                result.Add(KeyValuePair.Create<string, string>(configuration.Key, configuration.Value));
+                keyValues.Add(KeyValuePair.Create<string, string>(configuration.Key, configuration.Value));
             }
-            
+
+            result.Success = true;
+            result.Data = keyValues;
+
+
             return result;
         }
     }
