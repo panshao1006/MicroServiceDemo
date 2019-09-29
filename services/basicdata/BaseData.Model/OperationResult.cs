@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Organization.Model
+namespace BaseData.Model
 {
     public class OperationResult
     {

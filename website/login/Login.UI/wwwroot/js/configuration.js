@@ -1,4 +1,4 @@
-﻿Vue.prototype.$confirgurationManager = function () {
+﻿Vue.prototype.$confirgurationManager = async function () {
 
     var configurationUrl = "http://127.0.0.1:8000/api/v1/configurations?environment=DEV&appid=Login.UI";
 
@@ -6,7 +6,7 @@
     options.url = configurationUrl;
     options.method = "get";
 
-    options.onSuccessed = async  function (response) {
+    options.onSuccessed = async function (response) {
 
         if (!response || !response.success || !response.data) {
             return;
@@ -26,12 +26,7 @@
                     break;
             }
         }
-    }
+    };
 
-    this.$axios(options);
-}
-new Vue({
-    created: function () {
-        this.$confirgurationManager();
-    },
-});
+    await this.$axiosAsync(options);
+};

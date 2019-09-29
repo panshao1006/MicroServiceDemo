@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Organization.Model.Filter
 {
-    public class OrganizationFilter
+    public class OrganizationFilter : BaseFilter
     {
         public string Id { set; get; }
 

@@ -48,16 +48,16 @@ namespace Core.ConfigurationCenter
         }
 
         /// <summary>
-        /// 尝试从远程配置中心读取配置信息，当成功从配置中心读取信息的时候把配置写到本地的myconfig.json文件中，当配置中心无法访问的时候尝试从本地文件恢复配置。
+        /// 尝试从远程配置中心读取配置信息，当成功从配置中心读取信息的时候把配置写到本地的配置文件中，当配置中心无法访问的时候尝试从本地文件恢复配置。
         /// </summary>
-        public async override void Load()
+        public override void Load()
         {
             var response = "";
             try
             {
                 var client = new HttpClient();
 
-                response = await client.GetStringAsync(_remoteAddress + $"?environment={_environment}&appid={_appId}");
+                response = client.GetStringAsync(_remoteAddress + $"?environment={_environment}&appid={_appId}").Result;
 
                 WriteToLocal(response);
             }

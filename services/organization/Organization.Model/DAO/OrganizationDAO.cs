@@ -1,13 +1,13 @@
-﻿using Core.ORM.Attribute;
+﻿using Organization.Model.DAO;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Organization.Model.Model
+namespace Organization.Model
 {
     [SugarTable("t_bas_organisation")]
-    public class OrganizationModel: BaseModel
+    public class OrganizationDAO : BaseDAO
     {
         /// <summary>
         /// MRegionID
@@ -20,6 +20,10 @@ namespace Organization.Model.Model
         /// </summary>		
         public string MMasterID { get; set; }
 
+        /// <summary>
+        /// 显示名称
+        /// </summary>
+        public string MName { set; get; }
 
         /// <summary>
         /// 法定名称
@@ -42,12 +46,6 @@ namespace Organization.Model.Model
         public string MOrgBusiness { get; set; }
 
         /// <summary>
-        /// 组织本位币
-        /// </summary>
-        [SugarColumn(IsIgnore =true)]
-        public string MCurrencyID { get; set; }
-
-        /// <summary>
         /// 默认语言
         /// </summary>		
         public string MDefaulLocaleID { get; set; }
@@ -62,9 +60,6 @@ namespace Organization.Model.Model
         /// </summary>
         public string MStateID { get; set; }
 
-        [SugarColumn(IsIgnore = true)]
-        public string MStateName { get; set; }
-    
 
         public string MCityID { get; set; }
 
@@ -74,38 +69,6 @@ namespace Organization.Model.Model
 
         public string MPostalNo { get; set; }
 
-        /// <summary>
-        /// 注册地址
-        /// </summary>
-        [SugarColumn(IsIgnore = true)]
-        public string MRegAddress { get; set; }
-
-        /// <summary>
-        /// 纳税人类型
-        /// </summary>
-        [SugarColumn(IsIgnore = true)]
-        public string MTaxPayer { get; set; }
-
-        /// <summary>
-        /// 税务登记证号
-        /// </summary>
-        [SugarColumn(IsIgnore = true)]
-        public string MTaxNo { get; set; }
-
-        /// <summary>
-        /// 组织支持语言
-        /// </summary>
-        [SugarColumn(IsIgnore = true)]
-        public string MSystemLanguage { get; set; }
-
-        [SugarColumn(IsIgnore = true)]
-        public string[] MLanguage { get; set; }
-
-        /// <summary>
-        /// 时区
-        /// </summary>
-        [SugarColumn(IsIgnore = true)]
-        public string MSystemZone { get; set; }
-
+        
     }
 }

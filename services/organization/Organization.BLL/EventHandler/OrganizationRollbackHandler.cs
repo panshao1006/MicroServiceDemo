@@ -22,7 +22,7 @@ namespace Organization.BLL.EventHandler
 
         public Task<bool> HandleAsync(OrganizationRollbackEvent @event, CancellationToken cancellationToken = default(CancellationToken))
         {
-            OperationResult result = new OrganizationBusiness().Delete(@event.OrgId);
+            OperationResult result = new OrganizationBusiness().DeleteOrganization(@event.OrgId);
 
             return new Task<bool>(() =>  result.Success);
         }

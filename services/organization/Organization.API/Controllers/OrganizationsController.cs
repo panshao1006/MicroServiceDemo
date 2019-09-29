@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Organization.BLL;
 using Organization.Model;
+using Organization.Model.DTO;
 using Organization.Model.Filter;
 using Organization.Model.Model;
 
@@ -31,7 +32,7 @@ namespace Organization.API.Controllers
         {
             ReponseResult result = new ReponseResult();
 
-            var organizations = _business.GetList(filter);
+            var organizations = _business.GetOrganizations(filter);
 
             result.Data = organizations;
 
@@ -46,14 +47,19 @@ namespace Organization.API.Controllers
         /// <param name="org"></param>
         /// <returns></returns>
         [HttpPost]
-        public ReponseResult Post([FromBody]OrganizationModel org)
+        public ReponseResult Post([FromBody]OrganizationDTO organization)
         {
             ReponseResult result = new ReponseResult();
 
-            OperationResult operationResult = _business.CreateOrganization(org);
+            OperationResult operationResult = _business.CreateOrganization(organization);
 
             result.Success = operationResult.Success;
-            result.Data = new { Id = operationResult.ObjectId };
+            result.Message = operationResult.Message;
+            if (result.Success)
+            {
+                result.Data = new { Id = operationResult.ObjectId };
+            }
+            
             return result;
         }
 
@@ -63,14 +69,14 @@ namespace Organization.API.Controllers
         /// <param name="organization"></param>
         /// <returns></returns>
         [HttpPut]
-        public ReponseResult Put([FromBody]OrganizationModel organization)
+        public ReponseResult Put([FromBody]DetailedOrganizationDTO organization)
         {
             ReponseResult result = new ReponseResult();
 
-            OperationResult operationResult = new OperationResult();
+            OperationResult operationResult = _business.UpdateOrganization(organization);
 
             result.Success = operationResult.Success;
-            result.Data = new { Id = operationResult.ObjectId };
+            result.Message = operationResult.Message;
             return result;
         }
     }

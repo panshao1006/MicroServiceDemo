@@ -20,7 +20,7 @@ namespace Organization.BLL.EventHandler
         public Task<bool> HandleAsync(AuthorCreatedEvent @event, CancellationToken cancellationToken = default(CancellationToken))
         {
             //更新组织的状态
-            OperationResult result = new OrganizationBusiness().UpdateOrganizationStatus(@event.OrgId);
+            OperationResult result = new OrganizationBusiness().UpdateOrganization(@event.OrgId , true);
 
             return new Task<bool>(() => result.Success);
         }

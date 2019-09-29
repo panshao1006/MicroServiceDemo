@@ -2,6 +2,7 @@
 using Core.ORM;
 using Core.ORM.Dapper;
 using Core.ORM.Sugar;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,13 +14,17 @@ namespace Organization.DAL
         protected string _connectionString;
 
         protected IORM _orm;
-        
+
+        protected SqlSugarClient _sugarClient;
+
         public BaseRepository()
         {
             SetConnectionString();
 
             _orm = new SugarORM(_connectionString);
-        }
+
+            _sugarClient = _orm.GetSqlClient<SqlSugarClient>();
+    }
 
         protected virtual void SetConnectionString()
         {
