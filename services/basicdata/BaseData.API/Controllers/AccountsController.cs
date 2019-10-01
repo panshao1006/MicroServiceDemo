@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BaseData.Model;
+using BaseData.Model.Filter.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseData.API.Controllers
@@ -10,14 +12,14 @@ namespace BaseData.API.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ResponseResult Get(AccountFilter filter)
         {
-            return new string[] { "value1", "value2" };
+            ResponseResult result = new ResponseResult();
+
+            return result;
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {

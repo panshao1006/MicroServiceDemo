@@ -7,6 +7,6 @@ namespace Core.EventBus
 {
     public interface IEventSubscriber : IDisposable
     {
-        void Subscribe<TEvent>() where TEvent : IEvent;
+        void Subscribe<TEvent, TEventHandler>() where TEvent : IEvent where TEventHandler : IEventHandler;
     }
 }

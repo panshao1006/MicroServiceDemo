@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.Common\Core.Common.csproj" />
     <ProjectReference Include="..\..\..\core\Core.ORM\Core.ORM.csproj" />
+    <ProjectReference Include="..\Organization.Interface\Organization.Interface.csproj" />
     <ProjectReference Include="..\Organization.Model\Organization.Model.csproj" />
   </ItemGroup>
 

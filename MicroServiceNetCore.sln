@@ -87,17 +87,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigCenter.API", "service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.ConfigurationCenter", "core\Core.ConfiguartionCenter\Core.ConfigurationCenter.csproj", "{16E44A43-6D5E-4361-AFBA-B6E081E3AF0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseData.API", "services\basicdata\BaseData.API\BaseData.API.csproj", "{DDABFAB5-1424-4ABE-8EAE-7AFDD518ACA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseData.API", "services\basicdata\BaseData.API\BaseData.API.csproj", "{DDABFAB5-1424-4ABE-8EAE-7AFDD518ACA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseData.DAL", "services\basicdata\BaseData.DAL\BaseData.DAL.csproj", "{F5FE7F4E-0CB9-4DE9-9BE5-8BED93B17068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseData.DAL", "services\basicdata\BaseData.DAL\BaseData.DAL.csproj", "{F5FE7F4E-0CB9-4DE9-9BE5-8BED93B17068}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseData.BLL", "services\basicdata\BaseData.BLL\BaseData.BLL.csproj", "{AA3F609A-4F50-4788-89B8-2A18AD71BEF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseData.Model", "services\basicdata\BaseData.Model\BaseData.Model.csproj", "{2E9856CB-95CC-44D8-9908-7B85295CDF34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseData.Model", "services\basicdata\BaseData.Model\BaseData.Model.csproj", "{2E9856CB-95CC-44D8-9908-7B85295CDF34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseData.Common", "services\basicdata\BaseData.Common\BaseData.Common.csproj", "{6BDDE6E9-23CE-45C9-BF4F-361CA8EED398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseData.Common", "services\basicdata\BaseData.Common\BaseData.Common.csproj", "{6BDDE6E9-23CE-45C9-BF4F-361CA8EED398}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fixedassets", "fixedassets", "{0C3AD21F-FC2E-49D9-84CF-12BF4F9FC618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Organization.Interface", "services\organization\Organization.Interface\Organization.Interface.csproj", "{E161B3BE-F260-4032-BA90-49012C082EE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -233,6 +235,10 @@ Global
 		{6BDDE6E9-23CE-45C9-BF4F-361CA8EED398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BDDE6E9-23CE-45C9-BF4F-361CA8EED398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BDDE6E9-23CE-45C9-BF4F-361CA8EED398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E161B3BE-F260-4032-BA90-49012C082EE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E161B3BE-F260-4032-BA90-49012C082EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E161B3BE-F260-4032-BA90-49012C082EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E161B3BE-F260-4032-BA90-49012C082EE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -282,6 +288,7 @@ Global
 		{2E9856CB-95CC-44D8-9908-7B85295CDF34} = {ECA20242-5699-4378-9E29-1C44C8412566}
 		{6BDDE6E9-23CE-45C9-BF4F-361CA8EED398} = {ECA20242-5699-4378-9E29-1C44C8412566}
 		{0C3AD21F-FC2E-49D9-84CF-12BF4F9FC618} = {8C8A86EE-75F7-43F3-B247-45132CC70B95}
+		{E161B3BE-F260-4032-BA90-49012C082EE5} = {8BF45945-F20F-43ED-B82C-63EBBD3E74AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25CB7005-47B1-4CBF-B0A5-CFFEE10A7F57}

@@ -30,6 +30,10 @@ namespace Core.Common
 
         public static string AppSetting(string key)
         {
+            if (_configuation == null)
+            {
+                return "";
+            }
             return _configuation[key];
         }
     }

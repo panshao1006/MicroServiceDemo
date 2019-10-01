@@ -1,7 +1,10 @@
 ﻿using Core.Common.FieldValidate;
 using Core.EventBus;
 using Core.EventBus.Model.Organization;
+using Core.ORM.DBRouter;
 using Organization.DAL;
+using Organization.Interface.BLL;
+using Organization.Interface.DAL;
 using Organization.Model;
 using Organization.Model.DAO;
 using Organization.Model.DTO;
@@ -17,19 +20,16 @@ namespace Organization.BLL
     /// <summary>
     /// 组织业务
     /// </summary>
-    public class OrganizationBusiness
+    public class OrganizationBusiness : IOrganizationBusiness
     {
-        OrganizationRepository _dal = new OrganizationRepository();
-
-        IEnumerable<IEventHandler> _eventHandlers;
+        IOrganizationRepository _dal;
 
         IEventBus _eventBus;
 
-        public OrganizationBusiness()
+        public OrganizationBusiness(IEventBus eventBus , IOrganizationRepository dal)
         {
-            //_eventHandlers = new IEnumerable<IEventHandler>();
-
-            _eventBus = new RabbitMQEventBus(_eventHandlers);
+            _eventBus = eventBus;
+            _dal = dal;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Organization.BLL
             return result;
         }
 
-        
+
 
         /// <summary>
         /// 获取组织信息
@@ -134,6 +134,12 @@ namespace Organization.BLL
 
             result.Success = _dal.Update(organization);
 
+            //给组织分配业务数据库
+            if (result.Success)
+            {
+                DatabaseRouter.SetOrganizationStorageRelation(organization.MItemID);
+            }
+
             return result;
         }
 
@@ -171,13 +177,13 @@ namespace Organization.BLL
         /// <param name="organization"></param>
         private void SetUpdateValue(DetailedOrganizationDTO organization, OrganizationDAO organizationDao, OrganizationAttributeDAO organizationAttribute)
         {
-            organizationDao.MName = string.IsNullOrWhiteSpace(organization.DisplayName) ? 
+            organizationDao.MName = string.IsNullOrWhiteSpace(organization.DisplayName) ?
                 organizationDao.MName : organization.DisplayName;
 
-            organizationDao.MLegalTradingName = string.IsNullOrWhiteSpace(organization.LegalTradingName) ? 
+            organizationDao.MLegalTradingName = string.IsNullOrWhiteSpace(organization.LegalTradingName) ?
                 organizationDao.MLegalTradingName : organization.LegalTradingName;
 
-            organizationAttribute.MBaseCurrencyID = string.IsNullOrWhiteSpace(organization.BaseCurrencyId) ? 
+            organizationAttribute.MBaseCurrencyID = string.IsNullOrWhiteSpace(organization.BaseCurrencyId) ?
                 organizationAttribute.MBaseCurrencyID : organization.BaseCurrencyId;
         }
 
@@ -194,7 +200,7 @@ namespace Organization.BLL
             organizationDao = null;
             organizationAttributeDao = null;
 
-            if(organization == null)
+            if (organization == null)
             {
                 result.Success = false;
                 result.Messages.Add("传入参数不能为空！");
@@ -225,7 +231,7 @@ namespace Organization.BLL
             }
 
             OperationResult dataValidateResult = Validate(organization, true);
-            
+
             if (!dataValidateResult.Success)
             {
                 result.Success = false;
@@ -242,9 +248,6 @@ namespace Organization.BLL
             }
 
             #endregion
-
-
-
             return result;
         }
 
@@ -255,7 +258,7 @@ namespace Organization.BLL
         /// <param name="organization"></param>
         /// <param name="organizationAttributeDao"></param>
         /// <returns></returns>
-        private OperationResult ValidateWizardSetp(DetailedOrganizationDTO organization , OrganizationAttributeDAO organizationAttributeDao)
+        private OperationResult ValidateWizardSetp(DetailedOrganizationDTO organization, OrganizationAttributeDAO organizationAttributeDao)
         {
             OperationResult result = new OperationResult();
 

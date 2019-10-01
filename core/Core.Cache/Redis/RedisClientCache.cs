@@ -1,15 +1,32 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Common;
+using Newtonsoft.Json;
 using System;
 
 namespace Core.Cache.Redis
 {
     public class RedisClientCache : ICache
     {
-        private RedisHelper _redisCache;
+        private string _redisHost;
+
+        private string _redisPort;
+
+        private string _redisPassword;
+
+        private string _redisDataBaseName;
 
         public RedisClientCache()
         {
-            var csredis = new CSRedis.CSRedisClient("127.0.0.1:6379,password=123,defaultDatabase=1,poolsize=50,ssl=false,writeBuffer=10240");
+            _redisHost = ConfigurationManager.AppSetting("RedisHost");
+
+            _redisPort = ConfigurationManager.AppSetting("RedisPort");
+
+            _redisPassword = ConfigurationManager.AppSetting("RedisPassword");
+
+            _redisDataBaseName = ConfigurationManager.AppSetting("RedisDateBase");
+
+            _redisDataBaseName = string.IsNullOrWhiteSpace(_redisDataBaseName) ? "1" : _redisDataBaseName;
+
+            var csredis = new CSRedis.CSRedisClient($"{_redisHost}:{_redisPort},password={_redisPassword},defaultDatabase={_redisDataBaseName},poolsize=50,ssl=false,writeBuffer=10240");
             //初始化 RedisHelper
             RedisHelper.Initialization(csredis);
         }

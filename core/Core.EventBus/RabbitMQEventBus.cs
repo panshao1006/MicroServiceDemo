@@ -13,7 +13,7 @@ namespace Core.EventBus
     {
         private RabbitQueue _eventQueue;
 
-        private readonly IEnumerable<IEventHandler> _eventHandlers;
+        private List<IEventHandler> _eventHandlers;
 
         private string _mqHost;
 
@@ -21,7 +21,9 @@ namespace Core.EventBus
 
         private string _mqPassword;
 
-        public RabbitMQEventBus(IEnumerable<IEventHandler> eventHandlers)
+        private IEventHandlerExecutionContext _eventHandlerExecutionContext;
+
+        public RabbitMQEventBus(IEventHandlerExecutionContext eventHandlerExecutionContext)
         {
             _mqHost = ConfigurationManager.AppSetting("RabbitMQHost");
             _mqUser = ConfigurationManager.AppSetting("RabbitMQUser");
@@ -29,11 +31,15 @@ namespace Core.EventBus
 
             _eventQueue = new RabbitQueue(_mqHost, _mqUser, _mqPassword);
 
-            _eventHandlers = eventHandlers;
+            _eventHandlerExecutionContext = eventHandlerExecutionContext;
+
+            
         }
 
         private void EventQueue_EventReceive(object sender, EventProcessedEventArgs e)
         {
+            _eventHandlers = _eventHandlerExecutionContext.GetEventHandlers();
+
             var mathcHanderList = (from eh in this._eventHandlers
                                    where eh.CanHandle(e.Event)
                                    select eh).ToList();
@@ -56,13 +62,36 @@ namespace Core.EventBus
         /// <summary>
         /// 订阅
         /// </summary>
-        public void Subscribe<TEvent>() where TEvent : IEvent
+        public void Subscribe<TEvent , TEventHandler>() where TEvent : IEvent where TEventHandler:IEventHandler
         {
+            _eventHandlerExecutionContext.HandlerRegister<TEventHandler>();
+
             _eventQueue.ReceivedEvent += EventQueue_EventReceive;
 
             string queueName = typeof(TEvent).FullName;
 
             _eventQueue.Receive<TEvent>(queueName);
+        }
+
+        /// <summary>
+        /// 事件处理是否已经注册过了
+        /// </summary>
+        /// <param name="handlerType"></param>
+        /// <returns></returns>
+        public bool HandlerRegistered(Type handlerType)
+        {
+            var result = false;
+
+            foreach(IEventHandler handler in _eventHandlers)
+            {
+                if(handler.GetType() == handlerType)
+                {
+                    result= true;
+                    break;
+                }
+            }
+
+            return result;
         }
 
 

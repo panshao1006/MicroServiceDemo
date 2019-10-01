@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Organization.BLL.EventHandler;
+using Organization.Common;
 
 namespace Organization.API
 {
@@ -28,11 +29,9 @@ namespace Organization.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             services.InstanceConfigurationManager(Configuration);
-            services.AddSingleton<IEventBus, RabbitMQEventBus>();
-            services.AddSingleton<IEventHandler, OrganizationRollbackHandler>();
-            services.AddSingleton<IEventHandler, AuthorCreatedHandler>();
+            services.UseDIRegister();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,11 +42,11 @@ namespace Organization.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.InstanceConfigurationManager(Configuration);
+            //app.InstanceConfigurationManager(Configuration);
 
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-            eventBus.Subscribe<OrganizationRollbackEvent>();
-            eventBus.Subscribe<AuthorCreatedEvent>();
+            eventBus.Subscribe<OrganizationRollbackEvent , OrganizationRollbackHandler>();
+            eventBus.Subscribe<AuthorCreatedEvent , AuthorCreatedHandler>();
 
             app.UseMvc();
         }

@@ -1,19 +1,17 @@
 ﻿using Core.Common;
-using Core.ORM;
+using Organization.Interface.DAL;
 using Organization.Model;
 using Organization.Model.DAO;
 using Organization.Model.DTO;
 using Organization.Model.Enum;
 using Organization.Model.Filter;
-using Organization.Model.Model;
-using Organization.Model.ViewModel;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
 
 namespace Organization.DAL
 {
-    public class OrganizationRepository : BaseRepository
+    public class OrganizationRepository : BaseRepository, IOrganizationRepository
     {
         /// <summary>
         /// 创建一个组织

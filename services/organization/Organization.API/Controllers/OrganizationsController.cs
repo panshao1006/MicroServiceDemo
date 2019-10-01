@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Organization.BLL;
+﻿using Microsoft.AspNetCore.Mvc;
+using Organization.Interface.BLL;
 using Organization.Model;
 using Organization.Model.DTO;
 using Organization.Model.Filter;
-using Organization.Model.Model;
 
 namespace Organization.API.Controllers
 {
     [Route("api/v1/organizations")]
-    public class OrganizationsController : Controller
+    public class OrganizationsController : ControllerBase
     {
-        private OrganizationBusiness _business;
+        private IOrganizationBusiness _business;
 
-        public OrganizationsController()
+        public OrganizationsController(IOrganizationBusiness organizationBusiness)
         {
-            _business = new OrganizationBusiness();
+            _business = organizationBusiness;
         }
 
 

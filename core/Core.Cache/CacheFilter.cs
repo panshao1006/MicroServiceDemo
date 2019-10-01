@@ -8,6 +8,16 @@ namespace Core.Cache
     {
         public string Key { set; get; }
 
-       
+        public CacheFilter()
+        {
+
+        }
+
+        public CacheFilter(string key)
+        {
+            this.Key = key;
+        }
+
+        
     }
 }

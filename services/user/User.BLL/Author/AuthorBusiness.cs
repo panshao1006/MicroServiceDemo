@@ -19,14 +19,12 @@ namespace User.BLL.Author
     {
         private IAuthorRepository _authorRepository;
 
-        IEnumerable<IEventHandler> _eventHandlers;
+        private IEventBus _eventBus;
 
-        IEventBus _eventBus;
-
-        public AuthorBusiness(IAuthorRepository authorRepository)
+        public AuthorBusiness(IEventBus eventBus, IAuthorRepository authorRepository)
         {
             _authorRepository = authorRepository;
-            _eventBus = new RabbitMQEventBus(_eventHandlers);
+            _eventBus = eventBus;
         }
 
         /// <summary>
@@ -107,7 +105,7 @@ namespace User.BLL.Author
 
             try
             {
-                result.Success = _authorRepository.AddAuthor(userGroupRelation, userRoleRelation , rolePermisionRelations , groupRoleRealtion);
+                result.Success = _authorRepository.AddAuthor(userGroupRelation, userRoleRelation, rolePermisionRelations, groupRoleRealtion);
 
                 //如果成功，返回一个权限创建成功队列
                 if (result.Success)
@@ -121,7 +119,7 @@ namespace User.BLL.Author
 
                     _eventBus.PublishAsync<OrganizationRollbackEvent>(@event);
                 }
-               
+
             }
             catch (Exception ex)
             {

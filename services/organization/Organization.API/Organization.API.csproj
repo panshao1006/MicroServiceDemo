@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.ConfiguartionCenter\Core.ConfigurationCenter.csproj" />
     <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
-    <ProjectReference Include="..\Organization.BLL\Organization.BLL.csproj" />
     <ProjectReference Include="..\Organization.Common\Organization.Common.csproj" />
     <ProjectReference Include="..\Organization.Model\Organization.Model.csproj" />
   </ItemGroup>

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.ConfiguartionCenter\Core.ConfigurationCenter.csproj" />
+    <ProjectReference Include="..\BaseData.Model\BaseData.Model.csproj" />
   </ItemGroup>
 
 </Project>
