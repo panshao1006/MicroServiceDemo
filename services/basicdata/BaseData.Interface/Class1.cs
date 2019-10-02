@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BaseData.DAL
+namespace BaseData.Interface
 {
     public class Class1
     {

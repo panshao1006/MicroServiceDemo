@@ -1,11 +1,8 @@
 ﻿using Core.ORM;
 using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using User.Interface.DAL;
-using User.Model;
-using User.Model.Model.User;
+using User.Model.DAO.User;
+using User.Model.Filter;
 
 namespace User.DAL
 {
@@ -17,16 +14,40 @@ namespace User.DAL
         /// <param name="eamil"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public UserModel GetUser(string eamil , string password)
+        public UserDAO GetUser(string eamil , string password)
         {
-            var result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<UserModel>().GetSingle(x => x.MEmail == eamil && x.MPassword == password);
+            var result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<UserDAO>().GetSingle(x => x.MEmail == eamil && x.MPassword == password);
 
             return result;
         }
 
-        public UserModel GetUser(string id)
+        /// <summary>
+        /// 查询用户
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public UserDAO GetUser(UserFilter filter)
         {
-            var result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<UserModel>().GetById(id);
+            if(filter == null)
+            {
+                return null;
+            }
+
+            var queryable = _orm.GetSqlClient<SqlSugarClient>().Queryable<UserDAO>()
+                .WhereIF(!string.IsNullOrWhiteSpace(filter.Id), x => x.MItemID == filter.Id)
+                 .WhereIF(!string.IsNullOrWhiteSpace(filter.Email), x => x.MEmail == filter.Email)
+                  .WhereIF(!string.IsNullOrWhiteSpace(filter.Password), x => x.MPassword == filter.Password)
+                   .WhereIF(!string.IsNullOrWhiteSpace(filter.Id), x => x.MItemID == filter.Id);
+
+            var result = queryable.First();
+            
+            return result;
+        }
+
+
+        public UserDAO GetUser(string id)
+        {
+            var result = _orm.GetSqlClient<SqlSugarClient>().GetSimpleClient<UserDAO>().GetById(id);
 
             return result;
         }
@@ -36,14 +57,9 @@ namespace User.DAL
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public int InsertUser(UserModel user)
+        public int InsertUser(UserDAO user)
         {
-            CommandInfo cmd = new CommandInfo();
-
-            cmd.CommandText = string.Format("insert into t_sec_user(MItemID , MFirstName , MLastName ,MEmailAddress, MPassword) values('{0}','{1}','{2}','{3}','{4}')",
-                user.MItemID, user.MFirstName, user.MLastName, user.MEmail, user.MPassword);
-
-            var result = _orm.Execute(cmd);
+            var result = _orm.GetSqlClient<SqlSugarClient>().Insertable<UserDAO>(user).ExecuteCommand();
 
             return result;
         }

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using User.Model.Model.User;
+using User.Model.DTO.User;
 
 namespace User.Model.ViewModel
 {
     public class UserViewModel
     {
-        public string MItemID { set; get; }
+        public string Id { set; get; }
 
-        public string MName { set; get; }
+        public string Name { set; get; }
 
 
-        public UserViewModel ConvertViewModel(UserModel user)
+        public UserViewModel Convert(UserDTO user)
         {
             if (user == null)
             {
@@ -21,8 +21,8 @@ namespace User.Model.ViewModel
 
             UserViewModel result = new UserViewModel()
             {
-                MItemID = user.MItemID,
-                MName = user.MFirstName + " " + user.MLastName
+                Id = user.Id,
+                Name = user.Name
             };
 
             return result;

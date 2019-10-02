@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using User.Model.Model.Auth;
+using User.Model.DAO.Author;
 
 namespace User.Interface.DAL
 {
     public interface IAuthorRepository
     {
-        bool AddAuthor(UserGroupRelationModel userGroupRelation, UserRoleRelationModel userRoleRelation , List<RolePermisionRelationModel> rolePermisionRelations, GroupRoleRealtionModel groupRoleRealtion);
+        bool AddAuthor(UserGroupRelationDAO userGroupRelation, UserRoleRelationDAO userRoleRelation , List<RolePermisionRelationDAO> rolePermisionRelations, GroupRoleRealtionDAO groupRoleRealtion);
     }
 }

@@ -7,7 +7,7 @@ namespace User.Model.Model.Auth
     /// <summary>
     /// 权限项
     /// </summary>
-    public class PermisionModel
+    public class PermisionDAO
     {
     }
 }

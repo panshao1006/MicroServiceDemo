@@ -4,7 +4,7 @@ using System.Text;
 
 namespace User.Model.Model
 {
-    public class MenuModel
+    public class MenuDTO
     {
         /// <summary>
         /// 模块

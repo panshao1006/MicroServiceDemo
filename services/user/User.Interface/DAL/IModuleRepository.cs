@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using User.Model;
+using User.Model.DTO.Author;
 
 namespace User.Interface.DAL
 {
     public interface IModuleRepository
     {
-        List<ModuleModel> GetModuleList(string userId, string orgId);
+        List<ModuleDTO> GetModuleList(string userId, string orgId);
     }
 }

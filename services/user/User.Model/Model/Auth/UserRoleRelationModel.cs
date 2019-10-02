@@ -6,7 +6,7 @@ using System.Text;
 namespace User.Model.Model.Auth
 {
     [SugarTable("t_sec_userrole")]
-    public class UserRoleRelationModel
+    public class UserRoleRelationDAO
     {
         /// <summary>
         /// 主键id

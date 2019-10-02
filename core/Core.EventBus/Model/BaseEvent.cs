@@ -12,5 +12,7 @@ namespace Core.EventBus.Model
         public Guid Id { get; }
 
         public DateTime Timestamp { get; }
+
+        public List<string> Messages { set; get; }
     }
 }

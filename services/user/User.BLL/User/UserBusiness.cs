@@ -1,12 +1,16 @@
 ﻿using Core.Cache;
+using Core.Common;
+using Core.Common.FieldValidate;
+using Core.EventBus.Model.Email;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using User.Interface.BLL;
 using User.Interface.DAL;
 using User.Model;
-using User.Model.Model;
-using User.Model.Model.User;
+using User.Model.DAO.User;
+using User.Model.DTO;
+using User.Model.DTO.User;
+using User.Model.Filter;
 using User.Model.ViewModel;
 
 namespace User.BLL.User
@@ -32,7 +36,7 @@ namespace User.BLL.User
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public OperationResult InsertUser(UserModel user)
+        public OperationResult InsertUser(UserDTO user)
         {
             OperationResult result = new OperationResult();
 
@@ -41,21 +45,88 @@ namespace User.BLL.User
                 throw new ArgumentNullException("user");
             }
 
-            if (string.IsNullOrWhiteSpace(user.MFirstName) || string.IsNullOrWhiteSpace(user.MLastName))
-            {
-                result.Message = "姓和名是必填项";
-                result.Success = false;
+            result = Validate<UserDTO>(user);
 
+            if (!result.Success)
+            {
                 return result;
             }
 
-            user.MItemID = Guid.NewGuid().ToString();
+            user.Id = GuidUtility.GetGuid();
             
-            int effRow = _userRepository.InsertUser(user);
+            int effRow = _userRepository.InsertUser(user.Convert());
 
             result.Success = effRow > 0;
 
-            result.Id = result.Success ? user.MItemID : null;
+            if (result.Success)
+            {
+                SendActivateMail(user);
+            }
+
+
+            result.Id = result.Success ? user.Id : null;
+
+            return result;
+        }
+
+        /// <summary>
+        /// 用户数据校验
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="user"></param>
+        /// <param name="isUpdate"></param>
+        /// <returns></returns>
+        private OperationResult Validate<T>(T user, bool isUpdate = false) where T : class
+        {
+            OperationResult result = new OperationResult(true);
+            List<string> tempValidateMessages;
+
+            //基本字段的校验
+            var validateResult = isUpdate ? user.ValidateNonNull<T>(out tempValidateMessages) : user.Validate<T>(out tempValidateMessages);
+
+            if (!validateResult)
+            {
+                result.Success = false;
+
+                result.Messages.AddRange(tempValidateMessages);
+            }
+
+            //一些其他业务逻辑的校验
+            var emailValidateResult = ValidateEmail((user as UserDTO).Email);
+
+            if (!emailValidateResult.Success)
+            {
+                result.Success = false;
+                result.Messages.AddRange(emailValidateResult.Messages);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 邮箱是否存在
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public OperationResult ValidateEmail(string email)
+        {
+            OperationResult result = new OperationResult(true);
+
+            //邮箱为空，不进行校验
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return result;
+            }
+
+            UserFilter filter = new UserFilter() { Email = email};
+
+            var user = _userRepository.GetUser(filter);
+
+            if (user != null)
+            {
+                result.Success = false;
+                result.Messages.Add($"邮箱{email}已注册");
+            }
 
             return result;
         }
@@ -67,19 +138,33 @@ namespace User.BLL.User
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public UserModel GetUser(string email , string password)
+        public UserDTO GetUser(string email , string password)
         {
-            UserModel result = _userRepository.GetUser(email, password);
+            UserFilter filter = new UserFilter() { Email = email , Password = password};
 
-            return result;
+            UserDAO dao = _userRepository.GetUser(filter);
+
+            UserDTO user = new UserDTO();
+            user.Convert(dao);
+
+            return user;
         }
 
-
-        public UserModel GetUserById(string id)
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public UserDTO GetUser(string id)
         {
-            UserModel result = _userRepository.GetUser(id);
+            UserFilter filter = new UserFilter() { Id = id };
 
-            return result;
+            UserDAO result = _userRepository.GetUser(filter);
+
+            UserDTO user = new UserDTO();
+            user.Convert(result);
+
+            return user;
         }
 
 
@@ -100,10 +185,10 @@ namespace User.BLL.User
                 return result;
             }
 
-            TokenModel tokenModel = new TokenModel()
+            TokenDTO tokenModel = new TokenDTO()
             {
-                UserId = userModel.MItemID,
-                UserName = userModel.MName,
+                UserId = userModel.Id,
+                UserName = userModel.Name,
                 Token = Guid.NewGuid().ToString(),
                 ExpireDateTime = DateTime.Now.AddHours(1)
             };
@@ -128,7 +213,7 @@ namespace User.BLL.User
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        public OperationResult CheckToken(string token)
+        public OperationResult ValidateToken(string token)
         {
             OperationResult result = new OperationResult();
 
@@ -139,7 +224,7 @@ namespace User.BLL.User
 
             CacheFilter filter = new CacheFilter() { Key = token };
 
-            var tokenCache = _cache.Query<TokenModel>(filter);
+            var tokenCache = _cache.Query<TokenDTO>(filter);
 
             //没有找到token或者token的过期日期小于当前日期加一个小时
             if (tokenCache == null || tokenCache.ExpireDateTime < DateTime.Now)
@@ -171,7 +256,7 @@ namespace User.BLL.User
         /// <param name="userId"></param>
         /// <param name="orgId"></param>
         /// <returns></returns>
-        public MenuModel GetUserMenu(string userId, string orgId)
+        public MenuDTO GetUserMenu(string userId, string orgId)
         {
             //判断用户是否存在
 
@@ -179,7 +264,7 @@ namespace User.BLL.User
 
             //根据用户和组织查找可以使用的模块
 
-            MenuModel menu = new MenuModel();
+            MenuDTO menu = new MenuDTO();
 
 
             return menu;
@@ -190,16 +275,16 @@ namespace User.BLL.User
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        public UserViewModel GetUser(string token)
+        public UserDTO GetUserByToken(string token)
         {
             if (string.IsNullOrEmpty(token))
             {
                 return null;
             }
 
-            CacheFilter filter = new CacheFilter() { Key = token };
+            CacheFilter cacheFilter = new CacheFilter() { Key = token };
 
-            var tokenResult = _cache.Query<TokenModel>(filter);
+            var tokenResult = _cache.Query<TokenDTO>(cacheFilter);
 
             if (tokenResult == null)
             {
@@ -208,11 +293,27 @@ namespace User.BLL.User
 
             string userId = tokenResult.UserId;
 
-            var user = _userRepository.GetUser(userId);
+            UserFilter filter = new UserFilter() { Id = userId };
 
-            UserViewModel result = new UserViewModel().ConvertViewModel(user);
+            var user = _userRepository.GetUser(filter);
+
+            var result = new UserDTO();
+            result.Convert(user);
 
             return result;
+        }
+
+        /// <summary>
+        /// 发送激活邮件
+        /// </summary>
+        /// <param name="email"></param>
+        private void SendActivateMail(UserDTO user)
+        {
+            //string template = $"";
+            EmailNotificationEvent emailNotificationEvent = new EmailNotificationEvent()
+            {
+                Email = user.Email
+            };
         }
     }
 }

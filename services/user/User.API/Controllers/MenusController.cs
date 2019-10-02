@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using User.Model.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using User.Model.DTO;
 
 namespace User.API.Controllers
 {
@@ -13,9 +8,9 @@ namespace User.API.Controllers
     public class MenusController : ControllerBase
     {
         [HttpGet]
-        public MenuModel Get(string userId , string organizationId)
+        public MenuDTO Get(string userId , string organizationId)
         {
-            MenuModel result = new MenuModel();
+            MenuDTO result = new MenuDTO();
 
             return result;
         }

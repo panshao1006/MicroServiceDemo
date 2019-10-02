@@ -1,17 +1,10 @@
-﻿using Core.Common;
-using Core.EventBus;
+﻿using Core.EventBus;
 using Core.EventBus.Model;
-using Core.EventBus.Model.Author;
 using Core.EventBus.Model.Organization;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using User.BLL.Author;
 using User.Interface.BLL;
 using User.Model;
-using User.Model.Model.Auth;
 
 namespace User.BLL.EventHandler
 {

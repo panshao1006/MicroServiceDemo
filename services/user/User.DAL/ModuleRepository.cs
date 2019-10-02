@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using User.Interface.DAL;
 using User.Model;
+using User.Model.DTO.Author;
 
 namespace User.DAL
 {
@@ -18,7 +19,7 @@ namespace User.DAL
         /// <param name="userId"></param>
         /// <param name="orgId"></param>
         /// <returns></returns>
-        public List<ModuleModel> GetModuleList(string userId , string orgId)
+        public List<ModuleDTO> GetModuleList(string userId , string orgId)
         {
             if(string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(orgId))
             {
@@ -36,7 +37,7 @@ namespace User.DAL
             CommandInfo cmd = new CommandInfo();
             cmd.CommandText = sql;
 
-            List<ModuleModel> modules = _orm.GetDataModelList<ModuleModel>(cmd);
+            List<ModuleDTO> modules = _orm.GetDataModelList<ModuleDTO>(cmd);
 
             return modules;
         }

@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using User.Model;
-using User.Model.Model.User;
+using User.Model.DAO.User;
+using User.Model.Filter;
 
 namespace User.Interface.DAL
 {
     public interface IUserRepository
     {
-        UserModel GetUser(string eamil, string password);
+        UserDAO GetUser(UserFilter filter);
 
-        UserModel GetUser(string id);
-
-
-        int InsertUser(UserModel user);
+        int InsertUser(UserDAO user);
     }
 }

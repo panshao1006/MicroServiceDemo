@@ -4,7 +4,7 @@ using System.Text;
 
 namespace User.Model.Model
 {
-    public class TokenModel
+    public class TokenDTO
     {
         /// <summary>
         /// token值

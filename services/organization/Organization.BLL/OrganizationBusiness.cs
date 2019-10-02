@@ -301,18 +301,7 @@ namespace Organization.BLL
 
                 result.Messages.AddRange(tempValidateMessages);
             }
-
-            //基础资料的存在性校验
-            OperationResult baseDataValidateResult = BaseDataValidate(organization, isUpdate);
-
-            if (!baseDataValidateResult.Success)
-            {
-                result.Success = false;
-
-                result.Messages.AddRange(tempValidateMessages);
-            }
-
-            //一些其他业务逻辑的校验
+           
 
             return result;
         }

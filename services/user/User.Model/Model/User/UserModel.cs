@@ -6,7 +6,7 @@ using System.Text;
 namespace User.Model.Model.User
 {
     [SugarTable("t_sec_user")]
-    public class UserModel
+    public class UserDAO
     {
         /// <summary>
         /// 主键id

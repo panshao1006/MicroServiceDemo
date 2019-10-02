@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using User.Interface.BLL;
 using User.Model;
+using User.Model.DTO.User;
 using User.Model.Filter;
-using User.Model.Model.User;
 
 namespace User.API.Controllers
 {
@@ -47,7 +47,7 @@ namespace User.API.Controllers
         {
             ResponseResult result = new ResponseResult();
 
-            var userModel = _userBusiness.GetUser(token);
+            var userModel = _userBusiness.GetUserByToken(token);
 
             if (userModel == null)
             {
@@ -64,7 +64,7 @@ namespace User.API.Controllers
         }
 
         [HttpPost]
-        public ResponseResult Post([FromBody]UserModel user)
+        public ResponseResult Post([FromBody]UserDTO user)
         {
             var operationResult = _userBusiness.InsertUser(user);
 

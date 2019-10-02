@@ -17,11 +17,6 @@ namespace User.Model.Model
         public string MItemID { set; get; }
 
         /// <summary>
-        /// 名称
-        /// </summary>
-        public string MName { set; get; }
-
-        /// <summary>
         /// 是否删除
         /// </summary>
         public string MIsDelete { set; get; }

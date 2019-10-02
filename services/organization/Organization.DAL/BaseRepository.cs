@@ -24,8 +24,7 @@ namespace Organization.DAL
             _orm = new SugarORM(_connectionString);
 
             _sugarClient = _orm.GetSqlClient<SqlSugarClient>();
-    }
-
+        }
         protected virtual void SetConnectionString()
         {
             _connectionString = ConfigurationManager.AppSetting("ConnectionString");
@@ -35,5 +34,6 @@ namespace Organization.DAL
         {
             return _orm.GetSqlClient<T>();
         }
+
     }
 }

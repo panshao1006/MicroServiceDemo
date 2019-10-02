@@ -1,7 +1,9 @@
-﻿using Core.Common.FieldValidate;
+﻿using Core.Common.Field;
+using Core.Common.FieldValidate;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Core.Common.FieldValidate
 {
@@ -24,7 +26,12 @@ namespace Core.Common.FieldValidate
         /// 是否允许更新
         /// </summary>
         public bool AllowUpdate { set; get; }
-        
+
+        /// <summary>
+        /// 字段类型
+        /// </summary>
+        public FieldType FieldType { set; get; }
+
         public BaseDataType BaseDateType { set; get; }
 
         public FieldValidateAttribute()
@@ -46,12 +53,20 @@ namespace Core.Common.FieldValidate
 
             messages = new List<string>();
 
-            List<string> requireValidateMessages = new List<string>();
+            List<string> requireValidateMessages;
 
             if(!IsRequireValidate(fieldName, fieldType, fieldValue, out requireValidateMessages))
             {
                 result = false;
                 messages.AddRange(requireValidateMessages);
+            }
+
+            List<string> fieldTypeValidateMessages;
+
+            if(!IsFieldTypeValidate(fieldName, fieldType, fieldValue, out fieldTypeValidateMessages))
+            {
+                result = false;
+                messages.AddRange(fieldTypeValidateMessages);
             }
 
             return result;
@@ -91,6 +106,33 @@ namespace Core.Common.FieldValidate
             {
                 result = false;
                 messages.Add($"{fieldName} 不能为空");
+            }
+
+
+            return result;
+        }
+
+        /// <summary>
+        /// 字段类型校验
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="fieldType"></param>
+        /// <param name="fieldValue"></param>
+        /// <param name="messages"></param>
+        /// <returns></returns>
+        public bool IsFieldTypeValidate(string fieldName, Type fieldType, object fieldValue, out List<string> messages)
+        {
+            messages = new List<string>();
+
+            bool result = true;
+
+            //如果是邮箱
+            if (FieldType == FieldType.Email && fieldValue!=null && !string.IsNullOrWhiteSpace(fieldValue.ToString()))
+            {
+                Regex regex = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$");
+                result = regex.IsMatch(fieldValue.ToString());
+
+                if(!result) messages.Add($"{fieldName} 不是正确的邮箱格式");
             }
 
 

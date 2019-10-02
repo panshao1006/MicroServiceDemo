@@ -4,7 +4,7 @@ using System.Text;
 
 namespace User.Model.Model.Auth
 {
-    public class RoleModel : BaseModel
+    public class RoleDAO : BaseModel
     {
         public string MOrgID { set; get; }
 

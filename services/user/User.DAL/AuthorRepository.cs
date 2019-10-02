@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using User.Interface.DAL;
-using User.Model.Model.Auth;
+using User.Model.DAO.Author;
 
 namespace User.DAL
 {
@@ -12,16 +12,16 @@ namespace User.DAL
     /// </summary>
     public class AuthorRepository : BaseRepository, IAuthorRepository
     {
-        public bool AddAuthor(UserGroupRelationModel userGroupRelation, UserRoleRelationModel userRoleRelation , List<RolePermisionRelationModel> rolePermisionRelations, GroupRoleRealtionModel groupRoleRealtion)
+        public bool AddAuthor(UserGroupRelationDAO userGroupRelation, UserRoleRelationDAO userRoleRelation , List<RolePermisionRelationDAO> rolePermisionRelations, GroupRoleRealtionDAO groupRoleRealtion)
         {
             var dbContext = _orm.GetSqlClient<SqlSugarClient>();
             try
             {
                 dbContext.BeginTran();
-                dbContext.Insertable<UserGroupRelationModel>(userGroupRelation).ExecuteCommand();
-                dbContext.Insertable<UserRoleRelationModel>(userRoleRelation).ExecuteCommand();
-                dbContext.Insertable<List<RolePermisionRelationModel>>(rolePermisionRelations).ExecuteCommand();
-                dbContext.Insertable<GroupRoleRealtionModel>(groupRoleRealtion).ExecuteCommand();
+                dbContext.Insertable<UserGroupRelationDAO>(userGroupRelation).ExecuteCommand();
+                dbContext.Insertable<UserRoleRelationDAO>(userRoleRelation).ExecuteCommand();
+                dbContext.Insertable<List<RolePermisionRelationDAO>>(rolePermisionRelations).ExecuteCommand();
+                dbContext.Insertable<GroupRoleRealtionDAO>(groupRoleRealtion).ExecuteCommand();
                 dbContext.CommitTran();
 
                 return true;

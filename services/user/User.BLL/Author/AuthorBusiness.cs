@@ -4,11 +4,10 @@ using Core.EventBus.Model.Author;
 using Core.EventBus.Model.Organization;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using User.Interface.BLL;
 using User.Interface.DAL;
 using User.Model;
-using User.Model.Model.Auth;
+using User.Model.DAO.Author;
 
 namespace User.BLL.Author
 {
@@ -38,7 +37,7 @@ namespace User.BLL.Author
             OperationResult result = new OperationResult();
 
             //用户对于的角色
-            UserRoleRelationModel userRoleRelation = new UserRoleRelationModel()
+            UserRoleRelationDAO userRoleRelation = new UserRoleRelationDAO()
             {
                 MItemID = GuidUtility.GetGuid(),
                 MUserID = userId,
@@ -48,7 +47,7 @@ namespace User.BLL.Author
             };
 
             //获取用户组模型
-            UserGroupRelationModel userGroupRelation = new UserGroupRelationModel()
+            UserGroupRelationDAO userGroupRelation = new UserGroupRelationDAO()
             {
                 MItemID = GuidUtility.GetGuid(),
                 MUserID = userId,
@@ -56,7 +55,7 @@ namespace User.BLL.Author
                 MGroupID = "10000"
             };
 
-            GroupRoleRealtionModel groupRoleRealtion = new GroupRoleRealtionModel()
+            GroupRoleRealtionDAO groupRoleRealtion = new GroupRoleRealtionDAO()
             {
                 MGroupID = "10000",
                 MRoleID = "10000",
@@ -64,37 +63,37 @@ namespace User.BLL.Author
             };
 
             //获取角色，权限关系模型
-            List<RolePermisionRelationModel> rolePermisionRelations = new List<RolePermisionRelationModel>()
+            List<RolePermisionRelationDAO> rolePermisionRelations = new List<RolePermisionRelationDAO>()
             {
-                new RolePermisionRelationModel()
+                new RolePermisionRelationDAO()
                 {
                     MItemID = GuidUtility.GetGuid(),
                     MRoleID = "10000",
                     MPermisonID = "10001",
                     MRigthType="11111",
                 },
-                new RolePermisionRelationModel()
+                new RolePermisionRelationDAO()
                 {
                     MItemID = GuidUtility.GetGuid(),
                     MRoleID = "10000",
                     MPermisonID = "10002",
                     MRigthType="11111",
                 },
-                 new RolePermisionRelationModel()
+                 new RolePermisionRelationDAO()
                 {
                     MItemID = GuidUtility.GetGuid(),
                     MRoleID = "10000",
                     MPermisonID = "10003",
                     MRigthType="11111",
                 },
-                 new RolePermisionRelationModel()
+                 new RolePermisionRelationDAO()
                 {
                     MItemID = GuidUtility.GetGuid(),
                     MRoleID = "10000",
                     MPermisonID = "10004",
                     MRigthType="11111",
                 },
-                 new RolePermisionRelationModel()
+                 new RolePermisionRelationDAO()
                 {
                     MItemID = GuidUtility.GetGuid(),
                     MRoleID = "10000",

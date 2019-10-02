@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <None Remove="Model\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Core.Common\Core.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="SqlSugar">
       <HintPath>..\..\..\core\Core.ORM\Lib\SqlSugar.dll</HintPath>
     </Reference>

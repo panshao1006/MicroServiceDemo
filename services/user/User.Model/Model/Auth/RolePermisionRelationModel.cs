@@ -1,11 +1,14 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace User.Model.Model.Auth
 {
-    public class RolePermisionRelationModel
+    [SugarTable("t_sec_rolepermission")]
+    public class RolePermisionRelationDAO
     {
+        [SugarColumn(IsPrimaryKey = true)]
         public string MItemID { set; get; }
 
         public string MRoleID { set; get; }

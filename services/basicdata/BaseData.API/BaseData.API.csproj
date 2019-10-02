@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Core.Common\Core.Common.csproj" />
     <ProjectReference Include="..\..\..\core\Core.ConfiguartionCenter\Core.ConfigurationCenter.csproj" />
     <ProjectReference Include="..\BaseData.Model\BaseData.Model.csproj" />
   </ItemGroup>
