@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using BaseData.BLL.Account.EventHandler;
 
 namespace BaseData.Common.DI
 {
@@ -18,7 +19,7 @@ namespace BaseData.Common.DI
 
             //services.AddTransient(typeof(IOrganizationRepository), typeof(OrganizationRepository));
 
-            services.AddTransient<DefaultAccountCreateEventHandler>();
+            services.AddTransient<DefaultAccountEventHandler>();
             //services.AddTransient<AuthorCreatedHandler>();
 
             services.AddSingleton<IEventHandlerExecutionContext>(sp => new RabbitMQEventHandlerExecutionContext(services));

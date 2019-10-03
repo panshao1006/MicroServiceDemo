@@ -1,4 +1,6 @@
-﻿using Core.EventBus;
+﻿using BaseData.Interface.BLL;
+using BaseData.Model;
+using Core.EventBus;
 using Core.EventBus.Model;
 using Core.EventBus.Model.BaseData;
 using System;
@@ -11,6 +13,12 @@ namespace BaseData.BLL.Account.EventHandler
 {
     public class DefaultAccountEventHandler : IEventHandler<DefaultAccountCreateEvent>
     {
+        IAccountBusiness _accountBusiness;
+        public DefaultAccountEventHandler(IAccountBusiness accountBusiness)
+        {
+            _accountBusiness = accountBusiness;
+        }
+
         public bool CanHandle(IEvent @event)
         {
             return @event.GetType().Equals(typeof(DefaultAccountCreateEvent));
@@ -18,7 +26,9 @@ namespace BaseData.BLL.Account.EventHandler
 
         public Task<bool> HandleAsync(DefaultAccountCreateEvent @event, CancellationToken cancellationToken = default(CancellationToken))
         {
-            throw new NotImplementedException();
+            OperationResult result = _accountBusiness.CreateDefaultAccount(@event.AccountStandard, @event.OrganizationId);
+
+            return new Task<bool>(() => result.Success);
         }
 
         public Task<bool> HandleAsync(IEvent @event, CancellationToken cancellationToken = default(CancellationToken))

@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.Cache\Core.Cache.csproj" />
     <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
+    <ProjectReference Include="..\BaseData.BLL\BaseData.BLL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BaseData.Common.DI;
+using Core.Common;
+using Core.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +39,8 @@ namespace BaseData.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseTokenContext();
 
             app.UseMvc();
         }
