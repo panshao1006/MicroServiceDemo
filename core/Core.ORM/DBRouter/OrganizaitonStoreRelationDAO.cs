@@ -8,8 +8,10 @@ namespace Core.ORM.DBRouter
     /// <summary>
     /// db存储DAO
     /// </summary>
+    [SugarTable("t_sys_orgstorage")]
     public class OrganizaitonStoreRelationDAO
     {
+        [SugarColumn(IsPrimaryKey =true)]
         public string MItemID { set; get; }
 
         public string MOrgID { set; get; }

@@ -1,27 +1,30 @@
-﻿var welcomDiv = new Vue({
+﻿var welcomeDiv = new Vue({
     el: '#span-welcom-tips',
     data: {
-        welcomInfo: "您好，",
+        welcomeInfo: "您好，"
     },
-    mounted: function () {
+    created: function () {
         var token = this.$cookies.get('token');
 
         var requestUri = "http://localhost:5000/api/v1/users/" + token;
-        axios.get(requestUri, {
-            headers: {
-                'Content-Type': 'application/json',
-                'token': token
+
+        var options = {};
+        options.url = requestUri;
+        options.method = "get";
+
+        options.onSuccessed = async function (response) {
+
+            if (!response || !response.success || !response.data) {
+                return;
             }
-        }).then(function (response) {
-            if (response.data.success) {
-                var name = response.data.data.mName;
-                this.welcomInfo += name;
-            } else {
-                alert("登录失败");
-            }
-        }).catch(function (error) {
-            alert("登录失败");
-        });
+
+            var data = response.data;
+
+            var name = data.name;
+            welcomeDiv.$data.welcomeInfo += name;
+        };
+
+        this.$axios(options);
     },
     methods: {
         initName: function (name) {
@@ -34,43 +37,32 @@ var btnAddOrganization = new Vue({
     el: '#btnAddOrganization',
     methods: {
         click: function () {
-            var topContentDiv = top.$(".m-tab-content[data-index='1']");
+            //var topContentDiv = top.$(".m-tab-content[data-index='1']");
 
-            topContentDiv.css("display", "block");
+            //topContentDiv.css("display", "block");
 
-            topContentDiv.find("iframe").src = "/initialization/index";
+            //topContentDiv.find("iframe").src = "/initialization/index";
         }
     }
 });
 
-var organizationList = new Vue({
-    el: '#span-welcom-tips',
+var main = new Vue({
+    el: '.m-imain',
     data: {
-        welcomInfo: "您好，",
+        organizations:[]
     },
     mounted: function () {
-        var token = this.$cookies.get('token');
-
-        var requestUri = "http://localhost:5000/api/v1/users/" + token;
-        axios.get(requestUri, {
-            headers: {
-                'Content-Type': 'application/json',
-                'token': token
-            }
-        }).then(function (response) {
-            if (response.data.success) {
-                var name = response.data.data.mName;
-                this.welcomInfo += name;
-            } else {
-                alert("登录失败");
-            }
-        }).catch(function (error) {
-            alert("登录失败");
-        });
+        
+        var requestUri = "http://localhost:5000/api/v1/organizations";
+        var options = { url: requestUri, method: "get", onSuccessed: this.successCallback, onFailed: this.failCallback };
+        this.$axios(options);
     },
     methods: {
-        initName: function (name) {
-            this.welcomInfo += name;
+        successCallback: function (response) {
+            this.organizations = response.data;
+        },
+        failCallback: function (data) {
+
         }
     }
 });

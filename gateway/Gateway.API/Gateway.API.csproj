@@ -29,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\core\Core.Common\Core.Common.csproj">
+      <Private>true</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Gateway.Common\Gateway.Common.csproj" />
   </ItemGroup>
 
@@ -36,6 +39,12 @@
     <Reference Include="Ocelot">
       <HintPath>..\Lib\ocelot\Ocelot.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

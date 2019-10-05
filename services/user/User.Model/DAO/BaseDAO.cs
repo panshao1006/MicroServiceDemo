@@ -16,12 +16,12 @@ namespace User.Model.DAO
         /// <summary>
         /// 是否删除
         /// </summary>
-        public string MIsDelete { set; get; }
+        public bool MIsDelete { set; get; }
 
         /// <summary>
         /// 是否激活
         /// </summary>
-        public string MIsActive { set; get; }
+        public bool MIsActive { set; get; }
 
         /// <summary>
         /// 创建者
@@ -42,5 +42,13 @@ namespace User.Model.DAO
         /// 修改日期
         /// </summary>
         public string MModifyDate { set; get; }
+
+        public BaseDAO()
+        {
+            MIsActive = true;
+            MIsDelete = false;
+
+            MCreateDate = DateTime.Now;
+        }
     }
 }

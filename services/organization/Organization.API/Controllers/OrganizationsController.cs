@@ -23,7 +23,7 @@ namespace Organization.API.Controllers
         /// <param name="filter"></param>
         /// <returns></returns>
         [HttpGet]
-        public ReponseResult Get(OrganizationFilter filter)
+        public ReponseResult Get([FromQuery]OrganizationFilter filter)
         {
             ReponseResult result = new ReponseResult();
 

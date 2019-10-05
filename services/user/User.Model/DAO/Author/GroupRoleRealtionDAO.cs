@@ -5,13 +5,15 @@ using System.Text;
 
 namespace User.Model.DAO.Author
 {
-    [SugarTable("t_sec_grouppermisson")]
+    [SugarTable("t_sec_grouprole")]
     public class GroupRoleRealtionDAO: BaseDAO
     {
+        public string MOrgID { set; get; }
+
         public string MGroupID { set; get; }
 
         public string MRoleID { set; get; }
 
-        public string MOrgID { set; get; }
+       
     }
 }

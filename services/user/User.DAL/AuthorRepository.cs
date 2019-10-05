@@ -12,7 +12,16 @@ namespace User.DAL
     /// </summary>
     public class AuthorRepository : BaseRepository, IAuthorRepository
     {
-        public bool AddAuthor(UserGroupRelationDAO userGroupRelation, UserRoleRelationDAO userRoleRelation , List<RolePermisionRelationDAO> rolePermisionRelations, GroupRoleRealtionDAO groupRoleRealtion)
+        /// <summary>
+        /// 新增权限
+        /// </summary>
+        /// <param name="userGroupRelation"></param>
+        /// <param name="userRoleRelation"></param>
+        /// <param name="rolePermisionRelations"></param>
+        /// <param name="groupPermisionRelations"></param>
+        /// <returns></returns>
+        public bool AddAuthor(UserGroupRelationDAO userGroupRelation, UserRoleRelationDAO userRoleRelation ,
+            List<RolePermisionRelationDAO> rolePermisionRelations, List<GroupPermissionRelationDAO> groupPermisionRelations)
         {
             var dbContext = _orm.GetSqlClient<SqlSugarClient>();
             try
@@ -20,8 +29,8 @@ namespace User.DAL
                 dbContext.BeginTran();
                 dbContext.Insertable<UserGroupRelationDAO>(userGroupRelation).ExecuteCommand();
                 dbContext.Insertable<UserRoleRelationDAO>(userRoleRelation).ExecuteCommand();
-                dbContext.Insertable<List<RolePermisionRelationDAO>>(rolePermisionRelations).ExecuteCommand();
-                dbContext.Insertable<GroupRoleRealtionDAO>(groupRoleRealtion).ExecuteCommand();
+                dbContext.GetSimpleClient<RolePermisionRelationDAO>().InsertRange(rolePermisionRelations);
+                dbContext.GetSimpleClient<GroupPermissionRelationDAO>().InsertRange(groupPermisionRelations);
                 dbContext.CommitTran();
 
                 return true;
@@ -31,6 +40,41 @@ namespace User.DAL
                 dbContext.RollbackTran();
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// 获取应用组
+        /// </summary>
+        /// <returns></returns>
+        public List<GroupDAO> GetGroups()
+        {
+            var dbContext = _orm.GetSqlClient<SqlSugarClient>();
+
+            return dbContext.GetSimpleClient<GroupDAO>().GetList(x => x.MIsDelete == false);
+        }
+
+
+        /// <summary>
+        /// 获取权限项
+        /// </summary>
+        /// <returns></returns>
+        public List<PermisionDAO> GetPermisions()
+        {
+            var dbContext = _orm.GetSqlClient<SqlSugarClient>();
+
+            return dbContext.GetSimpleClient<PermisionDAO>().GetList(x => x.MIsDelete == false);
+        }
+
+
+        /// <summary>
+        /// 获取角色
+        /// </summary>
+        /// <returns></returns>
+        public List<RoleDAO> GetRoles()
+        {
+            var dbContext = _orm.GetSqlClient<SqlSugarClient>();
+
+            return dbContext.GetSimpleClient<RoleDAO>().GetList(x => x.MIsDelete == false);
         }
     }
 }

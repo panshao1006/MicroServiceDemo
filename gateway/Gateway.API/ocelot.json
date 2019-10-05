@@ -1,7 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/v1/sessions/",
+      "DownstreamPathTemplate": "/api/v1/sessions",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/sessions",
-      "UpstreamHttpMethod": [ "POST", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "GET","Put" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/users",

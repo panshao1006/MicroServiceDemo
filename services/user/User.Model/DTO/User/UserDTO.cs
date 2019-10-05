@@ -54,12 +54,21 @@ namespace User.Model.DTO.User
         /// 转换为DTO
         /// </summary>
         /// <param name="user"></param>
-        public void Convert(UserDAO user)
+        public UserDTO Convert(UserDAO user)
         {
-            this.Id = user.MItemID;
-            this.FirstName = user.MFirstName;
-            this.LastName = user.MLastName;
-            this.IsActive = user.MIsActive;
+            UserDTO dto = null;
+
+            if (user == null)
+            {
+                return dto;
+            }
+            dto = new UserDTO();
+            dto.Id = user.MItemID;
+            dto.FirstName = user.MFirstName;
+            dto.LastName = user.MLastName;
+            dto.IsActive = user.MIsActive;
+
+            return dto;
         }
     }
 }

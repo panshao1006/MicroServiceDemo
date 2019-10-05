@@ -8,7 +8,8 @@
     <script src="http://127.0.0.1:7005/lib/vue/vue.js"></script>
     <script src="http://127.0.0.1:7005/lib/axios/axios.js"></script>
     <script src="http://127.0.0.1:7005/lib/vue-cookies/vue-cookies.js"></script>
-
+    <script src="http://127.0.0.1:7005/js/request-componet.js"></script>
+    <script src="~/js/vue-component/organization-list-component.js"></script>
 </head>
 <body>
     <div class="" style="width:100%;height:100%;">
@@ -26,12 +27,12 @@
 
                     </div>
                     <div class="clear"></div>
-                    <div class="info" id="div-welcom" style="padding:1px 3px;margin-top:10px" lastorgid="">
-                        <span id="span-welcom-tips" class='mg-bold'>{{welcomInfo}}</span>
+                    <div class="info" id="div-welcom" style="padding:1px 3px;margin-top:10px">
+                        <span id="span-welcom-tips" class='mg-bold'>{{welcomeInfo}}</span>
                     </div>
                 </div>
                 <div class="action" style="margin-right:20px;">
-                    <input class="easyui-searchbox" id="txtKeyword" data-options="searcher:FWDashboard.doSearch" style="width:200px">
+                    <input class="easyui-searchbox" id="txtKeyword" style="width:200px">
                     <a href="javascript:void(0)" id="aDataList" class="m-data-list" style="float:right;">&nbsp;</a>
                     <a href="javascript:void(0)" id="aDataGrid" class="m-data-grid-current" style="padding-right: 15px;float:right;">&nbsp;</a>
 
@@ -42,13 +43,13 @@
                 <div class="m-imain-content m-imain-dashboard" style="padding:10px 20px 0 20px;">
                     <!--大视图-->
                     <div id="divDataGridContainer" style="border-bottom: 1px solid #ccc;">
-                        <div class="m-bank-list1" id="divDataGrid">
+                        <div id="divDataGrid" class="m-bank-list1" v-for="organization in organizations">
+                            <organization-list v-bind:organization="organization"></organization-list>
                         </div>
-                        <div id="pagination" class="datagrid-pager pagination"></div>
                     </div>
                     <!--小视图-->
                     <div id="divDataListContainer" class="m-imain-content" style="padding:0px!important;">
-                        <div id="divDataList" fitcolumns="false">
+                        <div id="divDataList">
                         </div>
                     </div>
                     <div style="padding:5px 0px;" class="try-demo-div">

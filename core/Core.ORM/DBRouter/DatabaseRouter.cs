@@ -135,7 +135,7 @@ namespace Core.ORM.DBRouter
 
             if(storages == null || storages.Count == 0)
             {
-                string sql = "select * from t_sys_storage where misdelete=1 order by mitemid";
+                string sql = "select * from t_sys_storage where misdelete=0 order by mitemid";
 
                 string connectionString = ConfigurationManager.AppSetting("ConnectionString");
 
@@ -150,6 +150,12 @@ namespace Core.ORM.DBRouter
                     Key = _storageCacheKey,
                     Data = storages
                 };
+
+                if (cacheClient.IsExistCacheKey(cacheFilter))
+                {
+                    cacheClient.Delete(cacheFilter);
+                }
+                
 
                 cacheClient.Add(storageCache);
 

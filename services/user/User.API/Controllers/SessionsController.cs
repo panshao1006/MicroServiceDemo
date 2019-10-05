@@ -12,9 +12,12 @@ namespace User.API.Controllers
     {
         private IUserBusiness _userBusiness = null;
 
-        public SessionsController(IUserBusiness userBusiness)
+        private ISessionBusiness _sesionBusiness;
+
+        public SessionsController(IUserBusiness userBusiness , ISessionBusiness sessionBusiness)
         {
             _userBusiness = userBusiness;
+            _sesionBusiness = sessionBusiness;
         }
 
         /// <summary>
@@ -71,6 +74,29 @@ namespace User.API.Controllers
 
             return result;
         }
+
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="organizationId"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public ResponseResult Put([FromBody]string organizationId)
+        {
+            ResponseResult result = new ResponseResult();
+
+            OperationResult operationResult = _sesionBusiness.ChangeOrganization(organizationId);
+
+            result.Success = operationResult.Success;
+
+            result.Data = operationResult.Data;
+
+            result.Message = operationResult.Message;
+            
+            return result;
+        }
+
 
         /// <summary>
         /// 删除一个会话

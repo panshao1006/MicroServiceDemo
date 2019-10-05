@@ -7,6 +7,6 @@ namespace User.Interface.BLL
 {
     public interface IAuthorBusiness
     {
-        OperationResult AddAuthor(string userId, string orgId);
+        OperationResult CreateAdminAuthor(string userId, string orgId);
     }
 }

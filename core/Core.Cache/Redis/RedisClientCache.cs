@@ -56,6 +56,17 @@ namespace Core.Cache.Redis
         }
 
 
+        /// <summary>
+        /// 释放存在缓存键值
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public bool IsExistCacheKey(CacheFilter filter)
+        {
+            return RedisHelper.Exists(filter.Key);
+        }
+
+
         private void AddCollectionCache(CacheModel cache)
         {
             //string collectionName = cache.CollectionName;

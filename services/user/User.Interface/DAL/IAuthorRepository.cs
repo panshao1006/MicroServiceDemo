@@ -7,6 +7,13 @@ namespace User.Interface.DAL
 {
     public interface IAuthorRepository
     {
-        bool AddAuthor(UserGroupRelationDAO userGroupRelation, UserRoleRelationDAO userRoleRelation , List<RolePermisionRelationDAO> rolePermisionRelations, GroupRoleRealtionDAO groupRoleRealtion);
+        bool AddAuthor(UserGroupRelationDAO userGroupRelation, UserRoleRelationDAO userRoleRelation , 
+            List<RolePermisionRelationDAO> rolePermisionRelations, List<GroupPermissionRelationDAO> groupPermisionRelations);
+
+        List<GroupDAO> GetGroups();
+
+        List<RoleDAO> GetRoles();
+
+        List<PermisionDAO> GetPermisions();
     }
 }

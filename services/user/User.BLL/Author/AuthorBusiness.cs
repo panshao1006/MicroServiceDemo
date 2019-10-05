@@ -32,7 +32,7 @@ namespace User.BLL.Author
         /// <param name="userId"></param>
         /// <param name="orgId"></param>
         /// <returns></returns>
-        public OperationResult AddAuthor(string userId, string orgId)
+        public OperationResult CreateAdminAuthor(string userId, string orgId)
         {
             OperationResult result = new OperationResult();
 
@@ -63,48 +63,14 @@ namespace User.BLL.Author
             };
 
             //获取角色，权限关系模型
-            List<RolePermisionRelationDAO> rolePermisionRelations = new List<RolePermisionRelationDAO>()
-            {
-                new RolePermisionRelationDAO()
-                {
-                    MItemID = GuidUtility.GetGuid(),
-                    MRoleID = "10000",
-                    MPermisonID = "10001",
-                    MRigthType="11111",
-                },
-                new RolePermisionRelationDAO()
-                {
-                    MItemID = GuidUtility.GetGuid(),
-                    MRoleID = "10000",
-                    MPermisonID = "10002",
-                    MRigthType="11111",
-                },
-                 new RolePermisionRelationDAO()
-                {
-                    MItemID = GuidUtility.GetGuid(),
-                    MRoleID = "10000",
-                    MPermisonID = "10003",
-                    MRigthType="11111",
-                },
-                 new RolePermisionRelationDAO()
-                {
-                    MItemID = GuidUtility.GetGuid(),
-                    MRoleID = "10000",
-                    MPermisonID = "10004",
-                    MRigthType="11111",
-                },
-                 new RolePermisionRelationDAO()
-                {
-                    MItemID = GuidUtility.GetGuid(),
-                    MRoleID = "10000",
-                    MPermisonID = "10005",
-                    MRigthType="11111",
-                }
-            };
+            List<RolePermisionRelationDAO> rolePermisionRelations = GetRolePermisionRelations(orgId, "10000", "11111");
+
+            //获取角色，权限关系模型
+            List<GroupPermissionRelationDAO> groupPermisionRelations = GetGroupPermisionRelations(orgId, "10000", "11111");
 
             try
             {
-                result.Success = _authorRepository.AddAuthor(userGroupRelation, userRoleRelation, rolePermisionRelations, groupRoleRealtion);
+                result.Success = _authorRepository.AddAuthor(userGroupRelation, userRoleRelation, rolePermisionRelations, groupPermisionRelations);
 
                 //如果成功，返回一个权限创建成功队列
                 if (result.Success)
@@ -130,5 +96,77 @@ namespace User.BLL.Author
 
             return result;
         }
+
+        /// <summary>
+        /// 获取角色权限关系
+        /// </summary>
+        /// <param name="organizationId"></param>
+        /// <param name="roleId"></param>
+        /// <param name="rightType"></param>
+        /// <returns></returns>
+        private List<RolePermisionRelationDAO> GetRolePermisionRelations(string organizationId , string roleId , string rightType)
+        {
+            List<RolePermisionRelationDAO> result = new List<RolePermisionRelationDAO>();
+
+            var permissions = _authorRepository.GetPermisions();
+
+            if(permissions==null || permissions.Count == 0)
+            {
+                return result;
+            }
+
+            foreach (var permission in permissions)
+            {
+                var relations = new RolePermisionRelationDAO()
+                {
+                    MItemID = GuidUtility.GetGuid(),
+                    MOrgID = organizationId,
+                    MRoleID = roleId,
+                    MPermissionID = permission.MItemID,
+                    MRightType = rightType,
+                };
+
+                result.Add(relations);
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 获取角色权限关系
+        /// </summary>
+        /// <param name="organizationId"></param>
+        /// <param name="roleId"></param>
+        /// <param name="rightType"></param>
+        /// <returns></returns>
+        private List<GroupPermissionRelationDAO> GetGroupPermisionRelations(string organizationId, string groupId, string rightType)
+        {
+            List<GroupPermissionRelationDAO> result = new List<GroupPermissionRelationDAO>();
+
+            var permissions = _authorRepository.GetPermisions();
+
+            if (permissions == null || permissions.Count == 0)
+            {
+                return result;
+            }
+
+            foreach (var permission in permissions)
+            {
+                var relations = new GroupPermissionRelationDAO()
+                {
+                    MItemID = GuidUtility.GetGuid(),
+                    MOrgID = organizationId,
+                    MGroupID = groupId,
+                    MPermissionID = permission.MItemID,
+                    MRightType = rightType,
+                };
+
+                result.Add(relations);
+            }
+
+            return result;
+        }
+
     }
 }

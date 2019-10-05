@@ -33,6 +33,13 @@ namespace Organization.DAL
             attributeDao.MRegProgress = (int)WizardStepType.Created;
             attributeDao.MIsActive = true;
 
+            OrganizationUserRelationDAO organizationUserRelation = new OrganizationUserRelationDAO();
+            organizationUserRelation.MItemID = GuidUtility.GetGuid();
+            organizationUserRelation.MOrgID = dao.MItemID;
+            organizationUserRelation.MUserID = GetCurrentUserId();
+            organizationUserRelation.MIsActive = true;
+
+
             var client = _orm.GetSqlClient<SqlSugarClient>();
             try
             {
@@ -40,6 +47,7 @@ namespace Organization.DAL
 
                 client.Insertable(dao).ExecuteCommand();
                 client.Insertable(attributeDao).ExecuteCommand();
+                client.Insertable(organizationUserRelation).ExecuteCommand();
                 client.CommitTran();
                 organization.Id = dao.MItemID;
 
@@ -59,11 +67,17 @@ namespace Organization.DAL
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public OrganizationDTO GetOrganization(OrganizationFilter filter)
+        public OrganizationDAO GetOrganization(OrganizationFilter filter)
         {
-            var organization = _sugarClient.GetSimpleClient<OrganizationDAO>().GetSingle(x => x.MItemID == filter.Id && x.MIsActive == true);
+            var queryable = _sugarClient.Queryable<OrganizationDAO>();
 
-            return new OrganizationDTO().Convert(organization);
+            queryable.WhereIF(!string.IsNullOrWhiteSpace(filter.Id), x => x.MItemID == filter.Id)
+                .WhereIF(!string.IsNullOrWhiteSpace(filter.Name), x => x.MName == filter.Name)
+                .WhereIF(filter.IsActive!=null , x=>x.MIsActive == filter.IsActive.Value);
+
+            var organization = queryable.First();
+
+            return organization;
         }
 
 
@@ -74,20 +88,13 @@ namespace Organization.DAL
         /// <returns></returns>
         public List<OrganizationDAO> GetOrganizations(OrganizationFilter filter)
         {
-            var organizations = _sugarClient.GetSimpleClient<OrganizationDAO>().GetList(x => x.MItemID == filter.Id && x.MIsActive == true);
+            var queryable = _sugarClient.Queryable<OrganizationDAO>();
+
+            var organizations = queryable.WhereIF(!string.IsNullOrWhiteSpace(filter.Id), x => x.MItemID == filter.Id)
+                .WhereIF(!string.IsNullOrWhiteSpace(filter.Name), x => x.MName == filter.Name)
+                .WhereIF(filter.IsActive != null, x => x.MIsActive == filter.IsActive.Value).ToList();
 
             return organizations;
-        }
-
-
-        /// <summary>
-        /// 根据Id获取组织
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        public OrganizationDAO GetOrgnazaitonById(OrganizationFilter filter)
-        {
-            return _sugarClient.GetSimpleClient<OrganizationDAO>().GetSingle(x => x.MItemID == filter.Id && x.MIsActive == true);
         }
 
 

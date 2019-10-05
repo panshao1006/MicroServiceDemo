@@ -17,5 +17,8 @@ namespace Organization.Model.Filter
         /// 组织名称
         /// </summary>
         public string Name { set; get; }
+
+
+        public bool? IsActive { set; get; }
     }
 }

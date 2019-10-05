@@ -7,7 +7,8 @@
         loginButtonData: null,
         loginButtonClass: "m-btn-blue",
         email: "",
-        password: ""
+        password: "",
+        errorTips:""
     },
     methods: {
         loginSuccessd: function (response) {
@@ -15,7 +16,7 @@
             window.location.href = this.$mySiteHost + "?token=" + token;
         },
         loginFailed: function (data) {
-            alert("账号或者密码错误!");
+            this.errorTips = "账号或者密码错误!";
         },
         getLoginPostData: function () {
             return { "Email": this.email, "Password": this.password };

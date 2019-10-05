@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Common;
+using Core.Context;
 using Core.EventBus;
 using Core.EventBus.Model.Author;
 using Core.EventBus.Model.Organization;
@@ -47,6 +48,8 @@ namespace Organization.API
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
             eventBus.Subscribe<OrganizationRollbackEvent , OrganizationRollbackHandler>();
             eventBus.Subscribe<AuthorCreatedEvent , AuthorCreatedHandler>();
+
+            app.UseTokenContext();
 
             app.UseMvc();
         }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,26 @@ namespace Core.Context
     public class TokenContextMiddleware
     {
         private RequestDelegate _nextDelegate;
+
+        /// <summary>
+        /// 获取验证白名单
+        /// </summary>
+        private List<string> ValidateWhiteList
+        {
+            get
+            {
+                string configWhiteList = ConfigurationManager.AppSetting("TokenValidateWhiteList");
+
+                List<string> result = string.IsNullOrWhiteSpace(configWhiteList) ? new List<string>() : configWhiteList.Split(';').ToList();
+
+                result.ForEach(x =>
+                {
+                    x = x.ToLower();
+                });
+
+                return result;
+            }
+        }
 
         public TokenContextMiddleware(RequestDelegate nextDelegate)
         {
@@ -21,33 +42,43 @@ namespace Core.Context
         {
             var token = httpContext.Request.Headers.Keys.Contains("token") ? httpContext.Request.Headers["token"].ToString() : null;
 
-            if (string.IsNullOrWhiteSpace(token))
+            var requestPath = httpContext.Request.Path.ToString();
+
+            //如果时创建会话，就不进行权限校验了，其他都要进行权限校验
+            if (!IsInWhiteList(requestPath))
             {
-                var result = new { Success = false, Message = "header token is empty", Code = "0001" };
+                if (string.IsNullOrWhiteSpace(token))
+                {
+                    var result = new { Success = false, Message = "header token is empty", Code = "0001" };
 
-                httpContext.Request.HttpContext.Response.Body.Write(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(result)));
+                    httpContext.Request.HttpContext.Response.Body.Write(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(result)));
 
-                return;
+                    return;
+                }
+
+                var tokenModel = GetToken(token);
+
+                if (tokenModel == null)
+                {
+                    var result = new { Success = false, Message = "无法找到token", Code = "0002" };
+
+                    httpContext.Request.HttpContext.Response.Body.Write(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(result)));
+
+                    return;
+                }
+
+                //初始化token上下文
+                TokenContext tokenContext = TokenContext.BeginContextRuntime(tokenModel.Token, tokenModel.OrganizationId, tokenModel.UserId);
+
+                await _nextDelegate.Invoke(httpContext);
+
+                //完成请求以后，释放掉当前上下文
+                tokenContext.Dispose();
             }
-
-            var tokenModel = GetToken(token);
-
-            if(tokenModel == null)
+            else
             {
-                var result = new { Success = false, Message = "无法找到token", Code = "0002" };
-
-                httpContext.Request.HttpContext.Response.Body.Write(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(result)));
-
-                return;
+                await _nextDelegate.Invoke(httpContext);
             }
-
-            //初始化token上下文
-            TokenContext tokenContext = TokenContext.BeginContextRuntime(tokenModel.Token , tokenModel.OrganizationId , tokenModel.UserId);
-
-            await _nextDelegate.Invoke(httpContext);
-
-            //完成请求以后，释放掉当前上下文
-            tokenContext.Dispose();
         }
 
 
@@ -71,6 +102,16 @@ namespace Core.Context
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 请求是否在白名单中
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private bool IsInWhiteList(string requestPath)
+        {
+            return ValidateWhiteList.Contains(requestPath.ToLower());
         }
     }
 

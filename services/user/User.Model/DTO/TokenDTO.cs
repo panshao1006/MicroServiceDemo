@@ -17,6 +17,11 @@ namespace User.Model.DTO
         public string UserId { set; get; }
 
         /// <summary>
+        /// 组织ID
+        /// </summary>
+        public string OrganizationId { set; get; }
+
+        /// <summary>
         /// 用户名
         /// </summary>
         public string UserName { set; get; }

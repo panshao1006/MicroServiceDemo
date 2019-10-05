@@ -7,8 +7,8 @@
     <script src="http://127.0.0.1:7005/js/request-componet.js"></script>
     <script src="http://127.0.0.1:7005/js/vuecomponent/button-component.js"></script>
 
-    <script src="~/js//configuration.js"></script>
-
+    <script src="~/js/configuration.js"></script>
+    
 </head>
 <body class="m-reg-bg">
     <div class="m-reg-box">
@@ -40,6 +40,7 @@
                         </span>
                     </p>
                     <div id="lblError" class="error-msg">
+                        {{errorTips}}
                     </div>
                     <div class="m-action">
                           <button-normal :button-id="loginButtonId" :button-class="loginButtonClass" :button-title="loginButtonTitle" :remote-url="loginButtonUrl" http-method="post" :init-post-data="getLoginPostData"

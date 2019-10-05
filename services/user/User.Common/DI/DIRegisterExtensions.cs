@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using User.BLL;
 using User.BLL.Author;
 using User.BLL.EventHandler;
 using User.BLL.User;
@@ -20,6 +21,7 @@ namespace User.Common.DI
         {
             //配置一个依赖注入映射关系
             services.AddTransient(typeof(IUserBusiness), typeof(UserBusiness));
+            services.AddTransient(typeof(ISessionBusiness), typeof(SessionBusiness));
             services.AddTransient(typeof(ICache), typeof(RedisClientCache));
             services.AddTransient(typeof(IAuthorBusiness), typeof(AuthorBusiness));
 

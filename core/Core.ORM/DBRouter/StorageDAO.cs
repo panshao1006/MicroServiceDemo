@@ -1,11 +1,14 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Core.ORM.DBRouter
 {
+    [SugarTable("t_sys_storage")]
     public class StorageDAO
     {
+        [SugarColumn(IsPrimaryKey =true)]
         public string MItemID { set; get; }
 
         public string MDBName { set; get; }

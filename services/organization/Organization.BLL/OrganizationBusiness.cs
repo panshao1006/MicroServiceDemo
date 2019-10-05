@@ -20,7 +20,7 @@ namespace Organization.BLL
     /// <summary>
     /// 组织业务
     /// </summary>
-    public class OrganizationBusiness : IOrganizationBusiness
+    public class OrganizationBusiness : BaseBusiness , IOrganizationBusiness
     {
         IOrganizationRepository _dal;
 
@@ -90,9 +90,9 @@ namespace Organization.BLL
         /// <returns></returns>
         public OrganizationDTO GetOrganization(OrganizationFilter filter)
         {
-            OrganizationDTO organization = _dal.GetOrganization(filter);
+            var organization = _dal.GetOrganization(filter);
 
-            return organization;
+            return new OrganizationDTO().Convert(organization);
         }
 
 
@@ -120,7 +120,21 @@ namespace Organization.BLL
         {
             OperationResult result = new OperationResult();
 
-            OrganizationDAO organization = _dal.GetOrgnazaitonById(new OrganizationFilter() { Id = id });
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                result.Success = false;
+                result.Messages.Add("参数id为空");
+
+                return result;
+            }
+
+            var filter = new OrganizationFilter()
+            {
+                IsActive = !isActive,
+                Id = id
+            };
+
+            OrganizationDAO organization = _dal.GetOrganization(filter);
 
             if (organization == null)
             {
@@ -218,8 +232,9 @@ namespace Organization.BLL
 
             var filter = new OrganizationFilter();
             filter.Id = organization.Id;
+            filter.IsActive = true;
 
-            organizationDao = _dal.GetOrgnazaitonById(filter);
+            organizationDao = _dal.GetOrganization(filter);
             organizationAttributeDao = _dal.GetOrganizationAttribute(filter);
             //组织不存在
             if (organizationDao == null || organizationAttributeDao == null)

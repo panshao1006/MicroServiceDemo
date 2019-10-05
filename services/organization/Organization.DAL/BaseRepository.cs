@@ -1,4 +1,5 @@
 ﻿using Core.Common;
+using Core.Context;
 using Core.ORM;
 using Core.ORM.Dapper;
 using Core.ORM.Sugar;
@@ -33,6 +34,15 @@ namespace Organization.DAL
         protected virtual T ORMClient<T>() where T : class
         {
             return _orm.GetSqlClient<T>();
+        }
+
+        /// <summary>
+        /// 获取用户ID
+        /// </summary>
+        /// <returns></returns>
+        protected string GetCurrentUserId()
+        {
+            return TokenContext.CurrentContext.GetUserId();
         }
 
     }

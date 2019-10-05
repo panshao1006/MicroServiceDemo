@@ -1,4 +1,5 @@
 ﻿using Core.Common;
+using Core.Context;
 using Core.EventBus;
 using Core.EventBus.Model.Organization;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +42,8 @@ namespace User.API
 
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
             eventBus.Subscribe<OrganizationCreatedEvent , OrganizationCreatedEventHandler>();
+
+            app.UseTokenContext();
 
             app.UseMvc();
 

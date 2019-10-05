@@ -15,7 +15,7 @@ using User.Model.ViewModel;
 
 namespace User.BLL.User
 {
-    public class UserBusiness: IUserBusiness
+    public class UserBusiness : IUserBusiness
     {
         private IUserRepository _userRepository;
 
@@ -25,7 +25,7 @@ namespace User.BLL.User
         private ICache _cache;
 
 
-        public UserBusiness(IUserRepository userRepository , ICache cache)
+        public UserBusiness(IUserRepository userRepository, ICache cache)
         {
             _userRepository = userRepository;
             _cache = cache;
@@ -53,7 +53,7 @@ namespace User.BLL.User
             }
 
             user.Id = GuidUtility.GetGuid();
-            
+
             int effRow = _userRepository.InsertUser(user.Convert());
 
             result.Success = effRow > 0;
@@ -118,7 +118,7 @@ namespace User.BLL.User
                 return result;
             }
 
-            UserFilter filter = new UserFilter() { Email = email};
+            UserFilter filter = new UserFilter() { Email = email };
 
             var user = _userRepository.GetUser(filter);
 
@@ -138,14 +138,13 @@ namespace User.BLL.User
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public UserDTO GetUser(string email , string password)
+        public UserDTO GetUser(string email, string password)
         {
-            UserFilter filter = new UserFilter() { Email = email , Password = password};
+            UserFilter filter = new UserFilter() { Email = email, Password = password };
 
             UserDAO dao = _userRepository.GetUser(filter);
 
-            UserDTO user = new UserDTO();
-            user.Convert(dao);
+            UserDTO user = new UserDTO().Convert(dao);
 
             return user;
         }
@@ -189,7 +188,7 @@ namespace User.BLL.User
             {
                 UserId = userModel.Id,
                 UserName = userModel.Name,
-                Token = Guid.NewGuid().ToString(),
+                Token = GuidUtility.GetGuid(),
                 ExpireDateTime = DateTime.Now.AddHours(1)
             };
 

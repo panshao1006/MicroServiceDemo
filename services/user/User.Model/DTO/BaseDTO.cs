@@ -8,6 +8,6 @@ namespace User.Model.DTO
     {
         public string Id { set; get; }
 
-        public string IsActive { set; get; }
+        public bool IsActive { set; get; }
     }
 }

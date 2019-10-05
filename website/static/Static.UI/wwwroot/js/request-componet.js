@@ -15,11 +15,11 @@
                 .then(function (response) {
                     if (response.data.success) {
                         if (options.onSuccessed) {
-                            options.onSuccessed(response.data)
+                            options.onSuccessed(response.data);
                         }
                     } else {
-                        if (options.onFialed) {
-                            options.onFialed(response.data);
+                        if (options.onFailed) {
+                            options.onFailed(response.data);
                         }
 
                     }
@@ -40,6 +40,26 @@
                     } else {
                         if (options.onFialed) {
                             options.onFialed(response.data);
+                        }
+
+                    }
+                })
+                .catch(function (error) {
+                    if (options.onError) {
+                        options.onError(response.data);
+                    }
+                });
+            break;
+        case "put":
+            axios.put(options.url, options.data)
+                .then(function (response) {
+                    if (response.data.success) {
+                        if (options.onSuccessed) {
+                            options.onSuccessed(response.data);
+                        }
+                    } else {
+                        if (options.onFailed) {
+                            options.onFailed(response.data);
                         }
 
                     }
@@ -97,6 +117,26 @@ Vue.prototype.$axiosAsync = async function (options) {
                     } else {
                         if (options.onFialed) {
                             options.onFialed(response.data);
+                        }
+
+                    }
+                })
+                .catch(function (error) {
+                    if (options.onError) {
+                        options.onError(response.data);
+                    }
+                });
+            break;
+        case "put":
+            await axios.put(options.url, options.data)
+                .then(function (response) {
+                    if (response.data.success) {
+                        if (options.onSuccessed) {
+                            options.onSuccessed(response.data);
+                        }
+                    } else {
+                        if (options.onFailed) {
+                            options.onFailed(response.data);
                         }
 
                     }

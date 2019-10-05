@@ -12,11 +12,9 @@ namespace Organization.Interface.DAL
     {
         OrganizationDTO CreateOrganization(OrganizationDTO organization);
 
-        OrganizationDTO GetOrganization(OrganizationFilter filter);
+        OrganizationDAO GetOrganization(OrganizationFilter filter);
 
         List<OrganizationDAO> GetOrganizations(OrganizationFilter filter);
-
-        OrganizationDAO GetOrgnazaitonById(OrganizationFilter filter);
 
         OrganizationAttributeDAO GetOrganizationAttribute(OrganizationFilter filter);
 

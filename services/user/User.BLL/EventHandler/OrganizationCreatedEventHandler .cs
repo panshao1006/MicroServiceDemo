@@ -25,7 +25,7 @@ namespace User.BLL.EventHandler
         public Task<bool> HandleAsync(OrganizationCreatedEvent @event, CancellationToken cancellationToken = default(CancellationToken))
         {
             //处理逻辑
-            OperationResult operationResult = _authorBusiness.AddAuthor(@event.UserId, @event.OrgId);
+            OperationResult operationResult = _authorBusiness.CreateAdminAuthor(@event.UserId, @event.OrgId);
 
             return new Task<bool>(() => operationResult.Success);
         }

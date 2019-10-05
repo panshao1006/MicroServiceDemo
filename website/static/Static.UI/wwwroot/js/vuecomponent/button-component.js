@@ -7,7 +7,7 @@
         httpMethod:String,
         postData:Object,
         successed:Function,
-        failed:Function,
+        failed:Function
     }, 
     data: function () {
         return {
@@ -33,7 +33,7 @@ Vue.component('button-normal', {
         buttonClass: String,
         initPostData: Function,
         successCallback:Function,
-        failCallback:Function,
+        failCallback:Function
     }, 
     template: '<a href="javascript:void(0)" v-bind:id="buttonId" v-bind:class="buttonClass" v-on:click="clickEvent">{{buttonTitle}}</a>',
     data: function () {
@@ -43,8 +43,8 @@ Vue.component('button-normal', {
             $postData: this.postData,
             $setData: this.initPostData,
             $successCallback: this.successCallback,
-            $faileCallback: this.failCallback,
-        }
+            $failCallback: this.failCallback
+        };
     },
     methods: {
         clickEvent: function () {
@@ -53,7 +53,7 @@ Vue.component('button-normal', {
                 this.postData = this.initPostData();
             }
 
-            var options = { url: this.remoteUrl, method: this.httpMethod, data: this.postData, onSuccessed: this.successCallback, onFailed: this.faileCallback };
+            var options = { url: this.remoteUrl, method: this.httpMethod, data: this.postData, onSuccessed: this.successCallback, onFailed: this.failCallback };
             this.$axios(options);
         }
     }

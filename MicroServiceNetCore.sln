@@ -101,13 +101,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fixedassets", "fixedassets"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Organization.Interface", "services\organization\Organization.Interface\Organization.Interface.csproj", "{E161B3BE-F260-4032-BA90-49012C082EE5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationService", "NotificationService", "{72DC8B5F-3E24-4C5F-A3FE-6E63160B8BA2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notification", "notification", "{72DC8B5F-3E24-4C5F-A3FE-6E63160B8BA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.API", "services\notification\Notification.API\Notification.API.csproj", "{08383205-207F-4B45-B3D2-AFF13A47F984}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.API", "services\notification\Notification.API\Notification.API.csproj", "{08383205-207F-4B45-B3D2-AFF13A47F984}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseData.Interface", "services\basicdata\BaseData.Interface\BaseData.Interface.csproj", "{C8772851-588E-413F-B862-E84850341CB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseData.Interface", "services\basicdata\BaseData.Interface\BaseData.Interface.csproj", "{C8772851-588E-413F-B862-E84850341CB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Context", "core\Core.Context\Core.Context.csproj", "{7BB0ECCE-5482-4967-8EB2-D3323B16745A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Context", "core\Core.Context\Core.Context.csproj", "{7BB0ECCE-5482-4967-8EB2-D3323B16745A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

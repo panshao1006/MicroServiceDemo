@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Gateway.Common
 {
-    public class HttpClientUtility
+    public class HttpClientContainner
     {
         private HttpClient _client;
 
-        public HttpClientUtility()
+        public HttpClientContainner()
         {
             _client = new HttpClient();
         }
