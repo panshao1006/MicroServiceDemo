@@ -12,9 +12,27 @@ namespace Core.Common
     {
         private HttpClient _client;
 
+        private HttpHeaders _hearder;
+
         public HttpClientUtility()
         {
             _client = new HttpClient();
+        }
+
+
+        /// <summary>
+        /// 设置请求头
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public void SetRequestHeaders(string name , string value)
+        {
+            if (_client.DefaultRequestHeaders.Contains(name))
+            {
+                return;
+            }
+
+            _client.DefaultRequestHeaders.Add(name, value);
         }
 
 
