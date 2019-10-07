@@ -156,10 +156,10 @@ textarea {overflow:auto;vertical-align:top;}
 .pupup-arrow-space {position:absolute;top:-12px;height:12px;width:100%;cursor:default;}
 .popup-list-msg {text-align:left;margin-left:20px;}
 .m-nav-msg {background-image:url(../images/nav-msg.png);}
-.m-nav-dashboard {background-image:url(../images/nav-dashboard.png);}
-.m-nav-dashboard:hover {background-image:url(../images/nav-dashboard-hover.png);}
-.m-nav-account {background-image:url(../images/nav-account.png);}
-.m-nav-account:hover {background-image:url(../images/nav-account-hover.png);}
+.m-nav-100 {background-image:url(../images/nav-dashboard.png);}
+.m-nav-100:hover {background-image:url(../images/nav-dashboard-hover.png);}
+.m-nav-200 {background-image:url(../images/nav-account.png);}
+.m-nav-200:hover {background-image:url(../images/nav-account-hover.png);}
 .m-nav-report {background-image:url(../images/nav-report.png);}
 .m-nav-report:hover {background-image:url(../images/nav-report-hover.png);}
 .m-nav-folder {background-image:url(../images/nav-folder.png);}

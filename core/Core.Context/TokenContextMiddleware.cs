@@ -112,7 +112,7 @@ namespace Core.Context
 
             string url = "http://localhost:6000/api/v1/sessions?token=" + token;
 
-            ResponseResult checkTokenResult = httpClient.Get<ResponseResult>(url);
+            ResponseResult checkTokenResult = httpClient.GetOriginalResponse<ResponseResult>(url);
 
             if (checkTokenResult.Success)
             {

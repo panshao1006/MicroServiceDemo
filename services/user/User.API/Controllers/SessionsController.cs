@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using User.Interface.BLL;
 using User.Model;
+using User.Model.DTO;
 using User.Model.ViewModel;
 
 namespace User.API.Controllers
@@ -8,16 +9,16 @@ namespace User.API.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/v1/sessions")]
-    public class SessionsController : Controller
+    public class SessionsController : ControllerBase
     {
         private IUserBusiness _userBusiness = null;
 
-        private ISessionBusiness _sesionBusiness;
+        private ISessionBusiness _sessionBusiness;
 
         public SessionsController(IUserBusiness userBusiness , ISessionBusiness sessionBusiness)
         {
             _userBusiness = userBusiness;
-            _sesionBusiness = sessionBusiness;
+            _sessionBusiness = sessionBusiness;
         }
 
         /// <summary>
@@ -82,11 +83,22 @@ namespace User.API.Controllers
         /// <param name="organizationId"></param>
         /// <returns></returns>
         [HttpPut]
-        public ResponseResult Put([FromBody]string organizationId)
+        public ResponseResult Put(TokenDTO tokenDTO)
         {
             ResponseResult result = new ResponseResult();
 
-            OperationResult operationResult = _sesionBusiness.ChangeOrganization(organizationId);
+            var organizationId = tokenDTO == null ? null : tokenDTO.OrganizationId;
+
+            if (string.IsNullOrWhiteSpace(organizationId))
+            {
+                result.Success = false;
+                result.Message = "组织id为空";
+                result.Code = "100000";
+
+                return result;
+            }
+
+            OperationResult operationResult = _sessionBusiness.ChangeOrganization(organizationId);
 
             result.Success = operationResult.Success;
 

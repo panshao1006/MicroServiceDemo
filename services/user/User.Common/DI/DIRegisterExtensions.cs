@@ -24,12 +24,15 @@ namespace User.Common.DI
             services.AddTransient(typeof(ISessionBusiness), typeof(SessionBusiness));
             services.AddTransient(typeof(ICache), typeof(RedisClientCache));
             services.AddTransient(typeof(IAuthorBusiness), typeof(AuthorBusiness));
+            services.AddTransient(typeof(IMenuBusiness), typeof(MenuBusiness));
 
             //注册DAL层的依赖注入
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
             services.AddTransient(typeof(IAuthorRepository), typeof(AuthorRepository));
+            services.AddTransient(typeof(IMenuRepository), typeof(MenuRepository));
 
-          
+
+
             services.AddSingleton<IEventHandlerExecutionContext>(sp => new RabbitMQEventHandlerExecutionContext(services));
             services.AddSingleton<IEventBus, RabbitMQEventBus>();
 

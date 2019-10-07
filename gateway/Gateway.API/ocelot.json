@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/sessions",
-      "UpstreamHttpMethod": [ "POST", "GET","Put" ]
+      "UpstreamHttpMethod": [ "POST", "GET", "Put" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/users",
@@ -37,6 +37,18 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/menus",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "127.0.0.1",
+          "Port": 6000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/menus",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/organizations",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -46,7 +58,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/organizations",
-      "UpstreamHttpMethod": [ "Get","Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],
   "GlobalConfiguration": {

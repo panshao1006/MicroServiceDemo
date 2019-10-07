@@ -18,7 +18,7 @@ namespace Go.UI
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder(args).UseUrls("http://127.0.0.1:7002")
                 .UseStartup<Startup>();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Common.HttpCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -43,6 +44,35 @@ namespace Core.Common
         /// <param name="url"></param>
         /// <returns></returns>
         public T Get<T>(string url)
+        {
+            T t = default(T);
+
+            var response = _client.GetAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                Task<string> responseString = response.Content.ReadAsStringAsync();
+                string tempResponseString = responseString.Result;
+
+                var responseResult = JsonConvert.DeserializeObject<ResponseResult>(tempResponseString);
+
+                if (responseResult.Success && responseResult.Data != null)
+                {
+                    t = JsonConvert.DeserializeObject<T>(responseResult.Data.ToString());
+                }
+            }
+
+            return t;
+        }
+
+        /// <summary>
+        /// 获取原始的返回信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <returns></returns>
+
+        public T GetOriginalResponse<T>(string url)
         {
             T t = default(T);
 

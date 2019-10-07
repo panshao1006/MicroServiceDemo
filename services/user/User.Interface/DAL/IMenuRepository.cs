@@ -6,8 +6,8 @@ using User.Model.DTO.Author;
 
 namespace User.Interface.DAL
 {
-    public interface IModuleRepository
+    public interface IMenuRepository
     {
-        List<ModuleDTO> GetModuleList(string userId, string orgId);
+        List<ModuleDTO> GetModules(string userId, string organizationId);
     }
 }

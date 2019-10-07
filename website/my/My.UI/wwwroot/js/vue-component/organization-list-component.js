@@ -20,9 +20,10 @@
 
                     if (data.WizardStep < 15) {
                         //走向导的逻辑
+                        window.location.href = "http://127.0.0.1:7002?token=" + this.$cookies.get('token');
                     } else {
                         //跳转到go页面
-                        window.location.href = "http://127.0.0.1:7002?token=" + token;
+                        window.top.location.href = "http://127.0.0.1:7002?token=" + this.$cookies.get('token');
                     }
                 },
                 onFailed: function (response) {

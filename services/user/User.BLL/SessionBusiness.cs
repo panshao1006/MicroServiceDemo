@@ -2,6 +2,7 @@
 using Core.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using User.Interface.BLL;
 using User.Model;
@@ -14,7 +15,7 @@ namespace User.BLL
     {
         private ICache _cacheClient;
 
-        private string _requestOrganizationUrl = ConfigurationManager.AppSetting("GatewayHost") + $"/organization/";
+        private string _requestOrganizationUrl = ConfigurationManager.AppSetting("GatewayHost") + $"/organizations";
 
         public SessionBusiness(ICache cache)
         {
@@ -50,7 +51,8 @@ namespace User.BLL
 
             //查找组织信息
             HttpClientUtility httpClient = new HttpClientUtility();
-            var organization = httpClient.Get<OrganizationViewModel>(_requestOrganizationUrl + "?id=" + organizationId);
+            httpClient.SetRequestHeaders("token", token);
+            var organization = httpClient.Get<List<OrganizationViewModel>>(_requestOrganizationUrl + "?id=" + organizationId).FirstOrDefault();
 
             if (organization == null)
             {

@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1(3306)
+Source Server         : localhost3306
 Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : jienorsys
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-10-06 23:22:42
+Date: 2019-10-07 17:04:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,35 +40,23 @@ CREATE TABLE `t_bas_emailtemplate` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_bas_module`;
 CREATE TABLE `t_bas_module` (
-  `MItemID` varchar(36) DEFAULT NULL,
+  `MItemID` varchar(36) NOT NULL,
   `MParentID` varchar(36) DEFAULT NULL,
-  `MVersionID` varchar(36) DEFAULT NULL,
+  `MVersionID` int(1) DEFAULT NULL,
   `MName` varchar(500) DEFAULT NULL,
   `MPermissonID` varchar(36) DEFAULT NULL COMMENT '模块需要的权限',
   `MLink` varchar(500) DEFAULT NULL,
+  `MIndex` int(2) DEFAULT NULL,
   `MIsActive` bit(1) DEFAULT NULL,
-  `MIsDelete` bit(1) DEFAULT NULL
+  `MIsDelete` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`MItemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_bas_module
 -- ----------------------------
-INSERT INTO `t_bas_module` VALUES ('10000', '0', '1', '科目', null, 'account', '', '');
-
--- ----------------------------
--- Table structure for `t_bas_modulepermison`
--- ----------------------------
-DROP TABLE IF EXISTS `t_bas_modulepermison`;
-CREATE TABLE `t_bas_modulepermison` (
-  `MPKID` varchar(36) NOT NULL,
-  `MModuleID` varchar(36) DEFAULT NULL,
-  `MPermisonID` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`MPKID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_bas_modulepermison
--- ----------------------------
+INSERT INTO `t_bas_module` VALUES ('100001', '0', '1', '销售', '100100', '/Sale/', '200', '', '');
+INSERT INTO `t_bas_module` VALUES ('100002', '0', '1', '仪表盘', '100100', '/Dashbord/', '100', '', '');
 
 -- ----------------------------
 -- Table structure for `t_bas_organisation`
@@ -166,6 +154,20 @@ CREATE TABLE `t_bas_organizationuser` (
 INSERT INTO `t_bas_organizationuser` VALUES ('a3f188bd348740998eaae94cef0a9b98', 'dd83591faacc4a32944faf29c0a8a1bd', '79dfc1f3-b524-4093-8d32-8f6af4877463', null, null, '', '', '', null, null, null, null, '', '');
 
 -- ----------------------------
+-- Table structure for `t_bas_ornanizationattribute`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_bas_ornanizationattribute`;
+CREATE TABLE `t_bas_ornanizationattribute` (
+  `MItemID` varchar(36) NOT NULL,
+  `MOrgID` varchar(36) NOT NULL,
+  PRIMARY KEY (`MItemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_bas_ornanizationattribute
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `t_sec_group`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_sec_group`;
@@ -244,6 +246,35 @@ CREATE TABLE `t_sec_group_l` (
 
 -- ----------------------------
 -- Records of t_sec_group_l
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_sec_orguser`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sec_orguser`;
+CREATE TABLE `t_sec_orguser` (
+  `MItemID` varchar(36) NOT NULL,
+  `MOrgID` varchar(36) DEFAULT NULL,
+  `MUserID` varchar(36) DEFAULT NULL,
+  `MPosition` varchar(100) DEFAULT NULL COMMENT '岗位',
+  `MRole` varchar(36) DEFAULT NULL COMMENT '角色',
+  `MIsDelete` bit(1) DEFAULT b'0',
+  `MIsActive` bit(1) DEFAULT b'1',
+  `MUserIsActive` bit(1) DEFAULT b'0' COMMENT '专门用于判断用户是否激活',
+  `MCreatorID` varchar(36) DEFAULT NULL,
+  `MCreateDate` datetime DEFAULT NULL,
+  `MModifierID` varchar(36) DEFAULT NULL,
+  `MModifyDate` datetime DEFAULT NULL,
+  `MIsArchive` bit(1) DEFAULT b'0' COMMENT '是否归档',
+  `IsSelfData` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`MItemID`) USING BTREE,
+  KEY `idx_OAD_Active_Archive` (`MOrgID`,`MIsActive`,`MIsDelete`,`MUserIsActive`,`MIsArchive`) USING BTREE,
+  KEY `idx_AD_MItemID` (`MIsActive`,`MIsDelete`,`MItemID`) USING BTREE,
+  KEY `index_name` (`MOrgID`,`MUserID`,`MIsDelete`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='组织与用户关联表';
+
+-- ----------------------------
+-- Records of t_sec_orguser
 -- ----------------------------
 
 -- ----------------------------
@@ -476,8 +507,8 @@ CREATE TABLE `t_sec_userrole` (
 -- ----------------------------
 -- Records of t_sec_userrole
 -- ----------------------------
-INSERT INTO `t_sec_userrole` VALUES ('7ba629360252486b8fecb83909f8bc5a', '5f6e5ea8ad7a4b4581f2c91977c34e1c', null, '10000', '', '', null, '2019-10-03 20:41:06', null, null);
-INSERT INTO `t_sec_userrole` VALUES ('dd5478d935704eb7b857bfc8ab528a86', 'dd83591faacc4a32944faf29c0a8a1bd', null, '10000', '', '', null, '2019-10-03 21:01:19', null, null);
+INSERT INTO `t_sec_userrole` VALUES ('7ba629360252486b8fecb83909f8bc5a', '5f6e5ea8ad7a4b4581f2c91977c34e1c', '79dfc1f3-b524-4093-8d32-8f6af4877463', '10000', '', '', null, '2019-10-03 20:41:06', null, null);
+INSERT INTO `t_sec_userrole` VALUES ('dd5478d935704eb7b857bfc8ab528a86', 'dd83591faacc4a32944faf29c0a8a1bd', '79dfc1f3-b524-4093-8d32-8f6af4877463', '10000', '', '', null, '2019-10-03 21:01:19', null, null);
 
 -- ----------------------------
 -- Table structure for `t_sys_config`
@@ -505,7 +536,7 @@ INSERT INTO `t_sys_config` VALUES ('20002', 'DEV', 'User.API', 'RabbitMQHost', '
 INSERT INTO `t_sys_config` VALUES ('20003', 'DEV', 'User.API', 'RabbitMQUser', 'admin', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('20004', 'DEV', 'User.API', 'RabbitMQPassword', 'admin', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('20005', 'DEV', 'User.API', 'GatewayHost', 'http://127.0.0.1:5000/api/v1', '1.0.0.0', '', '');
-INSERT INTO `t_sys_config` VALUES ('20006', 'DEV', 'User.API', 'TokenValidateWhiteList', '/api/v1/sessions|post;', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('20006', 'DEV', 'User.API', 'TokenValidateWhiteList', '/api/v1/sessions|post,get;', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30001', 'DEV', 'Organization.API', 'ConnectionString', 'server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30002', 'DEV', 'Organization.API', 'RabbitMQHost', '127.0.0.1', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30003', 'DEV', 'Organization.API', 'RabbitMQUser', 'admin', '1.0.0.0', '', '');

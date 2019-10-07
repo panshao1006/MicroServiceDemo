@@ -8,7 +8,7 @@ namespace User.Model.ViewModel
     {
         public string Id { set; get; }
 
-        public string Name { set; get; }
+        public string DisplayName { set; get; }
 
         /// <summary>
         /// 向导步骤
