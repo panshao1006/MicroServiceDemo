@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-10-07 17:04:49
+Date: 2019-10-09 17:07:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -537,6 +537,8 @@ INSERT INTO `t_sys_config` VALUES ('20003', 'DEV', 'User.API', 'RabbitMQUser', '
 INSERT INTO `t_sys_config` VALUES ('20004', 'DEV', 'User.API', 'RabbitMQPassword', 'admin', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('20005', 'DEV', 'User.API', 'GatewayHost', 'http://127.0.0.1:5000/api/v1', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('20006', 'DEV', 'User.API', 'TokenValidateWhiteList', '/api/v1/sessions|post,get;', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('20007', 'DEV', 'USer.API', 'LogFactoryHost', 'http://127.0.0.1:8001/api/v1/logs', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('20008', 'DEV', 'User.API', 'AppName', 'User.API', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30001', 'DEV', 'Organization.API', 'ConnectionString', 'server=127.0.0.1;database=JieNorSYS;uid=root;pwd=123456;Allow Zero Datetime=True;Port=3306;charset=utf8;pooling=true;Max Pool Size=100', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30002', 'DEV', 'Organization.API', 'RabbitMQHost', '127.0.0.1', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30003', 'DEV', 'Organization.API', 'RabbitMQUser', 'admin', '1.0.0.0', '', '');
@@ -546,6 +548,10 @@ INSERT INTO `t_sys_config` VALUES ('30006', 'DEV', 'Organization.API', 'RedisPor
 INSERT INTO `t_sys_config` VALUES ('30007', 'DEV', 'Organization.API', 'RedisPassword', '123456', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30008', 'DEV', 'Organization.API', 'ReidsDataBaseName', '1', '1.0.0.0', '', '');
 INSERT INTO `t_sys_config` VALUES ('30009', 'DEV', 'Organization.API', 'StorageMaxOrganiztonCount', '200', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('30010', 'DEV', 'Organization.API', 'LogFactoryHost', 'http://127.0.0.1:8001/api/v1/logs', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('30011', 'DEV', 'Organization.API', 'AppName', 'Organization.API', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('40001', 'DEV', 'Log.API', 'ElasticHost', 'http://127.0.0.1:9200', '1.0.0.0', '', '');
+INSERT INTO `t_sys_config` VALUES ('50001', 'DEV', 'Common', 'SessionValidateHost', 'http://127.0.0.1:6000/api/v1/sessions', '1.0.0.0', '', '');
 
 -- ----------------------------
 -- Table structure for `t_sys_orgstorage`
