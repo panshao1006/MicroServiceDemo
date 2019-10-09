@@ -14,7 +14,7 @@
     <ProjectReference Include="..\..\..\core\Core.Common\Core.Common.csproj" />
     <ProjectReference Include="..\..\..\core\Core.ConfiguartionCenter\Core.ConfigurationCenter.csproj" />
     <ProjectReference Include="..\..\..\core\Core.Context\Core.Context.csproj" />
-    <ProjectReference Include="..\..\..\core\Core.ExceptionHandleMiddleware\Core.ExceptionHandle.csproj" />
+    <ProjectReference Include="..\..\..\core\Core.ExceptionHandle\Core.ExceptionHandle.csproj" />
     <ProjectReference Include="..\..\..\core\Core.Log\Core.Log.csproj" />
     <ProjectReference Include="..\BaseData.Common\BaseData.Common.csproj" />
     <ProjectReference Include="..\BaseData.Model\BaseData.Model.csproj" />
