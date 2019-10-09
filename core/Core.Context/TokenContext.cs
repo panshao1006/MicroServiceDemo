@@ -10,12 +10,22 @@ namespace Core.Context
         private string _organizationId;
 
         private string _userId;
+
+        private string _requestId;
        
         protected TokenContext(string token , string organizationId , string userId)
         {
             this._token = token;
             this._organizationId = organizationId;
             this._userId = userId;
+        }
+
+        protected TokenContext(string token, string organizationId, string userId, string requestId)
+        {
+            this._token = token;
+            this._organizationId = organizationId;
+            this._userId = userId;
+            this._requestId = requestId;
         }
 
 
@@ -44,10 +54,22 @@ namespace Core.Context
             return _organizationId;
         }
 
+        public string GetRequestId()
+        {
+            return _requestId;
+        }
+
         public static TokenContext BeginContextRuntime(string token, string organizationId, string userId)
         {
             //可以通过配置文件配置上下文运行时环境的参数。这里只是实现简单的模拟。
             _currentContext = new TokenContext(token , organizationId , userId);
+            return _currentContext;
+        }
+
+        public static TokenContext BeginContextRuntime(string token, string organizationId, string userId , string requestId)
+        {
+            //可以通过配置文件配置上下文运行时环境的参数。这里只是实现简单的模拟。
+            _currentContext = new TokenContext(token, organizationId, userId , requestId);
             return _currentContext;
         }
 

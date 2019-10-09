@@ -1,6 +1,7 @@
 ﻿using Core.Cache;
 using Core.Cache.Redis;
 using Core.EventBus;
+using Core.Log;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,6 @@ namespace User.Common.DI
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
             services.AddTransient(typeof(IAuthorRepository), typeof(AuthorRepository));
             services.AddTransient(typeof(IMenuRepository), typeof(MenuRepository));
-
-
 
             services.AddSingleton<IEventHandlerExecutionContext>(sp => new RabbitMQEventHandlerExecutionContext(services));
             services.AddSingleton<IEventBus, RabbitMQEventBus>();

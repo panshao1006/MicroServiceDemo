@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using BaseData.Common.DI;
 using Core.Common;
 using Core.Context;
+using Core.ExceptionHandle;
+using Core.Log;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +43,8 @@ namespace BaseData.API
             }
 
             app.UseTokenContext();
+            app.UseRequestLog();
+            app.UseExceptionHandle();
 
             app.UseMvc();
         }

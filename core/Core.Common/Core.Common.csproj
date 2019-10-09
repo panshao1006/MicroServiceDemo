@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="HttpCore\**" />
+    <EmbeddedResource Remove="HttpCore\**" />
+    <None Remove="HttpCore\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="EnumConverter.cs" />
   </ItemGroup>
 

@@ -75,6 +75,9 @@ namespace Gateway.API
 
                     return;
                 }
+
+                //增加请求头Id
+                //ctx.HttpContext.Request.Headers.Add("RequestId", GuidUtility.GetGuid());
             }
 
             await next.Invoke();

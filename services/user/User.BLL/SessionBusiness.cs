@@ -1,5 +1,6 @@
 ﻿using Core.Cache;
 using Core.Common;
+using Core.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;

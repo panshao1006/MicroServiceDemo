@@ -23,7 +23,7 @@
                         window.location.href = "http://127.0.0.1:7002?token=" + this.$cookies.get('token');
                     } else {
                         //跳转到go页面
-                        window.top.location.href = "http://127.0.0.1:7002?token=" + this.$cookies.get('token');
+                        window.top.location.href = "http://127.0.0.1:7002?token=" + $cookies.get('token');
                     }
                 },
                 onFailed: function (response) {

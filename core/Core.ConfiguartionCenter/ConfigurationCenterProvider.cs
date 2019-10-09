@@ -59,6 +59,7 @@ namespace Core.ConfigurationCenter
 
                 response = client.GetStringAsync(_remoteAddress + $"?environment={_environment}&appid={_appId}").Result;
 
+                
                 WriteToLocal(response);
             }
             catch (Exception ex)

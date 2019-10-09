@@ -1,9 +1,11 @@
 ﻿using Core.Common;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -82,8 +84,10 @@ namespace Core.Context
                     return;
                 }
 
+                var requestId = GetRequestId(httpContext.Request);
+
                 //初始化token上下文
-                TokenContext tokenContext = TokenContext.BeginContextRuntime(tokenModel.Token, tokenModel.OrganizationId, tokenModel.UserId);
+                TokenContext tokenContext = TokenContext.BeginContextRuntime(tokenModel.Token, tokenModel.OrganizationId, tokenModel.UserId , requestId);
 
                 await _nextDelegate.Invoke(httpContext);
 
@@ -106,13 +110,13 @@ namespace Core.Context
         {
             TokenDTO result = null;
 
-            HttpClientUtility httpClient = new HttpClientUtility();
+            HttpClient httpClient = new HttpClient();
 
-            httpClient.SetRequestHeaders("token", token);
+            httpClient.DefaultRequestHeaders.Add("token", token);
 
-            string url = "http://localhost:6000/api/v1/sessions?token=" + token;
+            string url = ConfigurationManager.AppSetting("SessionValidateHost")+ $"?token={token}";
 
-            ResponseResult checkTokenResult = httpClient.GetOriginalResponse<ResponseResult>(url);
+            ResponseResult checkTokenResult = GetOriginalResponse<ResponseResult>(url , httpClient);
 
             if (checkTokenResult.Success)
             {
@@ -121,6 +125,49 @@ namespace Core.Context
 
             return result;
         }
+
+
+        /// <summary>
+        /// 获取返回消息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        private T GetOriginalResponse<T>(string url , HttpClient client)
+        {
+            T t = default(T);
+
+            var response = client.GetAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                Task<string> responseString = response.Content.ReadAsStringAsync();
+                string tempResponseString = responseString.Result;
+
+                t = JsonConvert.DeserializeObject<T>(tempResponseString);
+            }
+
+            return t;
+        }
+
+
+        /// <summary>
+        /// 获取ReqeustID
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        private string GetRequestId(HttpRequest request)
+        {
+            string result;
+
+            StringValues requestId;
+
+            result = request.Headers.TryGetValue("RequestId", out requestId) ? requestId.ToString() : null;
+
+            return result;
+        }
+
 
         /// <summary>
         /// 请求是否在白名单中
