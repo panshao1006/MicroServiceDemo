@@ -119,6 +119,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Http", "core\Core.Http
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.ExceptionHandle", "core\Core.ExceptionHandle\Core.ExceptionHandle.csproj", "{B27D00A2-2C44-4C6E-A5FF-3C08DB870D69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Middleware", "core\Core.Middleware\Core.Middleware.csproj", "{E1515761-A968-4FD1-AD44-7334AA33064F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -285,6 +287,10 @@ Global
 		{B27D00A2-2C44-4C6E-A5FF-3C08DB870D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B27D00A2-2C44-4C6E-A5FF-3C08DB870D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B27D00A2-2C44-4C6E-A5FF-3C08DB870D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1515761-A968-4FD1-AD44-7334AA33064F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1515761-A968-4FD1-AD44-7334AA33064F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1515761-A968-4FD1-AD44-7334AA33064F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1515761-A968-4FD1-AD44-7334AA33064F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -344,6 +350,7 @@ Global
 		{280EF487-2248-40CE-A898-D0416F0E35A0} = {34AD2C52-DF19-482D-AFA0-B6A5C3042325}
 		{E48E786C-AE57-4ECD-BB53-714C91F2E87F} = {34AD2C52-DF19-482D-AFA0-B6A5C3042325}
 		{B27D00A2-2C44-4C6E-A5FF-3C08DB870D69} = {34AD2C52-DF19-482D-AFA0-B6A5C3042325}
+		{E1515761-A968-4FD1-AD44-7334AA33064F} = {34AD2C52-DF19-482D-AFA0-B6A5C3042325}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25CB7005-47B1-4CBF-B0A5-CFFEE10A7F57}

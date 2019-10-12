@@ -3,53 +3,34 @@ using Core.Context;
 using Core.Log;
 using Core.Log.Model;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.Extensions.Primitives;
 
-namespace Core.ExceptionHandle
+namespace Core.Middleware
 {
-    public class ExceptionHandleMiddleware
+    public class RequestLogMiddleware
     {
         private readonly RequestDelegate next;
 
-        public ExceptionHandleMiddleware(RequestDelegate next)
+        public RequestLogMiddleware(RequestDelegate next)
         {
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context /* other dependencies */)
+        public async Task Invoke(HttpContext context)
         {
-            try
-            {
-                await next(context);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(context, ex);
-            }
+            SendRequestLog(context);
+            await next(context);
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
-        {
-            var code = HttpStatusCode.InternalServerError;
+        
 
-            //if (exception is MyNotFoundException) code = HttpStatusCode.NotFound;
-            //else if (exception is MyUnauthorizedException) code = HttpStatusCode.Unauthorized;
-            //else if (exception is MyException) code = HttpStatusCode.BadRequest;
-
-            SendExceptionLog(context, exception);
-
-            var result = JsonConvert.SerializeObject(new { error = "系统出现异常" });
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)code;
-            return context.Response.WriteAsync(result);
-        }
-
-        private async void SendExceptionLog(HttpContext httpContext, Exception exception)
+        private async void SendRequestLog(HttpContext httpContext)
         {
             var loggerFactory = BaseLoggerFactory.Instance();
 
@@ -69,11 +50,10 @@ namespace Core.ExceptionHandle
                     RequestToken = GetRequestToken(request),
                     UserId = TokenContext.CurrentContext != null ? TokenContext.CurrentContext.GetUserId() : null,
                     OrganizationId = TokenContext.CurrentContext != null ? TokenContext.CurrentContext.GetOrganizationId() : null,
-                    Message = GetExceptionMessage(exception)
                 }
             };
 
-           loggerFactory.Write(log);
+            loggerFactory.Write(log);
         }
 
         /// <summary>

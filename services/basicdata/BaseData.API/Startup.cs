@@ -7,6 +7,7 @@ using Core.Common;
 using Core.Context;
 using Core.ExceptionHandle;
 using Core.Log;
+using Core.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace BaseData.API
             }
 
             app.UseTokenContext();
-            app.UseRequestLog();
+            app.UseCustomMiddleware();
             app.UseExceptionHandle();
 
             app.UseMvc();

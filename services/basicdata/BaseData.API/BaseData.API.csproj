@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\..\core\Core.Context\Core.Context.csproj" />
     <ProjectReference Include="..\..\..\core\Core.ExceptionHandle\Core.ExceptionHandle.csproj" />
     <ProjectReference Include="..\..\..\core\Core.Log\Core.Log.csproj" />
+    <ProjectReference Include="..\..\..\core\Core.Middleware\Core.Middleware.csproj" />
     <ProjectReference Include="..\BaseData.Common\BaseData.Common.csproj" />
     <ProjectReference Include="..\BaseData.Model\BaseData.Model.csproj" />
   </ItemGroup>
