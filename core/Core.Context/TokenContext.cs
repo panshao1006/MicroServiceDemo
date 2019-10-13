@@ -2,6 +2,9 @@
 
 namespace Core.Context
 {
+    /// <summary>
+    /// Token 上下文
+    /// </summary>
     public class TokenContext : IDisposable
     {
 

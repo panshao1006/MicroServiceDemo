@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.Common\Core.Common.csproj" />
     <ProjectReference Include="..\..\..\core\Core.ConfiguartionCenter\Core.ConfigurationCenter.csproj" />
   </ItemGroup>
