@@ -10,6 +10,7 @@
     <script src="http://127.0.0.1:7005/lib/axios/axios.js"></script>
     <script src="http://127.0.0.1:7005/lib/vue-cookies/vue-cookies.js"></script>
     <script src="http://127.0.0.1:7005/js/request-componet.js"></script>
+    <script src="~/js/vue-component/list-combo.js"></script>
 </head>
 <body class="masked-relative">
     <div class="m-wrapper">
@@ -17,8 +18,9 @@
             <div class="m-top">
                 <div class="m-logo"></div>
                 <!--组织下拉框-->
-                <div id="divOrgCombox"><div class="m-org"><a href="###" id="aOrgList" orgid="dm000000000000000000000000000102" ispaid="0">Demo Company</a></div><div id="divOrgList" class="m-pop-box m-pop-menu"><b class="popup-arrow"></b><div class="item-list" style="height: 342px;"><p><a href="###" onclick="Index.navToMySite()">我的美记</a></p><p><a href="###" onclick="Index.onSelectOrg('0e1fb667470948d0bb26e61a9572b456', '/','15','0', 'true');"> Demo_Company</a></p><p><a href="###" onclick="Index.onSelectOrg('2dad0e3207564b9d88f6c9f746742bc5', '/','15','0', 'false');">0512发版测试</a></p><p><a href="###" onclick="Index.onSelectOrg('829f8a6023a94410a0060e8f27653c20', '/','15','0', 'false');">Test 小企业会计准则</a></p><p><a href="###" onclick="Index.onSelectOrg('12254bd01ee140759680854512f3a5f0', '/','15','0', 'false');">test0301</a></p><p><a href="###" onclick="Index.onSelectOrg('36388b060d7545a69c3b89a1009840a8', '/','15','0', 'false');">发包测试0420</a></p><p><a href="###" onclick="Index.onSelectOrg('73cf799a8f4f43769e8cd1b8263778db', '/BD/Setup/GLChartOfAccount','12','0', 'false');">小企业</a></p><p><a href="###" onclick="Index.onSelectOrg('d6c2ab2645c14543be3e0ea933976ff4', '/','15','0', 'false');">美记_1.4.0_标准版_陈攀</a></p><p><a href="###" onclick="Index.onSelectOrg('61be3826567c4e8e8b95cced7243c451', '/','15','1', 'true');">美记_1.4.0_记账版_陈攀</a></p></div></div></div>
-
+                <list-combo custom-class="m-org" v-bind:selected-id="organizationId" text-field="displayName" value-field="id"
+                            v-bind:data-source="organizations" v-bind:on-change="changeOrganization">
+                </list-combo>
                 <div class="m-action">
                     <a class="m-global" href="###" style="display: none;">&nbsp;</a>
                     <a class="m-search" href="###" title="搜索" tipid="4avfIdcTbM">&nbsp;</a>

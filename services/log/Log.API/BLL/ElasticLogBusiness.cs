@@ -34,7 +34,7 @@ namespace Log.API.BLL
                 return;
             }
 
-            string indexName = string.IsNullOrWhiteSpace(log.AppName) ? "index_unkonw_appname" : "index_"+log.AppName;
+            string indexName = string.IsNullOrWhiteSpace(log.AppName) ? "index_unkonw_appname" : "index_"+log.AppName.ToLower();
 
             _elasticClient.Index(log.Convert(), i => i.Index(indexName));
 
