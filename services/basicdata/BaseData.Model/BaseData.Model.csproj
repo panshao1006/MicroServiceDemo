@@ -9,4 +9,14 @@
     <Folder Include="VO\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Core.Context\Core.Context.csproj" />
+    <ProjectReference Include="..\..\..\core\Core.ORM\Core.ORM.csproj" />
+  </ItemGroup>
+
 </Project>
