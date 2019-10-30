@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BaseData.Interface.BLL;
 using BaseData.Model;
 using BaseData.Model.Filter.Account;
 using Core.Context;
@@ -13,12 +14,22 @@ namespace BaseData.API.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
+        private IAccountBusiness _accountBusiness;
+
+        public AccountsController(IAccountBusiness accountBusiness)
+        {
+            _accountBusiness = accountBusiness;
+        }
+
         [HttpGet]
         public ResponseResult Get([FromQuery]AccountFilter filter)
         {
             ResponseResult result = new ResponseResult();
 
-            string orgId = TokenContext.CurrentContext.GetOrganizationId();
+            var accountList = _accountBusiness.GetAccounts(filter);
+
+            result.Success = true;
+            result.Data = accountList;
 
             return result;
         }
