@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Common;
-using Log.API.BLL;
-using Log.API.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +26,7 @@ namespace Log.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstanceConfigurationManager(Configuration);
-            services.AddTransient(typeof(ILoggerBusiness), typeof(ElasticLogBusiness));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

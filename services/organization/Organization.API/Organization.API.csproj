@@ -19,7 +19,6 @@
     <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
     <ProjectReference Include="..\..\..\core\Core.ExceptionHandle\Core.ExceptionHandle.csproj" />
     <ProjectReference Include="..\..\..\core\Core.Log\Core.Log.csproj" />
-    <ProjectReference Include="..\..\..\core\Core.Middleware\Core.Middleware.csproj" />
     <ProjectReference Include="..\Organization.Common\Organization.Common.csproj" />
     <ProjectReference Include="..\Organization.Model\Organization.Model.csproj" />
   </ItemGroup>

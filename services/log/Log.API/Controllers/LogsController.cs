@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Log.API.Interface;
+using Log.API.BLL;
+using Log.API.Common;
 using Log.API.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,18 +13,13 @@ namespace Log.API.Controllers
     [ApiController]
     public class LogsController : ControllerBase
     {
-        private ILoggerBusiness _loggerBusiness;
-
-        public LogsController(ILoggerBusiness logBusiness)
-        {
-            _loggerBusiness = logBusiness;
-        }
-
-
+        // POST api/values
         [HttpPost]
         public void Post(LogDTO log)
         {
-            _loggerBusiness.AddLog(log);
+            var business = new LogBusiness();
+
+            business.Send(log);
         }
     }
 }

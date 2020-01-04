@@ -1,20 +1,29 @@
-﻿using Core.Common;
-using Core.Http;
-using Core.Log.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Common;
+using Core.Http;
+using Core.Log.Model;
 
 namespace Core.Log
 {
-    public class BaseLoggerFactory
+    /// <summary>
+    /// 日志工厂
+    /// </summary>
+    public class BaseLoggerFactory : ILogFactory
     {
-        private string _logServiceHost = ConfigurationManager.AppSetting("LogFactoryHost");
+        private string _host;
 
         private static BaseLoggerFactory _logFactory;
 
         private BaseLoggerFactory()
         {
+            _host = ConfigurationManager.AppSetting("LogFactoryHost");
+
+            if (string.IsNullOrWhiteSpace(_host))
+            {
+                throw new ArgumentNullException("LogFactoryHost 没有配置");
+            }
 
         }
 
@@ -28,17 +37,27 @@ namespace Core.Log
             return _logFactory;
         }
 
+
         /// <summary>
-        /// 写入日志
+        /// 新增日志
         /// </summary>
         /// <param name="log"></param>
-        public void Write(LogDTO log)
+        public void Add(LogDTO log)
         {
-            HttpClientUtility httpClientUtility = new HttpClientUtility();
+            if (log == null)
+                return;
 
-            httpClientUtility.PostAsync<LogDTO>(_logServiceHost, log);
+            try
+            {
+                //插入日志
+                HttpClientUtility httpClient = new HttpClientUtility();
+
+                httpClient.PostAsync<LogDTO>(_host, log);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
-
-
     }
 }

@@ -9,7 +9,6 @@ using Core.EventBus.Model.Author;
 using Core.EventBus.Model.Organization;
 using Core.ExceptionHandle;
 using Core.Log;
-using Core.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -53,7 +52,7 @@ namespace Organization.API
             eventBus.Subscribe<AuthorCreatedEvent , AuthorCreatedHandler>();
 
             app.UseTokenContext();
-            app.UseCustomMiddleware();
+            app.UseRequestLog();
             app.UseExceptionHandle();
 
             app.UseMvc();

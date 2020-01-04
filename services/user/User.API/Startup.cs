@@ -4,7 +4,6 @@ using Core.EventBus;
 using Core.EventBus.Model.Organization;
 using Core.ExceptionHandle;
 using Core.Log;
-using Core.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -47,7 +46,7 @@ namespace User.API
             eventBus.Subscribe<OrganizationCreatedEvent , OrganizationCreatedEventHandler>();
 
             app.UseTokenContext();
-            app.UseCustomMiddleware();
+            app.UseRequestLog();
             app.UseExceptionHandle();
 
             app.UseMvc();

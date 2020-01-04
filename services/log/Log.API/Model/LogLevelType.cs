@@ -20,5 +20,6 @@ namespace Log.API.Model
         /// 错误
         /// </summary>
         Error=3
+
     }
 }

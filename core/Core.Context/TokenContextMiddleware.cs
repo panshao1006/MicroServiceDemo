@@ -59,7 +59,7 @@ namespace Core.Context
 
         public async Task Invoke(HttpContext httpContext)
         {
-            var token = httpContext.Request.Headers.Keys.Contains("token") ? httpContext.Request.Headers["token"].ToString() : null;
+            var token = httpContext.Request.Headers.Keys.Contains("Token") ? httpContext.Request.Headers["Token"].ToString() : null;
 
             //如果时创建会话，就不进行权限校验了，其他都要进行权限校验
             if (!IsInWhiteList(httpContext))

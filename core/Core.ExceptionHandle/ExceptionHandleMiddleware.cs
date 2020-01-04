@@ -60,7 +60,6 @@ namespace Core.ExceptionHandle
                 AppName = ConfigurationManager.AppSetting("AppName"),
                 Level = LogLevelType.Error,
                 Type = LogType.Exception,
-                RequestId = TokenContext.CurrentContext != null ? TokenContext.CurrentContext.GetRequestId() : null,
                 Content = new
                 {
                     RequestURL = request.Host + request.Path,
@@ -73,7 +72,7 @@ namespace Core.ExceptionHandle
                 }
             };
 
-           loggerFactory.Write(log);
+            loggerFactory.Add(log);
         }
 
         /// <summary>

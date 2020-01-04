@@ -4,8 +4,7 @@
         organizationId: "",
         userId: "",
         token:"",
-        modules: [],
-        organizations:[]
+        modules:[]
     },
     mounted: function () {
         let token = null;
@@ -17,7 +16,7 @@
         }
 
         if (token) {
-            this.$cookies.set('token', token);
+            this.$cookies.set('token', token)
         }
 
         this.init();
@@ -29,7 +28,6 @@
                 this.initTokenInfo()
                     .then(response => {
                         this.initModule();
-                        this.initOrganizations();
                         resolve(response);
                     })
                     .catch(error => {
@@ -71,25 +69,6 @@
                     alert("模块数据加载失败");
                 }
             });
-        },
-        initOrganizations: function () {
-            //初始化组织
-            this.$axios({
-                url: "http://127.0.0.1:5000/api/v1/organizations",
-                method: "get",
-                onSuccessed: function (response) {
-                    let organizations = response.data;
-
-                    indexVM.organizations = organizations;
-
-                },
-                onFailed: function () {
-                    alert("加载组织信息失败");
-                }
-            });
-        },
-        changeOrganization: function (id) {
-            alert(id);
         }
     }
 });

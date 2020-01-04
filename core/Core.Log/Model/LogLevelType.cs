@@ -20,5 +20,6 @@ namespace Core.Log.Model
         /// 错误
         /// </summary>
         Error=3
+
     }
 }

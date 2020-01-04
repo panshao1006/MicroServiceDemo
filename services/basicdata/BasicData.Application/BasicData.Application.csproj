@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BasicData.Domain.AggregateAccount\BasicData.Domain.AggregateAccount.csproj" />
+    <ProjectReference Include="..\BasicData.Domain.AggregateContact\BasicData.Domain.AggregateContact.csproj" />
+    <ProjectReference Include="..\BasicData.DTO\BasicData.DTO.csproj" />
+  </ItemGroup>
+
+</Project>
