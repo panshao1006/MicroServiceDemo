@@ -56,7 +56,11 @@ namespace BasicData.Application
             return result;
         }
 
-
+        /// <summary>
+        /// 获取一个联系人
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ContactDTO GetContact(string id)
         {
             var contact = _contactDomainService.GetContact(id);
@@ -92,7 +96,14 @@ namespace BasicData.Application
         {
             var contact = _mapper.Map<ContactDTO, Contact>(contactDTO);
 
-            var result = contact.Insert();
+            var result = contact.Validate();
+
+            if (!result.Success)
+            {
+                return result;
+            }
+
+            result = _contactDomainService.Create(contact);
 
             return result;
         }

@@ -20,5 +20,7 @@ namespace BasicData.Domain.AggregateContact.Entity
         /// 是否禁用
         /// </summary>
         public bool IsActive { set; get; }
+
+        
     }
 }

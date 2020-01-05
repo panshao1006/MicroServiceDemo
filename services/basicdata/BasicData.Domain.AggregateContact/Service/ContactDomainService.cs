@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BasicData.Domain.AggregateContact.Entity;
 using BasicData.Domain.AggregateContact.Repository.PO;
+using BasicData.Infrastructure;
 using BasicData.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -36,11 +37,40 @@ namespace BasicData.Domain.AggregateContact.Service
             return result;
         }
 
+        /// <summary>
+        /// 获取联系人
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Contact GetContact(string id)
         {
-            var contact = new Contact(_reposiotry , _mapper).Get(id);
+            var contactPO = _reposiotry.Query().AsNoTracking().FirstOrDefault(x=>x.MItemID == id);
+
+            var contact = _mapper.Map<ContactPO, Contact>(contactPO);
 
             return contact;
+        }
+
+        /// <summary>
+        /// 创建一个联系人
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <returns></returns>
+        public OperationResult Create(Contact contact)
+        {
+            OperationResult result = contact.Validate();
+
+            if(result.Success == false)
+            {
+                return result;
+            }
+
+            var contactPO = _mapper.Map<Contact, ContactPO>(contact);
+
+            _reposiotry.Add(contactPO);
+            result.Success = _reposiotry.SaveChange() > 0;
+
+            return result;
         }
 
 

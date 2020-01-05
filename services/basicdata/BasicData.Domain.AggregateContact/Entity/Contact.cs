@@ -40,47 +40,27 @@ namespace BasicData.Domain.AggregateContact.Entity
         /// </summary>
         public ContactFinanceInfo FinanceInfo { set; get; }
 
-        private IRepository<ContactPO> _repository;
-
-        private IMapper _mapper;
-
-
-        public Contact(IRepository<ContactPO> repository , IMapper mapper)
+        public Contact()
         {
-            this._repository = repository;
-            this._mapper = mapper;
         }
 
 
         /// <summary>
-        /// 插入联系人
+        /// 新增联系人
         /// </summary>
         /// <returns></returns>
-        public OperationResult Insert()
+        public Contact Create()
         {
-            OperationResult result = Validate();
-
-            if (!result.Success)
-            {
-                return result;
-            }
-
-            var contactPO = _mapper.Map<Contact, ContactPO>(this);
-
-            _repository.Add(contactPO);
-
-            int effRow = _repository.SaveChange();
-
-            result.Success = effRow > 0;
-
-            return result;
+            this.Id = NewId;
+            
+            return this;
         }
 
         /// <summary>
         /// 联系人信息的校验
         /// </summary>
         /// <returns></returns>
-        private OperationResult Validate()
+        public OperationResult Validate()
         {
             OperationResult result = new OperationResult();
 
@@ -99,14 +79,18 @@ namespace BasicData.Domain.AggregateContact.Entity
             return result;
         }
 
-
         /// <summary>
-        /// 新增
+        /// 更新时的校验
         /// </summary>
         /// <returns></returns>
-        public OperationResult Create()
+        public OperationResult ValidateUpdate()
         {
-            OperationResult result = new OperationResult();
+            var result = Validate();
+
+            if (string.IsNullOrWhiteSpace(Id))
+            {
+                result.Messages.Add("联系人没有传入Id");
+            }
 
             return result;
         }
@@ -128,18 +112,5 @@ namespace BasicData.Domain.AggregateContact.Entity
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// 获取联系人
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Contact Get(string id)
-        {
-            var contactPO = _repository.Query().AsNoTracking().Where(x => x.MItemID == id).FirstOrDefault();
-
-            return _mapper.Map<ContactPO, Contact>(contactPO);
-        }
-
     }
 }
