@@ -87,7 +87,7 @@ namespace Core.Context
                 var requestId = GetRequestId(httpContext.Request);
 
                 //初始化token上下文
-                TokenContext tokenContext = TokenContext.BeginContextRuntime(tokenModel.Token, tokenModel.OrganizationId, tokenModel.UserId , requestId);
+                TokenContext tokenContext = TokenContext.BeginContextRuntime(tokenModel.Token, tokenModel.OrganizationId, tokenModel.UserId , requestId , tokenModel.LanguageId);
 
                 await _nextDelegate.Invoke(httpContext);
 
@@ -224,6 +224,11 @@ namespace Core.Context
         /// 创建日期
         /// </summary>
         public DateTime CreateDateTime { set; get; }
+
+        /// <summary>
+        /// 当前多语言
+        /// </summary>
+        public string LanguageId { set; get; }
 
 
         /// <summary>

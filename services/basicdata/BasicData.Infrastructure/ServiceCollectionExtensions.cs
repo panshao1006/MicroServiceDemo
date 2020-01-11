@@ -7,6 +7,9 @@ using System.Runtime.Loader;
 using System.Text;
 using AutoMapper;
 using Core.Common;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.FileExtensions;
 
 namespace BasicData.Infrastructure
 {
@@ -122,5 +125,6 @@ namespace BasicData.Infrastructure
 
             return result;
         }
+
     }
 }

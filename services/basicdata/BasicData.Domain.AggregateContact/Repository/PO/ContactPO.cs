@@ -59,5 +59,10 @@ namespace BasicData.Domain.AggregateContact.Repository.PO
         /// </summary>
         public string MFax { set; get; }
 
+        /// <summary>
+        /// 导航属性
+        /// </summary>
+        public List<ContactLanguagePO> Languages { set; get; }
+
     }
 }

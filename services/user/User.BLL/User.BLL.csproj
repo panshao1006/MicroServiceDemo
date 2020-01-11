@@ -10,8 +10,6 @@
     <ProjectReference Include="..\..\..\core\Core.Context\Core.Context.csproj" />
     <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
     <ProjectReference Include="..\..\..\core\Core.Http\Core.Http.csproj" />
-    <ProjectReference Include="..\User.Interface\User.Interface.csproj" />
-    <ProjectReference Include="..\User.Model\User.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>

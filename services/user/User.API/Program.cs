@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Common;
 using Core.ConfigurationCenter;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -19,11 +20,13 @@ namespace User.API
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
+
+
              WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((context, configBuiler) =>
              {
                  configBuiler.UserConfigurationCenter();
 
-             }).UseStartup<Startup>().UseUrls("http://127.0.0.1:6000")
+             }).UseStartup<Startup>().CustomUseUrls()
                  .Build();
     }
 }

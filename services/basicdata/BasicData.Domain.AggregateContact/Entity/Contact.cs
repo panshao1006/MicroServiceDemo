@@ -21,6 +21,11 @@ namespace BasicData.Domain.AggregateContact.Entity
         public string ContactName { set; get; }
 
         /// <summary>
+        /// 多语言字段
+        /// </summary>
+        public List<LanguageValueObject> ContactNames { set; get; }
+
+        /// <summary>
         /// 往来科目Id
         /// </summary>
         public string AccountId { set; get; }
@@ -29,6 +34,14 @@ namespace BasicData.Domain.AggregateContact.Entity
         /// 组织Id
         /// </summary>
         public string OrganizationId { set; get; }
+
+        /// <summary>
+        /// 联系人类型，用逗号隔开
+        /// </summary>
+        public string ContactTypeIds { set; get; }
+
+
+        public List<ContactGroup> ContactTypes { set; get; }
 
         /// <summary>
         /// 联系人基本信息

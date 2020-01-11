@@ -12,6 +12,8 @@ namespace Core.Context
         private string _userId;
 
         private string _requestId;
+
+        private string _langId;
        
         protected TokenContext(string token , string organizationId , string userId)
         {
@@ -20,12 +22,13 @@ namespace Core.Context
             this._userId = userId;
         }
 
-        protected TokenContext(string token, string organizationId, string userId, string requestId)
+        protected TokenContext(string token, string organizationId, string userId, string requestId , string langId)
         {
             this._token = token;
             this._organizationId = organizationId;
             this._userId = userId;
             this._requestId = requestId;
+            this._langId = langId;
         }
 
 
@@ -59,6 +62,12 @@ namespace Core.Context
             return _requestId;
         }
 
+        public string GetLangId()
+        {
+            _langId = string.IsNullOrWhiteSpace(_langId) ? "0x0009" : _langId;
+            return _langId;
+        }
+
         public static TokenContext BeginContextRuntime(string token, string organizationId, string userId)
         {
             //可以通过配置文件配置上下文运行时环境的参数。这里只是实现简单的模拟。
@@ -66,10 +75,10 @@ namespace Core.Context
             return _currentContext;
         }
 
-        public static TokenContext BeginContextRuntime(string token, string organizationId, string userId , string requestId)
+        public static TokenContext BeginContextRuntime(string token, string organizationId, string userId , string requestId , string langId)
         {
             //可以通过配置文件配置上下文运行时环境的参数。这里只是实现简单的模拟。
-            _currentContext = new TokenContext(token, organizationId, userId , requestId);
+            _currentContext = new TokenContext(token, organizationId, userId , requestId , langId);
             return _currentContext;
         }
 

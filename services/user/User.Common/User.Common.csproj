@@ -10,10 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.Log\Core.Log.csproj" />
-    <ProjectReference Include="..\User.BLL\User.BLL.csproj" />
-    <ProjectReference Include="..\User.DAL\User.DAL.csproj" />
-    <ProjectReference Include="..\User.Interface\User.Interface.csproj" />
-    <ProjectReference Include="..\User.Model\User.Model.csproj" />
   </ItemGroup>
 
 </Project>

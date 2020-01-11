@@ -35,6 +35,11 @@ namespace User.Model.DTO
         /// <summary>
         /// 过期日期
         /// </summary>
-        public DateTime ExpireDateTime { set; get; }   
+        public DateTime ExpireDateTime { set; get; } 
+        
+        /// <summary>
+        /// 登录的版本
+        /// </summary>
+        public string LangId { set; get; }
     }
 }

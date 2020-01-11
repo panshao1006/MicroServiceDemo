@@ -16,6 +16,9 @@ namespace BasicData.DTO.Contact
         /// </summary>
         public string Name { set; get; }
 
+
+        public List<LanguageDTO> LanguageNames { set; get; }
+
         /// <summary>
         /// 联系人邮件地址
         /// </summary>
@@ -24,7 +27,7 @@ namespace BasicData.DTO.Contact
         /// <summary>
         /// 联系类型 1客户 2供应商 3其他,可进行组合用逗号隔开
         /// </summary>
-        public string Type { set; get; }
+        public string ContactTypeIds { set; get; }
 
         /// <summary>
         /// 科目Id

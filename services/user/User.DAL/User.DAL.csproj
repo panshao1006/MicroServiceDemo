@@ -12,8 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\Core.Common\Core.Common.csproj" />
     <ProjectReference Include="..\..\..\core\Core.ORM\Core.ORM.csproj" />
-    <ProjectReference Include="..\User.Interface\User.Interface.csproj" />
-    <ProjectReference Include="..\User.Model\User.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>

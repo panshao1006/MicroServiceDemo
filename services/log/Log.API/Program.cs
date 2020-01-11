@@ -15,14 +15,18 @@ namespace Log.API
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var configuration = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory)
+                                         .AddJsonFile("appsettings.json")
+                                         .Build();
+
+            CreateWebHostBuilder(args, configuration).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args , IConfiguration configuration) =>
             WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((context, configBuiler) =>
             {
                 configBuiler.UserConfigurationCenter();
-            }).UseUrls("http://127.0.0.1:8001")
+            }).UseUrls(configuration["Server.Urls"])
                 .UseStartup<Startup>();
     }
 }

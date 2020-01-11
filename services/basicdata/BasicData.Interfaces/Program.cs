@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using BasicData.Infrastructure;
+using Core.Common;
 using Core.ConfigurationCenter;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +25,6 @@ namespace BasicData.Interfaces
             {
                 configBuiler.UserConfigurationCenter();
 
-            }).UseStartup<Startup>().UseUrls("http://127.0.0.1:6002");
+            }).UseStartup<Startup>().CustomUseUrls();
     }
 }

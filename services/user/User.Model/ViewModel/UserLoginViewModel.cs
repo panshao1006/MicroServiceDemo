@@ -28,5 +28,8 @@ namespace User.Model.ViewModel
         /// 手机号
         /// </summary>
         public string Phone { set; get; }
+
+
+        public string LangId { set; get; }
      }
 }

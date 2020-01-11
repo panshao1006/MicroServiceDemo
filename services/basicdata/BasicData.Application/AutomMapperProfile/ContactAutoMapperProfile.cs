@@ -13,7 +13,10 @@ namespace BasicData.Application.AutomMapperProfile
         {
             CreateMap<ContactDTO, Contact>()
                 .ForMember(@do=> @do.Id , opts=>opts.MapFrom(dto=> dto.Id))
-                .ForMember(@do => @do.ContactName, opts => opts.MapFrom(dto => dto.Name));
+                .ForMember(@do => @do.ContactName, opts => opts.MapFrom(dto => dto.Name))
+                .ForMember(@do=>@do.ContactNames , opts=>opts.MapFrom(dto=>dto.LanguageNames));
+
+            CreateMap<ContactGroupDTO, ContactGroup>();
         }
     }
 }

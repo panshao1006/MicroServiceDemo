@@ -27,6 +27,8 @@ namespace BasicData.Application
             _mapper = mapper;
         }
 
+        #region 联系人
+
         /// <summary>
         /// 获取联系人
         /// </summary>
@@ -103,9 +105,42 @@ namespace BasicData.Application
                 return result;
             }
 
-            result = _contactDomainService.Create(contact);
+            result = _contactDomainService.CreateContact(contact);
 
             return result;
         }
+
+        #endregion
+
+        #region 联系人分组
+
+        /// <summary>
+        /// 新建联系人分组
+        /// </summary>
+        /// <param name="contactGroupDTO"></param>
+        /// <returns></returns>
+        public OperationResult CreateContactGroup(ContactGroupDTO contactGroupDTO)
+        {
+            var contactGroup = _mapper.Map<ContactGroup>(contactGroupDTO);
+
+            var result = _contactDomainService.CreateContactGroup(contactGroup);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 查询联系人分组
+        /// </summary>
+        /// <returns></returns>
+        public List<ContactGroupDTO> GetContactGroups()
+        {
+            var contactGroups = _contactDomainService.GetContactGroups();
+
+            var result = _mapper.Map<List<ContactGroupDTO>>(contactGroups);
+
+            return result;
+        }
+
+        #endregion
     }
 }

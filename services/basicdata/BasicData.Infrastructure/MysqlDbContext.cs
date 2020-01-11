@@ -2,6 +2,8 @@
 using Core.Common;
 using Core.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,10 @@ namespace BasicData.Infrastructure
 {
     public class MysqlDbContext: DbContext
     {
+        protected static readonly LoggerFactory LoggerFactory = new LoggerFactory(new[] { new DebugLoggerProvider((_, __) => true) });
+
+        //private string _organizationId;
+
         public MysqlDbContext()
         {
 
@@ -35,6 +41,7 @@ namespace BasicData.Infrastructure
         {
             var connectionString = GetConnectionString();
             //SslModel=None 这和ssl协议有关系。如果不指定会报错
+            optionsBuilder.UseLoggerFactory(LoggerFactory);
             optionsBuilder.UseMySQL(connectionString);
         }
 
@@ -87,7 +94,7 @@ namespace BasicData.Infrastructure
                     return;
                 }
 
-                tempEntitys = tempEntitys.Where(x => x.GetTypeInfo().IsSubclassOf(typeof(BasePO)) && !x.GetTypeInfo().IsAbstract).ToList();
+                tempEntitys = tempEntitys.Where(x => (x.GetTypeInfo().IsSubclassOf(typeof(BasePO)) || x.GetTypeInfo().IsSubclassOf(typeof(BaseLanguagePO))) && !x.GetTypeInfo().IsAbstract).ToList();
 
                 entitys.AddRange(tempEntitys);
 
