@@ -1,84 +1,96 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using User.Interface.BLL;
-using User.Model;
-using User.Model.DTO.User;
-using User.Model.Filter;
+using User.Application;
+using User.DTO;
+using User.Infrastructure;
 
 namespace User.API.Controllers
 {
     /// <summary>
     /// 账号相关api控制器
     /// </summary>
+    [ApiController]
     [Route("api/v1/users")]
     public class UsersController : ControllerBase
     {
-        private IUserBusiness _userBusiness = null;
+        private UserApplicationService _userApplicationService = null;
 
 
-        public UsersController(IUserBusiness userBusiness)
+        public UsersController(UserApplicationService userApplicationService)
         {
-            _userBusiness = userBusiness;
+            _userApplicationService = userApplicationService;
         }
 
+        
+        //public OperationResult Get(string id)
+        //{
+        //    _userApplicationService
+        //}
 
-        [HttpGet]
-        public ResponseResult Get(UserFilter filter)
-        {
-            ResponseResult result = new ResponseResult();
+        //[HttpGet]
+        //public ResponseResult Get(UserFilter filter)
+        //{
+        //    ResponseResult result = new ResponseResult();
 
-            var userModel = _userBusiness.GetUser(filter.Email, filter.Password);
+        //    var userModel = _userBusiness.GetUser(filter.Email, filter.Password);
 
-            if (userModel == null)
-            {
-                result.Success = false;
-                result.Code = "1000"; 
+        //    if (userModel == null)
+        //    {
+        //        result.Success = false;
+        //        result.Code = "1000"; 
 
-                return result;
-            }
+        //        return result;
+        //    }
 
            
-            result.Data = userModel;
+        //    result.Data = userModel;
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        [HttpGet("{token}")]
-        public ResponseResult Get(string token)
-        {
-            ResponseResult result = new ResponseResult();
+        //[HttpGet("{token}")]
+        //public ResponseResult Get(string token)
+        //{
+        //    ResponseResult result = new ResponseResult();
 
-            var userModel = _userBusiness.GetUserByToken(token);
+        //    var userModel = _userBusiness.GetUserByToken(token);
 
-            if (userModel == null)
-            {
-                result.Success = false;
-                result.Code = "1000";
+        //    if (userModel == null)
+        //    {
+        //        result.Success = false;
+        //        result.Code = "1000";
 
-                return result;
-            }
+        //        return result;
+        //    }
 
-            result.Success = true;
-            result.Data = userModel;
+        //    result.Success = true;
+        //    result.Data = userModel;
 
-            return result;
-        }
+        //    return result;
+        //}
 
+
+        /// <summary>
+        /// 注册一个用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ResponseResult Post([FromBody]UserDTO user)
+        public OperationResult Post(UserDTO user)
         {
-            var operationResult = _userBusiness.InsertUser(user);
+            var result = _userApplicationService.CreateUser(user);
+           
+            return result;
+        }
 
-            var result = new ResponseResult();
-
-            if (!operationResult.Success)
-            {
-                result.Message = operationResult.Message;
-                return result;
-            }
-
-            result.Success = true;
-
-            result.Data = new { Id = operationResult.Id };
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public OperationResult Put(UserDTO user)
+        {
+            OperationResult result = _userApplicationService.UpdateUser(user);
 
             return result;
         }

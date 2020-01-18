@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using User.Interface.BLL;
-using User.Model;
-using User.Model.DTO;
-using User.Model.ViewModel;
+using User.Application;
+using User.DTO;
+using User.Infrastructure;
 
 namespace User.API.Controllers
 {
@@ -11,14 +10,13 @@ namespace User.API.Controllers
     [Route("api/v1/sessions")]
     public class SessionsController : ControllerBase
     {
-        private IUserBusiness _userBusiness = null;
+        private UserApplicationService _userApplicationService = null;
 
-        private ISessionBusiness _sessionBusiness;
+        
 
-        public SessionsController(IUserBusiness userBusiness , ISessionBusiness sessionBusiness)
+        public SessionsController(UserApplicationService userApplicationService)
         {
-            _userBusiness = userBusiness;
-            _sessionBusiness = sessionBusiness;
+            _userApplicationService = userApplicationService;
         }
 
         /// <summary>
@@ -27,23 +25,23 @@ namespace User.API.Controllers
         /// <param name="token"></param>
         /// <returns></returns>
         [HttpGet]
-        public ResponseResult Get(string token)
+        public OperationResult Get(string token)
         {
-            ResponseResult result = new ResponseResult();
+            OperationResult result = new OperationResult();
 
-            OperationResult checkResult = _userBusiness.ValidateToken(token);
+            //OperationResult checkResult = _userBusiness.ValidateToken(token);
 
-            if (!checkResult.Success)
-            {
-                result.Code = "100001";
-                result.Success = false;
+            //if (!checkResult.Success)
+            //{
+            //    result.Code = "100001";
+            //    result.Success = false;
 
-                return result;
-            }
+            //    return result;
+            //}
 
-            result.Success = true;
+            //result.Success = true;
 
-            result.Data = checkResult.Data;
+            //result.Data = checkResult.Data;
 
             return result;
         }
@@ -55,24 +53,10 @@ namespace User.API.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResponseResult Post(UserLoginViewModel user)
+        public OperationResult Post(UserDTO user)
         {
-            ResponseResult result = new ResponseResult();
-
-            OperationResult loginResult = _userBusiness.Login(user.Email, user.Password);
-
-            if (!loginResult.Success || loginResult.Data == null)
-            {
-                result.Success = false;
-                result.Code = "100000";
-
-                return result;
-            }
-
-            result.Success = true;
-
-            result.Data = loginResult.Data;
-
+            OperationResult result = _userApplicationService.Login(user);
+            
             return result;
         }
 
@@ -82,45 +66,45 @@ namespace User.API.Controllers
         /// </summary>
         /// <param name="organizationId"></param>
         /// <returns></returns>
-        [HttpPut]
-        public ResponseResult Put(TokenDTO tokenDTO)
-        {
-            ResponseResult result = new ResponseResult();
+        //[HttpPut]
+        //public ResponseResult Put(TokenDTO tokenDTO)
+        //{
+        //    ResponseResult result = new ResponseResult();
 
-            var organizationId = tokenDTO == null ? null : tokenDTO.OrganizationId;
+        //    var organizationId = tokenDTO == null ? null : tokenDTO.OrganizationId;
 
-            if (string.IsNullOrWhiteSpace(organizationId))
-            {
-                result.Success = false;
-                result.Message = "组织id为空";
-                result.Code = "100000";
+        //    if (string.IsNullOrWhiteSpace(organizationId))
+        //    {
+        //        result.Success = false;
+        //        result.Message = "组织id为空";
+        //        result.Code = "100000";
 
-                return result;
-            }
+        //        return result;
+        //    }
 
-            OperationResult operationResult = _sessionBusiness.ChangeOrganization(organizationId);
+        //    OperationResult operationResult = _sessionBusiness.ChangeOrganization(organizationId);
 
-            result.Success = operationResult.Success;
+        //    result.Success = operationResult.Success;
 
-            result.Data = operationResult.Data;
+        //    result.Data = operationResult.Data;
 
-            result.Message = operationResult.Message;
+        //    result.Message = operationResult.Message;
             
-            return result;
-        }
+        //    return result;
+        //}
 
 
-        /// <summary>
-        /// 删除一个会话
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        [HttpDelete]
-        public ResponseResult Delete(string token)
-        {
-            ResponseResult result = new ResponseResult();
+        ///// <summary>
+        ///// 删除一个会话
+        ///// </summary>
+        ///// <param name="token"></param>
+        ///// <returns></returns>
+        //[HttpDelete]
+        //public ResponseResult Delete(string token)
+        //{
+        //    ResponseResult result = new ResponseResult();
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

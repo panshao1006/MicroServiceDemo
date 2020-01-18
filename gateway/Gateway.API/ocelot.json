@@ -22,7 +22,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/users",
-      "UpstreamHttpMethod": [ "Post", "Get" ]
+      "UpstreamHttpMethod": [ "Post", "Get","Put","Delete"]
     },
     {
       "DownstreamPathTemplate": "/api/v1/users/{id}",
@@ -49,6 +49,18 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/activeinfoes?id={id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "127.0.0.1",
+          "Port": 6000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/activeinfoes?id={id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/organizations",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -59,7 +71,20 @@
       ],
       "UpstreamPathTemplate": "/api/v1/organizations",
       "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/emailtemplates?type={type}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "127.0.0.1",
+          "Port": 6002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/emailtemplates?type={type}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     }
+
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://127.0.0.1:5000",

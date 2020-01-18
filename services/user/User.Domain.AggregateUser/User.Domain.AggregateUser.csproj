@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repository\PO\GroupLanguagePO.cs" />
+    <Compile Remove="Repository\PO\GroupPO.cs" />
+    <Compile Remove="Repository\PO\RightLanguagePO.cs" />
+    <Compile Remove="Repository\PO\RightPO.cs" />
+    <Compile Remove="Repository\PO\RoleLanguagePO.cs" />
+    <Compile Remove="Repository\PO\RolePO.cs" />
+    <Compile Remove="Repository\PO\UserRoleRelationPO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Core.Email\Core.Email.csproj" />
+    <ProjectReference Include="..\..\..\core\Core.EventBus\Core.EventBus.csproj" />
+    <ProjectReference Include="..\User.Infrastructure\User.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore\2.2.0\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using User.BLL.EventHandler;
-using User.Common.DI;
+using User.Application.Event.Subscribe;
+using User.Domain.AggregateUser.Event;
+using User.Infrastructure;
+using User.Infrastructure.Data;
 
 namespace User.API
 {
@@ -27,7 +29,21 @@ namespace User.API
         {
             services.InstanceConfigurationManager(Configuration);
 
-            services.UseDIRegister();
+            //注入EFCore 上下文
+            services.AddDbContextPool();
+
+            //注入repository
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+            //注入整个程序集
+            services.AddGloabalIoc();
+
+            //注入automapper文件
+            services.AddAutoMappers();
+
+            //事件总线
+            services.AddSingleton<IEventHandlerExecutionContext>(sp => new RabbitMQEventHandlerExecutionContext(services));
+            services.AddSingleton<IEventBus, RabbitMQEventBus>();
 
             services.AddMvc();
             
@@ -43,7 +59,7 @@ namespace User.API
             }
 
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-            eventBus.Subscribe<OrganizationCreatedEvent , OrganizationCreatedEventHandler>();
+            eventBus.Subscribe<UserWaitActiveEvent, UserWaitActiveEventHandler>();
 
             app.UseTokenContext();
             app.UseRequestLog();

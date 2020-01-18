@@ -26,7 +26,7 @@ namespace User.API
              {
                  configBuiler.UserConfigurationCenter();
 
-             }).UseStartup<Startup>().CustomUseUrls()
+             }).UseStartup<Startup>().CustomUseUrls() 
                  .Build();
     }
 }

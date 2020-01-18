@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Core.CustomException\Core.CustomException.csproj" />
     <ProjectReference Include="..\..\..\core\Core.Context\Core.Context.csproj" />
+    <ProjectReference Include="..\..\..\core\Core.CustomException\Core.CustomException.csproj" />
   </ItemGroup>
 
   <ItemGroup>

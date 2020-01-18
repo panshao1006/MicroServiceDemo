@@ -56,12 +56,12 @@ namespace Core.Http
                 Task<string> responseString = response.Content.ReadAsStringAsync();
                 string tempResponseString = responseString.Result;
 
-                var responseResult = JsonConvert.DeserializeObject<ResponseResult>(tempResponseString);
+                t = JsonConvert.DeserializeObject<T>(tempResponseString);
 
-                if (responseResult.Success && responseResult.Data != null)
-                {
-                    t = JsonConvert.DeserializeObject<T>(responseResult.Data.ToString());
-                }
+                //if (responseResult.Success && responseResult.Data != null)
+                //{
+                //    t = JsonConvert.DeserializeObject<T>(responseResult.Data.ToString());
+                //}
             }
 
             return t;

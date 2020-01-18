@@ -82,7 +82,5 @@ namespace BasicData.Domain.AggregateContact.Entity
         {
             return GuidUtility.GetGuid();
         }
-
-        
     }
 }

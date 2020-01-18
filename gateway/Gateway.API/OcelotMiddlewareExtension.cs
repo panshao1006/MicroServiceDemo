@@ -18,7 +18,7 @@ namespace Gateway.API
         {
             var request = ctx.HttpContext.Request;
 
-            var token = request.Headers.Keys.Contains("token") ? request.Headers["token"].ToString() : null;
+            var token = request.Headers.Keys.Contains("Token") ? request.Headers["Token"].ToString() : null;
 
             var requestPath = request.Path.ToString();
 

@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BasicData.Domain.AggregateAccount\BasicData.Domain.AggregateAccount.csproj" />
     <ProjectReference Include="..\BasicData.Domain.AggregateContact\BasicData.Domain.AggregateContact.csproj" />
+    <ProjectReference Include="..\BasicData.Domain.AggregateEmailTemplate\BasicData.Domain.AggregateEmailTemplate.csproj" />
     <ProjectReference Include="..\BasicData.DTO\BasicData.DTO.csproj" />
   </ItemGroup>
 
